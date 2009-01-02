@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-SOURCES = $(gen_cmdline_SOURCES)
+SOURCES = $(ct_rng_SOURCES)
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -38,11 +38,10 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = gen_cmdline$(EXEEXT)
+bin_PROGRAMS = ct-rng$(EXEEXT)
 @HAVE_PADLOCK_TRUE@am__append_1 = padlock_rng.cpp
-subdir = gen_cmdline
-DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	AUTHORS COPYING ChangeLog INSTALL NEWS
+subdir = ct-rng
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -53,11 +52,11 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am__gen_cmdline_SOURCES_DIST = gen_cmdline_main.cpp padlock_rng.cpp
+am__ct_rng_SOURCES_DIST = ct-rng.cpp padlock_rng.cpp
 @HAVE_PADLOCK_TRUE@am__objects_1 = padlock_rng.$(OBJEXT)
-am_gen_cmdline_OBJECTS = gen_cmdline_main.$(OBJEXT) $(am__objects_1)
-gen_cmdline_OBJECTS = $(am_gen_cmdline_OBJECTS)
-gen_cmdline_LDADD = $(LDADD)
+am_ct_rng_OBJECTS = ct-rng.$(OBJEXT) $(am__objects_1)
+ct_rng_OBJECTS = $(am_ct_rng_OBJECTS)
+ct_rng_LDADD = $(LDADD)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -68,8 +67,8 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(gen_cmdline_SOURCES)
-DIST_SOURCES = $(am__gen_cmdline_SOURCES_DIST)
+SOURCES = $(ct_rng_SOURCES)
+DIST_SOURCES = $(am__ct_rng_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -175,9 +174,10 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-gen_cmdline_SOURCES = gen_cmdline_main.cpp $(am__append_1)
-gen_cmdline_LDFLAGS = -L../gen -lrng
-DEFAULT_INCLUDES = -I. -I.. -I/opt/boost/include/boost-1_37
+AM_CPPFLAGS = @BOOST_CPPFLAGS@
+ct_rng_SOURCES = ct-rng.cpp $(am__append_1)
+ct_rng_LDFLAGS = -L../gen -lrng
+DEFAULT_INCLUDES = -I. -I..
 all: all-am
 
 .SUFFIXES:
@@ -191,9 +191,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  gen_cmdline/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  ct-rng/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  gen_cmdline/Makefile
+	  $(AUTOMAKE) --gnu  ct-rng/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -239,9 +239,9 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-gen_cmdline$(EXEEXT): $(gen_cmdline_OBJECTS) $(gen_cmdline_DEPENDENCIES) 
-	@rm -f gen_cmdline$(EXEEXT)
-	$(CXXLINK) $(gen_cmdline_LDFLAGS) $(gen_cmdline_OBJECTS) $(gen_cmdline_LDADD) $(LIBS)
+ct-rng$(EXEEXT): $(ct_rng_OBJECTS) $(ct_rng_DEPENDENCIES) 
+	@rm -f ct-rng$(EXEEXT)
+	$(CXXLINK) $(ct_rng_LDFLAGS) $(ct_rng_OBJECTS) $(ct_rng_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -249,7 +249,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen_cmdline_main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ct-rng.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/padlock_rng.Po@am__quote@
 
 .cpp.o:

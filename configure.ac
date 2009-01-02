@@ -400,4 +400,4 @@ AX_BOOST
 AX_GMP
 
 
-AC_OUTPUT([Makefile gen/Makefile test/Makefile gen_cmdline/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
+AC_OUTPUT([Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
