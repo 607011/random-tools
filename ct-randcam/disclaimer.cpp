@@ -44,7 +44,7 @@ void usage(void)
         << "     automatische Bitratenanpassung" << std::endl
         << std::endl
         << "  -n x" << std::endl
-        << "     n Hashes pro Bild erzeugen (Vorgabe: " << DefaultHashesPerFrame << ")" << std::endl
+        << "     n Hashes pro Bild erzeugen (Vorgabe: " << DefaultHashesPerFrame << "); schaltet automatische Bitratenanpassung ab" << std::endl
         << std::endl
         << "  --quiet" << std::endl
         << "  -q" << std::endl

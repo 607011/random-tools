@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="gen_cmdline"
+	Name="ct-rng"
 	ProjectGUID="{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
 	RootNamespace="gen_cmdline"
 	TargetFrameworkVersion="196613"
@@ -46,6 +46,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				StructMemberAlignment="4"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -137,7 +138,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libeay32MT.lib gmp.lib"
-				OutputFile="$(OutDir)\gen_cmdline.exe"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
@@ -186,7 +188,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\gen_cmdline_main.cpp"
+				RelativePath=".\ct-rng.cpp"
 				>
 			</File>
 			<File
