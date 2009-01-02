@@ -1,7 +1,7 @@
-AC_INIT([ctrandom], [1.0a], [oliver.lau@ct.heise.de])
-AC_COPYRIGHT([Copyright (c) 2008 Oliver Lau, Heise Zeitschriften Verlag])
+AC_INIT([randomtools], [1.0], [oliver.lau@ct.heise.de])
+AC_COPYRIGHT([Copyright (c) 2008-2009 Oliver Lau, Heise Zeitschriften Verlag])
 
-AM_INIT_AUTOMAKE([ctrandom], [1.0a], [oliver.lau@ct.heise.de])
+AM_INIT_AUTOMAKE([randomtools], [1.0], [oliver.lau@ct.heise.de])
 AM_CONFIG_HEADER(config.h)
 
 
