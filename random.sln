@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-rng-assessor", "ct-rng-a
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "getopt", "getopt\getopt.vcproj", "{FB10A353-C026-45E9-BC20-1FC81B036C03}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gen_cmdline", "gen_cmdline\gen_cmdline.vcproj", "{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-rng", "ct-rng\ct-rng.vcproj", "{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-randcam", "ct-randcam\ct-randcam.vcproj", "{78A9C683-310C-469F-B5AA-99808BFEDDC6}"
 EndProject

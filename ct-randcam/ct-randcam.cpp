@@ -74,14 +74,14 @@ char* outputFilename;
 char outputVideoFilename[100];
 char outputRawFilename[100];
 bool grabVideo = false;
-int hashesPerFrame;
+int hashesPerFrame = DefaultHashesPerFrame;
 int64 maxByteCount = LLONG_MAX;
 int preferredWidth = DefaultWidth;
 int preferredHeight = DefaultHeight;
 int preferredFPS = DefaultFPS;
 bool doAppend = false;
 bool grabRawData = false;
-bool adaptive = true;
+bool adaptive = false;
 double alpha = 1.0;
 int gain = 70;
 
