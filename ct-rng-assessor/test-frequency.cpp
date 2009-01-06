@@ -2,18 +2,15 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
-#include <iostream>
-#include <iomanip>
 #include <set>
-#include <cstdlib>
-#include <math.h>
-
-#include "tests.h"
+#include <vector>
+#include "ct-rng-assessor.h"
 #include "test/frequency.h"
 #include "test/combinations.h"
 
 std::vector<bool> is_prime(10000);
 std::vector<unsigned int> primes;
+
 
 /// Generate prime numbers with Atkin's sieve.
 void generate_primes(size_t limit)
@@ -120,7 +117,8 @@ void make_all_divisors(size_t x, std::set<size_t>& divisors)
 ////////////////////////////////////////////////////////////
 void test_frequencies(void)
 {
-    std::cout << "FREQUENCY TEST" << std::endl;
+    if (!quiet)
+        std::cout << "FREQUENCY TEST" << std::endl;
     size_t maxBuckets = r_range;
     generate_primes(r_max);
     std::set<size_t> divisors;
@@ -132,10 +130,15 @@ void test_frequencies(void)
         if (num_buckets > maxBuckets || num_buckets < 5)
             continue;
         double p = ctrandom::frequency_test<size_t>(r, r_min, r_max, num_buckets);
-        std::cout << " ... " << std::flush
-                  << std::setw(4) << std::right << num_buckets << " Klassen: " << std::flush
-                  << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
-                  << " " << ((alpha < p)? "OK" : "NICHT BESTANDEN") << '.' << std::endl;
+        if (!quiet)
+            std::cout << " ... " << std::flush
+                      << std::setw(4) << std::right << num_buckets << " Klassen: " << std::flush
+                      << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
+                      << " " << ((alpha < p)? "OK" : "NICHT BESTANDEN") << '.' << std::endl;
+        if (htmlReport)
+            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
+                      << p << "</td>";
     }
-    std::cout << std::endl;
+    if (!quiet)
+        std::cout << std::endl;
 }
