@@ -1,7 +1,7 @@
 bin_PROGRAMS = ct-rng-assessor
 
-AM_CPPFLAGS=@BOOST_CPPFLAGS@
-AM_LDFLAGS=-L../test -lrngtest
+AM_CPPFLAGS = @BOOST_CPPFLAGS@
+AM_LDFLAGS = -L../test -lrngtest
 
 ct_rng_assessor_SOURCES = ct-rng-assessor.cpp 
 ct_rng_assessor_SOURCES += test-birthdayspacings.cpp

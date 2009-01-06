@@ -14,28 +14,33 @@
 #include "test/math_functions.h"
 #include "test/chisq.h"
 
+#include "ct-rng-assessor.h"
+
+
 typedef unsigned char variate_t;
 
 enum _long_options {
     SELECT_HELP = 1,
     SELECT_VERBOSE,
     SELECT_NOFIPS,
-    SELECT_QUIET
+    SELECT_QUIET,
+    SELECT_HTMLREPORT
 };
 
 static struct option long_options[] = {
     { "quiet",           no_argument, 0, SELECT_QUIET },
     { "verbose",         no_argument, 0, SELECT_VERBOSE },
     { "no-fips",         no_argument, 0, SELECT_NOFIPS },
+    { "html",            no_argument, 0, SELECT_HTMLREPORT },
     { NULL,                        0, 0, 0 }
 };
 
 bool quiet = false;
 bool runFIPS140_1 = true;
+bool htmlReport = false;
 size_t blockSize = 0;
 size_t offset = 0;
 int verbose = 0;
-char* logFilename = NULL;
 char* inputFilename = NULL;
 
 size_t r_min;
@@ -44,6 +49,7 @@ size_t r_range;
 size_t r_bits;
 std::vector<size_t> r;
 double alpha = 0.01;
+
 
 static void usage(void)
 {
@@ -69,9 +75,9 @@ static void usage(void)
 
 static void disclaimer(void)
 {
-    std::cout << "ct-rng-assessor - Zufallszahlenanalyse 1." << std::endl
+    std::cout << "ct-rng-assessor " << VERSION << " - Zufallszahlenanalyse 1." << std::endl
         << "Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2008  Heise Zeitschriften Verlag." << std::endl
+        << "Copyright (c) 2008 Heise Zeitschriften Verlag." << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl;
 }
@@ -115,6 +121,10 @@ int main(int argc, char* argv[])
         case SELECT_NOFIPS:
             runFIPS140_1 = false;
             break;
+        case SELECT_HTMLREPORT:
+            htmlReport = true;
+            quiet = true;
+            break;
         default:
             usage();
             exit(EXIT_FAILURE);
@@ -134,7 +144,8 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Verarbeiten von '" << inputFilename << "' .." << std::endl << std::endl;
+    if (!quiet)
+        std::cout << "Verarbeiten von '" << inputFilename << "' .." << std::endl << std::endl;
     ctrandom::RandomFile<size_t> gen(inputFilename, true);
     if (!gen.stream().is_open())
     {
@@ -147,7 +158,9 @@ int main(int argc, char* argv[])
         blockSize = gen.stream().tellg();
     }
 
-    std::cout << "Lesen von " << blockSize << " Bytes ab Offset " << offset << " .." << std::endl << std::endl;
+    if (!quiet)
+        std::cout << "Lesen von " << blockSize << " Bytes"
+                  << " ab Offset " << offset << " .." << std::endl << std::endl;
     gen.seek(offset);
     r.resize(blockSize);
     for (size_t i = 0; i < blockSize; ++i)
@@ -156,6 +169,11 @@ int main(int argc, char* argv[])
     r_max = 1 + std::numeric_limits<variate_t>::max();
     r_range = r_max - r_min;
     r_bits = (size_t) (M_LOG2E * log((double) r_range));
+
+    if (htmlReport)
+        std::cout << "<table>" << std::endl
+                  << "<tbody>" << std::endl
+                  << "  <tr>" << std::endl;
 
     test_entropy();
     test_frequencies();
@@ -170,6 +188,14 @@ int main(int argc, char* argv[])
     test_poker_fips();
     test_pi();
 
-    std::cout << "Fertig." << std::endl << std::endl;
-    return 0;
+    if (htmlReport)
+        std::cout << std::endl
+                  << "  </tr>" << std::endl
+                  << "</tbody>" << std::endl
+                  << "</table>" << std::endl;
+
+    if (!quiet)
+        std::cout << "Fertig." << std::endl << std::endl;
+
+    return EXIT_SUCCESS;
 }
