@@ -37,7 +37,7 @@
  * Define my endian-ness.  Could not do in a portable manner using the
  * include files -- grumble.
  */
-#if defined(__alpha) || defined(WIN32) || defined(__i386__)
+#if defined(__alpha) || defined(WIN32) || defined(__i386__) || defined(__x86_64__)
 /*
  * little endian
  */

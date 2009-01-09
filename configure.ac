@@ -68,7 +68,7 @@ AC_ARG_WITH([boost],
 
 if test "x$want_boost" = "xyes"; then
    AC_REQUIRE([AC_PROG_CC])
-   boost_lib_version_req=ifelse([$1], ,1.37.0,$1)
+   boost_lib_version_req=ifelse([$1], ,1.36.0,$1)
    boost_lib_version_req_shorten=`expr $boost_lib_version_req : '\([[0-9]]*\.[[0-9]]*\)'`
    boost_lib_version_req_major=`expr $boost_lib_version_req : '\([[0-9]]*\)'`
    boost_lib_version_req_minor=`expr $boost_lib_version_req : '[[0-9]]*\.\([[0-9]]*\)'`
