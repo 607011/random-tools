@@ -1,5 +1,7 @@
 SUBDIRS = gen test ct-randcam ct-rng-assessor ct-rng-analyzer ct-rng
 
+ACLOCAL_AMFLAGS = -I m4
+
 PROJ=randomtools
 VERSION=1.0
 BUILD=$(PROJ)-$(VERSION)-linux
