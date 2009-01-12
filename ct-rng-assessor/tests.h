@@ -20,6 +20,7 @@ extern void test_runs(void);
 extern void test_runs_fips(void);
 extern void test_serial(void);
 extern void test_couponcollector(void);
+extern void test_autocorrelation(void);
 extern void test_gap(void);
 extern void test_poker_knuth(void);
 extern void test_poker_fips(void);

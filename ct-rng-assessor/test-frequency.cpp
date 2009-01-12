@@ -3,7 +3,10 @@
 // Alle Rechte vorbehalten.
 
 #include <set>
+#include <cstdlib>
+#include <cmath>
 #include <vector>
+
 #include "ct-rng-assessor.h"
 #include "test/frequency.h"
 #include "test/combinations.h"
