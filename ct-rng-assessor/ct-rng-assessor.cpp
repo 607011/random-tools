@@ -76,8 +76,8 @@ static void usage(void)
 static void disclaimer(void)
 {
     std::cout << "ct-rng-assessor " << VERSION << " - Zufallszahlenanalyse 1." << std::endl
-        << "Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2008 Heise Zeitschriften Verlag." << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
+        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag." << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl;
 }
@@ -178,6 +178,7 @@ int main(int argc, char* argv[])
     test_entropy();
     test_frequencies();
     test_monobit();
+    test_autocorrelation();
     test_serial();
     test_gap();
     test_max_of_t();

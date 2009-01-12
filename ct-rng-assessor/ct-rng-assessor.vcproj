@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\test-autocorrelation.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\test-couponcollector.cpp"
 				>
 			</File>
