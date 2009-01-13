@@ -33,7 +33,7 @@ void test_monobit(void)
         if (htmlReport)
             std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
                       << ((p > alpha)? "OK" : "FAIL") << "</td>";
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
 #endif
 
@@ -56,7 +56,7 @@ void test_monobit(void)
         }
         if (htmlReport)
             std::cout << "<td>" << pctFailed << "</td>";
-        std::cout << std::endl <<std::endl;
+        std::cout << std::endl << std::endl;
     }
 
 

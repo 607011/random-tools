@@ -19,6 +19,7 @@ ct_rng_assessor_SOURCES += test-serial.cpp
 ct_rng_assessor_SOURCES += test-entropy.cpp
 ct_rng_assessor_SOURCES += test-monobit.cpp
 ct_rng_assessor_SOURCES += test-poker-fips.cpp
+ct_rng_assessor_SOURCES += test-autocorrelation.cpp
 
 DEFAULT_INCLUDES = -I. -I..
 
