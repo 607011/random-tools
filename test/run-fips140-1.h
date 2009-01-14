@@ -76,7 +76,11 @@ namespace ctrandom {
         const size_t MaxRunLength = 5;
         const size_t ChunkSize = 20000;
         VariateType range = _max - _min;
+#ifdef _MSC_VER
         unsigned int bitsPerVariate = (unsigned int) (M_LOG2E * log((double) range));
+#else
+        unsigned int bitsPerVariate = (unsigned int) (0.0001 + M_LOG2E * log((double) range));
+#endif
         unsigned int stepLen = ChunkSize / bitsPerVariate;
         longestRun0 = 0;
         longestRun1 = 0;

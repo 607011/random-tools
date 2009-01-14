@@ -27,7 +27,11 @@ namespace ctrandom {
     {
         assert(_max > _min);
         VariateType range = _max - _min;
+#ifdef _MSC_VER
         size_t bitsPerVariate = (size_t) (M_LOG2E * log((double) range));
+#else
+        size_t bitsPerVariate = (size_t) (0.0001 + M_LOG2E * log((double) range));
+#endif
         assert(ran.size() > 5000 / bitsPerVariate);
         size_t stepLen = 5000 / bitsPerVariate;
         size_t passedCount = 0;
