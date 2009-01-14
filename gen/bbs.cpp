@@ -2,6 +2,11 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
+#ifdef _WIN32
+#define _CRT_RAND_S
+#include <cstdlib>
+#endif
+
 #include <ctime>
 #include <cstdio>
 #include <cassert>
@@ -61,7 +66,14 @@ namespace ctrandom {
 
     BlumBlumShub::BlumBlumShub(size_t keyLength)
     {
-        MCG rng((unsigned int) time((time_t)0)); // TODO: besser einen Hardware-Generator verwenden
+        MCG rng;
+#ifdef _WIN32
+        unsigned int seed;
+        rand_s(&seed);
+        rng.seed(seed);
+#else
+        rng.seed((unsigned int) time((time_t)0); // TODO: besser einen Hardware-Generator verwenden
+#endif
         size_t nKeyHexDigits = keyLength / 4;
         char* str = new char[nKeyHexDigits + 1];
 
