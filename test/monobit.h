@@ -17,6 +17,7 @@
 
 #include "chisq.h"
 #include "math_functions.h"
+#include "popcount.h"
 
 #ifdef HAVE_BOOST
 #include <boost/math/special_functions/erf.hpp>
@@ -48,8 +49,8 @@ namespace ctrandom {
             size_t bitCount = 0;
             for (size_t j = 0; j < stepLen; ++j)
             {
-                for (VariateType r = ran.at(i + j) - _min; r != 0; r = r & (r-1))
-                    ++bitCount;
+                VariateType r = ran.at(i + j) - _min;
+                bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff];
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
