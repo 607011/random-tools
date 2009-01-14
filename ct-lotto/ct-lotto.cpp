@@ -75,6 +75,22 @@ size_t N = DefaultFieldCount;
 size_t selectionCount = DefaultSelectionCount;
 int generator = GEN_SYSTEM_RAND;
 size_t bbsKeyBits = DefaultBBSKeyBits;
+bool quiet = false;
+
+
+#define GENERATE_AND_PRINT \
+    for (size_t i = 0; i < N; ++i) \
+    { \
+        lottoNumbers.clear(); \
+        while (lottoNumbers.size() < selectionCount) \
+        { \
+            size_t r = 1 + gen() % 49; \
+            if (!lottoNumbers[r]) \
+                lottoNumbers[r] = true; \
+        } \
+        printNumbers(); \
+    }
+
 
 static void usage(void)
 {
@@ -89,6 +105,10 @@ static void usage(void)
         << "  -?" << std::endl
         << "     Diese Hilfe anzeigen" << std::endl
         << std::endl
+        << "  -q" << std::endl
+        << "     Nur Zahlen ausgeben, sonst nichts" << std::endl
+        << std::endl
+        << std::endl
         << "Generatoren:" << std::endl
         << "  --gen-mt19937" << std::endl
         << "  --gen-lcg" << std::endl
@@ -98,6 +118,7 @@ static void usage(void)
 #ifdef HAVE_LIBGMP
         << "  --gen-bbs [Schlüsselgröße in Bits]" << std::endl
 #endif
+        << std::endl
         << std::endl;
 }
 
@@ -117,48 +138,29 @@ static void disclaimer(void)
 
 void printNumbers(void)
 {
-    std::cout << std::endl << "\t";
     for (std::map<size_t, bool>::const_iterator i = lottoNumbers.begin(); i != lottoNumbers.end(); ++i)
         std::cout << std::setw(2) << (*i).first << "  ";
+    std::cout << std::endl;
 }
 
 
 unsigned int getSeed(void)
 {
+    // TODO: besseren Seed-Generator basteln
     return (unsigned int) time((time_t)0);
 }
 
 
 void generate(GeneratorFunction gen)
 {
-    for (size_t i = 0; i < N; ++i)
-    {
-        lottoNumbers.clear();
-        while (lottoNumbers.size() < selectionCount)
-        {
-            size_t r = 1 + gen() % 49;
-            if (!lottoNumbers[r])
-                lottoNumbers[r] = true;
-        }
-        printNumbers();
-    }
+    GENERATE_AND_PRINT
 }
 
 
 template <class T>
 void generate(ctrandom::RandomNumberGenerator<T>& gen)
 {
-    for (size_t i = 0; i < N; ++i)
-    {
-        lottoNumbers.clear();
-        while (lottoNumbers.size() < selectionCount)
-        {
-            size_t r = 1 + gen() % 49;
-            if (!lottoNumbers[r])
-                lottoNumbers[r] = true;
-        }
-        printNumbers();
-    }
+    GENERATE_AND_PRINT
 }
 
 
@@ -166,11 +168,14 @@ int main(int argc, char* argv[])
 {
     for (;;) {
         int option_index = 0;
-        int c = getopt_long(argc, argv, "h?vqo:n:", long_options, &option_index);
+        int c = getopt_long(argc, argv, "h?vqn:", long_options, &option_index);
         if (c == -1)
             break;
         switch (c)
         {
+        case 'q':
+            quiet = true;
+            break;
         case 'h':
             // fall-through
         case '?':
@@ -178,7 +183,7 @@ int main(int argc, char* argv[])
         case SELECT_HELP:
             disclaimer();
             usage();
-            return 0;
+            return EXIT_SUCCESS;
             break;
         case 'n':
             if (optarg == NULL)
@@ -211,25 +216,32 @@ int main(int argc, char* argv[])
         }
     }
 
-    disclaimer();
+    if (!quiet)
+        disclaimer();
 
     switch (generator)
     {
     case GEN_SYSTEM_RAND:
-        std::cout << "system's rand() function .. " << std::endl;
+        if (!quiet)
+            std::cout << "system's rand() function .. " << std::endl;
         srand((unsigned int) time(0));
         generate(rand);
         break;
     case GEN_MT19937:
-        std::cout << "Mersenne-Twister 19937 .. " << std::endl;
+        if (!quiet)
+            std::cout << "Mersenne-Twister 19937 .. " << std::endl;
         {
             ctrandom::MersenneTwister mt19937;
             mt19937.seed(getSeed());
+            // warm-up
+            for (int i = 0; i < 10000; ++i)
+                (void) mt19937();
             generate<unsigned int>(mt19937);
         }
         break;
     case GEN_LCG:
-        std::cout << "LCG (ANSI C) .. " << std::endl;
+        if (!quiet)
+            std::cout << "LCG (ANSI C) .. " << std::endl;
         {
             ctrandom::LCG_ANSIC lcg;
             lcg.seed(getSeed());
@@ -237,7 +249,8 @@ int main(int argc, char* argv[])
         }
         break;
     case GEN_MCG:
-        std::cout << "MCG .. " << std::endl;
+        if (!quiet)
+            std::cout << "MCG .. " << std::endl;
         {
             ctrandom::MCG mcg;
             mcg.seed(getSeed());
@@ -245,7 +258,8 @@ int main(int argc, char* argv[])
         }
         break;
     case GEN_KNUTH:
-        std::cout << "Knuth .. " << std::endl;
+        if (!quiet)
+            std::cout << "Knuth .. " << std::endl;
         {
             ctrandom::KnuthRand1 knuth;
             knuth.seed(getSeed());
@@ -253,7 +267,8 @@ int main(int argc, char* argv[])
         }
         break;
     case GEN_MWC:
-        std::cout << "Multiply-with-carry (Marsaglia) .. " << std::endl;
+        if (!quiet)
+            std::cout << "Multiply-with-carry (Marsaglia) .. " << std::endl;
         {
             ctrandom::MultiplyWithCarry mwc;
             mwc.seed(getSeed());
@@ -262,7 +277,8 @@ int main(int argc, char* argv[])
         break;
 #ifdef HAVE_LIBGMP
     case GEN_BBS:
-        std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::endl;
+        if (!quiet)
+            std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::endl;
         {
             ctrandom::BlumBlumShub bbs(bbsKeyBits);
             generate<unsigned int>(bbs);

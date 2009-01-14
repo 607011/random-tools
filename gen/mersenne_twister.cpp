@@ -2,6 +2,7 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag. Alle Rechte vorbehalten.
 
 
+#include "mcg.h"
 #include "mersenne_twister.h"
 
 namespace ctrandom {
@@ -22,29 +23,36 @@ namespace ctrandom {
 
     void MersenneTwister::seed(unsigned int _Seed)
     {
-        (void) (_Seed);
-        index = N + 1;
+        MCG rng(_Seed);
+        for (unsigned int i = 0; i < N; ++i)
+            y[i] = rng();
+        index = 0;
     }
 
 
     unsigned int MersenneTwister::operator()()
     {
-        if (index >= N) {
-            if (index > N) {
+        if (index >= N)
+        {
+            if (index > N)
+            {
                 unsigned int r = 9;
                 unsigned int s = 3402;
-                for (int i = 0 ; i < N ; ++i) {
+                for (int i = 0 ; i < N ; ++i)
+                {
                     r = 509845221 * r + 3;
                     s *= s + 1;
                     y[i] = s + (r >> 10);
                 }
             }
             unsigned int h;
-            for (int k = 0 ; k < N-M ; ++k) {
+            for (int k = 0 ; k < N-M ; ++k)
+            {
                 h = (y[k] & HI) | (y[k+1] & LO);
                 y[k] = y[k+M] ^ (h >> 1) ^ A[h & 1];
             }
-            for (int k = N-M ; k < N-1 ; ++k) {
+            for (int k = N-M ; k < N-1 ; ++k)
+            {
                 h = (y[k] & HI) | (y[k+1] & LO);
                 y[k] = y[k+(M-N)] ^ (h >> 1) ^ A[h & 1];
             }
