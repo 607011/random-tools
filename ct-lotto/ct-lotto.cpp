@@ -4,6 +4,7 @@
 
 #ifdef _WIN32
 #include "../config-win32.h"
+#define _CRT_RAND_S
 #else
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -11,6 +12,7 @@
 #endif
 
 #define VERSION "1.0.0"
+
 
 #include <cstdlib>
 #include <ctime>
@@ -78,20 +80,6 @@ size_t bbsKeyBits = DefaultBBSKeyBits;
 bool quiet = false;
 
 
-#define GENERATE_AND_PRINT \
-    for (size_t i = 0; i < N; ++i) \
-    { \
-        lottoNumbers.clear(); \
-        while (lottoNumbers.size() < selectionCount) \
-        { \
-            size_t r = 1 + gen() % 49; \
-            if (!lottoNumbers[r]) \
-                lottoNumbers[r] = true; \
-        } \
-        printNumbers(); \
-    }
-
-
 static void usage(void)
 {
     std::cout << "Aufruf: ct-lotto Generator [Optionen]" << std::endl
@@ -146,21 +134,43 @@ void printNumbers(void)
 
 unsigned int getSeed(void)
 {
-    // TODO: besseren Seed-Generator basteln
-    return (unsigned int) time((time_t)0);
+    unsigned int seed;
+#ifdef _WIN32
+    rand_s(&seed);
+#else
+    seed = (unsigned int) time((time_t)0;
+#endif
+    return seed;
+}
+
+
+template <typename T>
+void __generate(T gen)
+{
+    for (size_t i = 0; i < N; ++i)
+    {
+        lottoNumbers.clear();
+        while (lottoNumbers.size() < selectionCount)
+        {
+            size_t r = 1 + gen() % 49;
+            if (!lottoNumbers[r])
+                lottoNumbers[r] = true;
+        }
+        printNumbers();
+    }
 }
 
 
 void generate(GeneratorFunction gen)
 {
-    GENERATE_AND_PRINT
+    __generate<GeneratorFunction>(gen);
 }
 
 
 template <class T>
 void generate(ctrandom::RandomNumberGenerator<T>& gen)
 {
-    GENERATE_AND_PRINT
+    __generate<ctrandom::RandomNumberGenerator<T>&>(gen);
 }
 
 
