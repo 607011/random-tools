@@ -1,4 +1,4 @@
-SUBDIRS = gen test ct-randcam ct-rng-assessor ct-rng-analyzer ct-rng
+SUBDIRS = gen test ct-lotto ct-randcam ct-rng-assessor ct-rng-analyzer ct-rng
 
 ACLOCAL_AMFLAGS = -I m4
 
