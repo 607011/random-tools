@@ -138,7 +138,7 @@ unsigned int getSeed(void)
 #ifdef _WIN32
     rand_s(&seed);
 #else
-    seed = (unsigned int) time((time_t)0;
+    seed = (unsigned int) time((time_t)0);
 #endif
     return seed;
 }
