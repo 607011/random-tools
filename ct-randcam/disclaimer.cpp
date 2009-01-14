@@ -60,9 +60,12 @@ void usage(void)
 
 void disclaimer(void)
 {
-    std::cout << "ct-randcam - Zufallszahlen aus Webcam-Bildern generieren." << std::endl
-              << "Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>" << std::endl
-              << "Copyright (c) 2008 Heise Zeitschriften Verlag" << std::endl
-              << "Alle Rechte vorbehalten." << std::endl
-              << std::endl;
+    std::cout << "ct-randcam " << VERSION << " - Zufallszahlen aus Webcam-Bildern generieren." << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
+        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag" << std::endl
+        << "Alle Rechte vorbehalten." << std::endl
+        << std::endl
+        << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
+        << "Alle Ausgaben ohne Gewähr." << std::endl
+        << std::endl;
 }

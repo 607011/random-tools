@@ -41,9 +41,6 @@ namespace ctrandom {
                 ent += p * M_LOG2E * log(1.0 / p);
         }
         double bitsPerVariate = log((double) range) * M_LOG2E;
-#ifdef _DEBUG
-        std::cout << "bitsPerVariate = " << std::setprecision(20) << bitsPerVariate << std::endl;
-#endif
         return ent / bitsPerVariate;
     }
 

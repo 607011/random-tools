@@ -10,6 +10,8 @@
 #endif //HAVE_CONFIG_H
 #endif
 
+#define VERSION "1.0.2"
+
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -90,7 +92,8 @@ enum _long_options {
     SELECT_VERBOSE,
     SELECT_QUIET,
     SELECT_OUTPUT,
-    SELECT_APPEND
+    SELECT_APPEND,
+    SELECT_TEXT
 };
 
 static struct option long_options[] = {
@@ -137,6 +140,7 @@ static struct option long_options[] = {
     { "quiet",                no_argument, 0, SELECT_QUIET },
     { "verbose",              no_argument, 0, SELECT_VERBOSE },
     { "append",               no_argument, 0, SELECT_APPEND },
+    { "text",                 no_argument, 0, SELECT_TEXT },
     { NULL,                             0, 0, 0 }
 };
 
@@ -157,10 +161,11 @@ size_t chunkSize = DefaultChunkSize;
 unsigned char* rngBuf;
 size_t bbsKeyBits = DefaultBBSKeyBits;
 bool doAppend = false;
+bool binary = true;
 
 static void usage(void)
 {
-    std::cout << "Aufruf: gen Generator [Optionen]" << std::endl
+    std::cout << "Aufruf: ct-rng Generator [Optionen]" << std::endl
         << std::endl
         << "Options:" << std::endl
         << "  -n N" << std::endl
@@ -169,9 +174,12 @@ static void usage(void)
         << "  --output filename" << std::endl
         << "  -o filename" << std::endl
         << "     Zufallszahlen in Datei 'filename' schreiben" << std::endl
+        << "  --text" << std::endl
+        << "     generierte Zahlen in Textdatei schreiben anstelle in Binärdatei" << std::endl
+        << std::endl
         << std::endl
         << "  --append" << std::endl
-        << "     Zufallszahlen an Datei anhängenm" << std::endl
+        << "     Zufallszahlen an Datei anhängen" << std::endl
         << std::endl
         << "  --quiet" << std::endl
         << "  -q" << std::endl
@@ -221,10 +229,13 @@ static void usage(void)
 
 static void disclaimer(void)
 {
-    std::cout << "Zufallszahlengenerator-Demo." << std::endl
-        << "Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2008 Heise Zeitschriften Verlag" << std::endl
+    std::cout << "ct-rng " << VERSION << " - Generator für Zufallsbytes." << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
+        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
+        << std::endl
+        << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
+        << "Alle Ausgaben ohne Gewähr." << std::endl
         << std::endl;
 }
 
@@ -251,10 +262,21 @@ void generate(GeneratorFunction gen, std::ofstream& fs)
     for (count = 0; count < N; ++count)
     {
         updateProcess();
-        for (size_t i = 0; i < chunkSize; ++i)
-            rngBuf[i] = (unsigned char) (gen() & 0xff);
-        if (fs.is_open())
-            fs.write((char*) rngBuf, chunkSize);
+        if (binary)
+        {
+            for (size_t i = 0; i < chunkSize; ++i)
+                rngBuf[i] = (unsigned char) (gen() & 0xff);
+            if (fs.is_open())
+                fs.write((char*) rngBuf, chunkSize);
+        }
+        else
+        {
+            if (fs.is_open())
+            {
+                for (size_t i = 0; i < chunkSize; ++i)
+                    fs << (gen() & 0xff) << std::endl;
+            }
+        }
     }
 }
 
@@ -265,10 +287,21 @@ void generate(ctrandom::RandomNumberGenerator<T>& gen, std::ofstream& fs)
     for (count = 0; count < N; ++count)
     {
         updateProcess();
-        for (size_t i = 0; i < chunkSize; ++i)
-            rngBuf[i] = (unsigned char) (gen() & 0xff);
-        if (fs.is_open())
-            fs.write((char*) rngBuf, chunkSize);
+        if (binary)
+        {
+            for (size_t i = 0; i < chunkSize; ++i)
+                rngBuf[i] = (unsigned char) (gen() & 0xff);
+            if (fs.is_open())
+                fs.write((char*) rngBuf, chunkSize);
+        }
+        else
+        {
+            if (fs.is_open())
+            {
+                for (size_t i = 0; i < chunkSize; ++i)
+                    fs << (gen() & 0xff) << std::endl;
+            }
+        }
     }
 }
 
@@ -282,10 +315,21 @@ void generate(T& gen, std::ofstream& fs)
     for (count = 0; count < N; ++count)
     {
         updateProcess();
-        for (size_t i = 0; i < chunkSize; ++i)
-            rngBuf[i] = (unsigned char) (rnd() & 0xff);
-        if (fs.is_open())
-            fs.write((char*) rngBuf, chunkSize);
+        if (binary)
+        {
+            for (size_t i = 0; i < chunkSize; ++i)
+                rngBuf[i] = (unsigned char) (rnd() & 0xff);
+            if (fs.is_open())
+                fs.write((char*) rngBuf, chunkSize);
+        }
+        else
+        {
+            if (fs.is_open())
+            {
+                for (size_t i = 0; i < chunkSize; ++i)
+                    fs << (rnd() & 0xff) << std::endl;
+            }
+        }
     }
 }
 #endif
@@ -312,6 +356,9 @@ int main(int argc, char* argv[])
             break;
         case SELECT_APPEND:
             doAppend = true;
+            break;
+        case SELECT_TEXT:
+            binary = false;
             break;
         case 'h':
             // fall-through

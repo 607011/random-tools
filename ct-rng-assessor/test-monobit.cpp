@@ -2,6 +2,10 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
+#ifdef _WIN32
+#include "../config-win32.h"
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

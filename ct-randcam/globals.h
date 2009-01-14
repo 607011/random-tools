@@ -5,6 +5,8 @@
 #ifndef __CT_RANDCAM_GLOBALS_H_
 #define __CT_RANDCAM_GLOBALS_H_
 
+#define VERSION "1.0.5"
+
 #ifndef LLONG_MAX
 #define LLONG_MAX (9223372036854775807LL)
 #endif
