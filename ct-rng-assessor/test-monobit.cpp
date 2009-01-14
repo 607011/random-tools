@@ -26,12 +26,15 @@ void test_monobit(void)
         std::cout << "MONOBIT TEST (à la NIST)" << std::endl
                   << " ... " << std::flush;
     double p = ctrandom::monobit_test_nist<size_t>(r, r_min, r_max);
-    if (!quiet) {
+    if (!quiet)
+    {
         std::cout << "p = " << p << "  ";
-        if (p > alpha) {
+        if (p > alpha)
+        {
             std::cout << "OK.";
         }
-        else {
+        else
+        {
             std::cout << "NICHT BESTANDEN.";
         }
         if (htmlReport)
@@ -47,16 +50,21 @@ void test_monobit(void)
     if (!quiet)
         std::cout << " ... " << std::flush;
     size_t passed = ctrandom::monobit_test<size_t>(r, r_min, r_max, counts);
-    if (!quiet) {
+    if (!quiet) 
+    {
         double pctFailed = 100.0 * (double) (counts.size() - passed) / (double) counts.size();
-        if (passed == counts.size()) {
+        if (passed == counts.size())
+        {
             std::cout << "OK.";
         }
-        else {
-            std::cout << "NICHT BESTANDEN. " << (counts.size() - passed)
+        else
+        {
+            size_t notPassed = counts.size() - passed;
+            std::cout << "NICHT BESTANDEN. " << notPassed
                       << " von " << counts.size() << " Blöcken ("
                       << std::setprecision(3) << pctFailed << "%)" << std::endl
-                      << "     enthält nicht die geforderte Anzahl Bits (9654..10346)";
+                      << "     " << ((notPassed == 1)? "enthält" : "enthalten")
+                      << " nicht die geforderte Anzahl Bits (9654..10346)";
         }
         if (htmlReport)
             std::cout << "<td>" << pctFailed << "</td>";

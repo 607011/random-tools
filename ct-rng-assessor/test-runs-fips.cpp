@@ -21,11 +21,14 @@ void test_runs_fips(void)
     if (!quiet)
         std::cout << " ... " << std::flush;
     size_t passed = ctrandom::run_test_fips<size_t>(r, r_min, r_max, runs, longestRun0, longestRun1);
-    if (!quiet) {
-        if (passed == runs.size()) {
+    if (!quiet)
+    {
+        if (passed == runs.size())
+        {
             std::cout << "OK.";
         }
-        else {
+        else
+        {
             std::cout << "NICHT BESTANDEN. " << (runs.size() - passed) << " von "
                       << runs.size() << " Blöcken (" 
                       << std::setprecision(3)

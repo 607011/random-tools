@@ -10,7 +10,7 @@
 #endif //HAVE_CONFIG_H
 #endif
 
-#define VERSION "1.0.2"
+#define VERSION "1.0.3"
 
 #include <cstdlib>
 #include <ctime>
@@ -88,7 +88,7 @@ enum _gen_types {
 };
 
 enum _long_options {
-    SELECT_HELP = 0x0,
+    SELECT_HELP = 0x1,
     SELECT_VERBOSE,
     SELECT_QUIET,
     SELECT_OUTPUT,
@@ -140,6 +140,7 @@ static struct option long_options[] = {
     { "quiet",                no_argument, 0, SELECT_QUIET },
     { "verbose",              no_argument, 0, SELECT_VERBOSE },
     { "append",               no_argument, 0, SELECT_APPEND },
+    { "help",                 no_argument, 0, SELECT_HELP },
     { "text",                 no_argument, 0, SELECT_TEXT },
     { NULL,                             0, 0, 0 }
 };
@@ -167,27 +168,33 @@ static void usage(void)
 {
     std::cout << "Aufruf: ct-rng Generator [Optionen]" << std::endl
         << std::endl
-        << "Options:" << std::endl
+        << "Optionen:" << std::endl
         << "  -n N" << std::endl
-        << "     N KByte Zufallszahlen generieren (Vorgabe: " << DefaultCount << " KByte)" << std::endl
+        << "     N KByte Zufallsbytes generieren (Vorgabe: " << DefaultCount << " KByte)" << std::endl
         << std::endl
         << "  --output filename" << std::endl
         << "  -o filename" << std::endl
         << "     Zufallszahlen in Datei 'filename' schreiben" << std::endl
-        << "  --text" << std::endl
-        << "     generierte Zahlen in Textdatei schreiben anstelle in Binärdatei" << std::endl
         << std::endl
+        << "  --text" << std::endl
+        << "     Generierte Zahlen in Textdatei schreiben anstelle in Binärdatei." << std::endl
+        << "     Jede Zeile enthält eine Zahl zwischen 0 und 255 (jeweils inklusive)" << std::endl
         << std::endl
         << "  --append" << std::endl
         << "     Zufallszahlen an Datei anhängen" << std::endl
         << std::endl
         << "  --quiet" << std::endl
         << "  -q" << std::endl
-        << "     keine Informationen nicht ausgeben" << std::endl
+        << "     Keine Informationen nicht ausgeben" << std::endl
         << std::endl
         << "  --verbose" << std::endl
         << "  -v" << std::endl
-        << "     mehr Informationen über Verarbeitungsschritte ausgeben" << std::endl
+        << "     Mehr Informationen über Verarbeitungsschritte ausgeben" << std::endl
+        << std::endl
+        << "  --help" << std::endl
+        << "  -h" << std::endl
+        << "  -?" << std::endl
+        << "     Diese Hilfe anzeigen" << std::endl
         << std::endl
         << "Generatoren:" << std::endl
         << "  --gen-file filename" << std::endl
@@ -437,6 +444,8 @@ int main(int argc, char* argv[])
         std::cerr << "FEHLER: Speicherallokation fehlgeschlagen." << std::endl;
         exit(EXIT_FAILURE);
     }
+
+
 
 #ifdef _WIN32
     LARGE_INTEGER freq, t0;
@@ -729,10 +738,9 @@ int main(int argc, char* argv[])
         std::cout << std::endl;
     fs.close();
 
-    if (rngBuf != NULL)
-        delete [] rngBuf;
+    delete [] rngBuf;
 
     if (!quiet)
         std::cout << count << " KByte geschrieben." << std::endl << std::endl;
-    return 0;
+    return EXIT_SUCCESS;
 }
