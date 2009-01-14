@@ -151,6 +151,10 @@
 				RelativePath=".\chisq.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\popcount.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -223,6 +227,10 @@
 			</File>
 			<File
 				RelativePath=".\poker-knuth.h"
+				>
+			</File>
+			<File
+				RelativePath=".\popcount.h"
 				>
 			</File>
 			<File
