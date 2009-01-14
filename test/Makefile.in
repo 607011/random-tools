@@ -64,7 +64,7 @@ LIBRARIES = $(lib_LIBRARIES)
 ARFLAGS = cru
 librngtest_a_AR = $(AR) $(ARFLAGS)
 librngtest_a_LIBADD =
-am_librngtest_a_OBJECTS = chisq.$(OBJEXT)
+am_librngtest_a_OBJECTS = chisq.$(OBJEXT) popcount.$(OBJEXT)
 librngtest_a_OBJECTS = $(am_librngtest_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -189,9 +189,9 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 lib_LIBRARIES = librngtest.a
-librngtest_a_SOURCES = chisq.cpp
+librngtest_a_SOURCES = chisq.cpp popcount.cpp
 library_includedir = $(includedir)/rngtest
-library_include_HEADERS = birthday.h math_functions.h poker-fips140-1.h run-up-down.h bitvector.h couponcollector.h max-t.h poker.h serial.h chisq.h entropy.h monobit.h poker-knuth.h collision.h frequency.h permutation.h run-above-below.h combinations.h gap.h pi.h run-fips140-1.h
+library_include_HEADERS = autocorr.h popcount.h birthday.h math_functions.h poker-fips140-1.h run-up-down.h bitvector.h couponcollector.h max-t.h poker.h serial.h chisq.h entropy.h monobit.h poker-knuth.h collision.h frequency.h permutation.h run-above-below.h combinations.h gap.h pi.h run-fips140-1.h
 all: all-am
 
 .SUFFIXES:
@@ -266,6 +266,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chisq.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/popcount.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
