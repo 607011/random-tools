@@ -21557,7 +21557,7 @@ fi
 
 
 
-                                                                      ac_config_files="$ac_config_files Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile"
+                                                                                ac_config_files="$ac_config_files Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -22132,6 +22132,7 @@ do
   "gen/Makefile" ) CONFIG_FILES="$CONFIG_FILES gen/Makefile" ;;
   "test/Makefile" ) CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
   "ct-rng/Makefile" ) CONFIG_FILES="$CONFIG_FILES ct-rng/Makefile" ;;
+  "ct-lotto/Makefile" ) CONFIG_FILES="$CONFIG_FILES ct-lotto/Makefile" ;;
   "ct-randcam/Makefile" ) CONFIG_FILES="$CONFIG_FILES ct-randcam/Makefile" ;;
   "ct-rng-assessor/Makefile" ) CONFIG_FILES="$CONFIG_FILES ct-rng-assessor/Makefile" ;;
   "ct-rng-analyzer/Makefile" ) CONFIG_FILES="$CONFIG_FILES ct-rng-analyzer/Makefile" ;;

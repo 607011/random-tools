@@ -132,4 +132,4 @@ AX_GMP
 AX_OPENCV
 
 
-AC_OUTPUT([Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
+AC_OUTPUT([Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
