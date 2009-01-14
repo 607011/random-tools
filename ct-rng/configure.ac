@@ -1,7 +1,7 @@
-AC_INIT([gen_cmdline], [1.0], [ola@ctmagazin.de])
-AC_COPYRIGHT([Copyright (c) 2008 Oliver Lau, Heise Zeitschriften Verlag])
+AC_INIT([ct-rng], [1.0.2], [ola@ctmagazin.de])
+AC_COPYRIGHT([Copyright (c) 2008-2009 Oliver Lau, Heise Zeitschriften Verlag])
 
-AM_INIT_AUTOMAKE([gen_cmdline], [1.0], [ola@ctmagazin.de])
+AM_INIT_AUTOMAKE([ct-rng], [1.0.2], [ola@ctmagazin.de])
 AM_CONFIG_HEADER([config.h])
 
 AC_PROG_CXX
