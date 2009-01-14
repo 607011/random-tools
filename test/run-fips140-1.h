@@ -76,22 +76,18 @@ namespace ctrandom {
         const size_t MaxRunLength = 5;
         const size_t ChunkSize = 20000;
         VariateType range = _max - _min;
-#ifdef _MSC_VER
-        unsigned int bitsPerVariate = (unsigned int) (M_LOG2E * log((double) range));
-#else
-        unsigned int bitsPerVariate = (unsigned int) (0.0001 + M_LOG2E * log((double) range));
-#endif
-        unsigned int stepLen = ChunkSize / bitsPerVariate;
+        size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
+        size_t stepLen = ChunkSize / bitsPerVariate;
         longestRun0 = 0;
         longestRun1 = 0;
         size_t passedCount = 0;
-        for (unsigned int i = 0; i < ran.size() - stepLen; i += stepLen)
+        for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
         {
             BitVector chunk(ChunkSize);
-            for (unsigned int j = 0; j < stepLen; ++j)
+            for (size_t j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
-                for (unsigned int k = 0; k < bitsPerVariate; ++k)
+                for (size_t k = 0; k < bitsPerVariate; ++k)
                 {
                     if ((r & 1) == 1)
                         chunk.set(j * bitsPerVariate + k);
@@ -101,7 +97,7 @@ namespace ctrandom {
             bool isSet = chunk.at(0);
             size_t runLength = 0;
             RunResult run;
-            for (unsigned int j = 1; j < ChunkSize; ++j)
+            for (size_t j = 1; j < ChunkSize; ++j)
             {
                 if (isSet) 
                 {

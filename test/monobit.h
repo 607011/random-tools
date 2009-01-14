@@ -40,13 +40,9 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        VariateType range = _max - _min;
-#ifdef _MSC_VER
-        size_t bitsPerVariate = (size_t) (M_LOG2E * log((double) range));
-#else
-        size_t bitsPerVariate = (size_t) (0.0001 + M_LOG2E * log((double) range));
-#endif
-        size_t stepLen = 20000 / bitsPerVariate;
+        const VariateType range = _max - _min;
+        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
+        const size_t stepLen = 20000 / bitsPerVariate;
         size_t passedCount = 0;
         for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
         {
@@ -73,8 +69,8 @@ namespace ctrandom {
     template <typename VariateType>
     double monobit_test_nist(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max)
     {
-        VariateType range = _max - _min;
-        size_t bitsPerVariate = (size_t) (0.5 + M_LOG2E * log((double) range));
+        const VariateType range = _max - _min;
+        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         double Sn = 0;
         for (size_t i = 0; i < ran.size(); ++i)
         {

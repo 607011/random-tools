@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
 #include "ct-rng-assessor.h"
@@ -19,7 +19,7 @@ void test_entropy(void)
     if (!quiet)
         std::cout << std::setprecision(std::numeric_limits<double>::digits10)
                   << (8*entropy) << " Bits pro Byte" << std::endl
-                  << std::endl << std::endl;
+                  << std::endl;
     if (htmlReport)
         std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
                   << (8*entropy) << "</td>";

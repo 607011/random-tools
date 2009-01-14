@@ -26,30 +26,26 @@ namespace ctrandom {
     size_t autocorrelation_test(const std::vector<VariateType>& ran, size_t _min, size_t _max, std::vector<size_t>& counts)
     {
         assert(_max > _min);
-        VariateType range = _max - _min;
-#ifdef _MSC_VER
-        size_t bitsPerVariate = (size_t) (M_LOG2E * log((double) range));
-#else
-        size_t bitsPerVariate = (size_t) (0.0001 + M_LOG2E * log((double) range));
-#endif
+        const VariateType range = _max - _min;
+        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         assert(ran.size() > 5000 / bitsPerVariate);
-        size_t stepLen = 5000 / bitsPerVariate;
+        const size_t stepLen = 5000 / bitsPerVariate;
         size_t passedCount = 0;
         for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
         {
-            size_t bitCount = 0;
+            size_t sum = 0;
             for (size_t j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j);
                 for (size_t k = 0; k < bitsPerVariate; ++k)
                 {
-                    bitCount += ((r & 1) ^ ((r >> 1) & 1));
+                    sum += ((r & 1) ^ ((r >> 1) & 1));
                     r >>= 1;
                 }
             }
-            if ((2326 < bitCount) && (bitCount < 2674))
+            if ((2326 < sum) && (sum < 2674))
                 ++passedCount;
-            counts.push_back(bitCount);
+            counts.push_back(sum);
         }
         return passedCount;
     };

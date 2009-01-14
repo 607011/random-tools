@@ -26,11 +26,7 @@ namespace ctrandom {
         size_t m = 1048576; // 2^20 urns
         size_t n = 16384;   // 2^14 balls
         size_t collisions = 0;
-#ifdef _MSC_VER
-        const size_t VariateTypeSize = (size_t) (M_LOG2E * ((double)(_max - _min)));
-#else
-        const size_t VariateTypeSize = (size_t) (0.0001 + M_LOG2E * ((double)(_max - _min)));
-#endif
+        const size_t VariateTypeSize = (size_t) round(M_LOG2E * ((double)(_max - _min)));
         BitVector Y(n);
         size_t k = 0;
         for (size_t i = 0; i < n / VariateTypeSize; ++i)

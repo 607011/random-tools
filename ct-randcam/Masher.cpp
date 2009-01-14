@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
 #include "Masher.h"
@@ -24,14 +24,8 @@ Masher::Masher(const unsigned char* src, const size_t sz)
 
 Masher::~Masher()
 {
-    if (_Dst != NULL) {
-        delete [] _Dst;
-        _Dst = NULL;
-    }
-    if (_Rng != NULL) {
-        delete [] _Rng;
-        _Rng = NULL;
-    }
+    delete [] _Dst;
+    delete [] _Rng;
 }
 
 

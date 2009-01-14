@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testu01-mylib", "testu01-my
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testu01-testu01", "testu01-testu01\testu01-testu01.vcproj", "{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-lotto", "ct-lotto\ct-lotto.vcproj", "{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -91,6 +93,10 @@ Global
 		{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}.Debug|Win32.Build.0 = Debug|Win32
 		{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}.Release|Win32.ActiveCfg = Release|Win32
 		{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}.Release|Win32.Build.0 = Release|Win32
+		{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}.Debug|Win32.Build.0 = Debug|Win32
+		{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}.Release|Win32.ActiveCfg = Release|Win32
+		{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
