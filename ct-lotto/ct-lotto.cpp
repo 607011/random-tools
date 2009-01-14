@@ -45,6 +45,7 @@ enum _gen_types {
 
 enum _long_options {
     SELECT_HELP = 0x1,
+    SELECT_QUIET
 };
 
 
@@ -70,11 +71,13 @@ typedef variate_t (*GeneratorFunction)(void);
 const size_t DefaultBBSKeyBits = 512;
 const size_t DefaultFieldCount = 12;
 const size_t DefaultSelectionCount = 6;
+const size_t DefaultMaxNumber = 49;
 
 std::map<size_t, bool> lottoNumbers;
 size_t selectedCount = 0;
 size_t N = DefaultFieldCount;
 size_t selectionCount = DefaultSelectionCount;
+size_t maxNumber = DefaultMaxNumber;
 int generator = GEN_SYSTEM_RAND;
 size_t bbsKeyBits = DefaultBBSKeyBits;
 bool quiet = false;
@@ -86,15 +89,16 @@ static void usage(void)
         << std::endl
         << "Optionen:" << std::endl
         << "  -n N" << std::endl
-        << "     Lottozahlen (6 aus 49) für N Felder generieren (Vorgabe: " << DefaultFieldCount << " Felder)" << std::endl
+        << "     Lottozahlen (" << DefaultSelectionCount << " aus " << DefaultMaxNumber << ") für N Felder generieren (Vorgabe: " << DefaultFieldCount << " Felder)." << std::endl
         << std::endl
         << "  --help" << std::endl
         << "  -h" << std::endl
         << "  -?" << std::endl
-        << "     Diese Hilfe anzeigen" << std::endl
+        << "     Diese Hilfe anzeigen." << std::endl
         << std::endl
+        << "  --quiet" << std::endl
         << "  -q" << std::endl
-        << "     Nur Zahlen ausgeben, sonst nichts" << std::endl
+        << "     Nur Zahlen ausgeben, sonst nichts." << std::endl
         << std::endl
         << std::endl
         << "Generatoren:" << std::endl
@@ -152,7 +156,7 @@ void __generate(T gen)
         lottoNumbers.clear();
         while (lottoNumbers.size() < selectionCount)
         {
-            size_t r = 1 + gen() % 49;
+            size_t r = 1 + gen() % maxNumber;
             if (!lottoNumbers[r])
                 lottoNumbers[r] = true;
         }
@@ -184,6 +188,8 @@ int main(int argc, char* argv[])
         switch (c)
         {
         case 'q':
+            // fall-through
+        case SELECT_QUIET:
             quiet = true;
             break;
         case 'h':
@@ -233,7 +239,7 @@ int main(int argc, char* argv[])
     {
     case GEN_SYSTEM_RAND:
         if (!quiet)
-            std::cout << "system's rand() function .. " << std::endl << std::endl;
+            std::cout << "rand() .. " << std::endl << std::endl;
         srand(getSeed());
         generate(rand);
         break;
@@ -243,8 +249,7 @@ int main(int argc, char* argv[])
         {
             ctrandom::MersenneTwister mt19937;
             mt19937.seed(getSeed());
-            // warm-up
-            for (int i = 0; i < 10000; ++i)
+            for (int i = 0; i < 10000; ++i) // warm-up
                 (void) mt19937();
             generate<unsigned int>(mt19937);
         }
