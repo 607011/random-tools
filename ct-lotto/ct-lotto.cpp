@@ -67,7 +67,7 @@ typedef int variate_t;
 typedef variate_t (*GeneratorFunction)(void);
 
 
-const size_t DefaultBBSKeyBits = 1024;
+const size_t DefaultBBSKeyBits = 512;
 const size_t DefaultFieldCount = 12;
 const size_t DefaultSelectionCount = 6;
 
@@ -233,13 +233,13 @@ int main(int argc, char* argv[])
     {
     case GEN_SYSTEM_RAND:
         if (!quiet)
-            std::cout << "system's rand() function .. " << std::endl;
-        srand((unsigned int) time(0));
+            std::cout << "system's rand() function .. " << std::endl << std::endl;
+        srand(getSeed());
         generate(rand);
         break;
     case GEN_MT19937:
         if (!quiet)
-            std::cout << "Mersenne-Twister 19937 .. " << std::endl;
+            std::cout << "Mersenne-Twister 19937 .. " << std::endl << std::endl;
         {
             ctrandom::MersenneTwister mt19937;
             mt19937.seed(getSeed());
@@ -251,7 +251,7 @@ int main(int argc, char* argv[])
         break;
     case GEN_LCG:
         if (!quiet)
-            std::cout << "LCG (ANSI C) .. " << std::endl;
+            std::cout << "LCG (ANSI C) .. " << std::endl << std::endl;
         {
             ctrandom::LCG_ANSIC lcg;
             lcg.seed(getSeed());
@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
         break;
     case GEN_MCG:
         if (!quiet)
-            std::cout << "MCG .. " << std::endl;
+            std::cout << "MCG .. " << std::endl << std::endl;
         {
             ctrandom::MCG mcg;
             mcg.seed(getSeed());
@@ -269,7 +269,7 @@ int main(int argc, char* argv[])
         break;
     case GEN_KNUTH:
         if (!quiet)
-            std::cout << "Knuth .. " << std::endl;
+            std::cout << "Knuth .. " << std::endl << std::endl;
         {
             ctrandom::KnuthRand1 knuth;
             knuth.seed(getSeed());
@@ -278,7 +278,7 @@ int main(int argc, char* argv[])
         break;
     case GEN_MWC:
         if (!quiet)
-            std::cout << "Multiply-with-carry (Marsaglia) .. " << std::endl;
+            std::cout << "Multiply-with-carry (Marsaglia) .. " << std::endl << std::endl;
         {
             ctrandom::MultiplyWithCarry mwc;
             mwc.seed(getSeed());
@@ -288,7 +288,7 @@ int main(int argc, char* argv[])
 #ifdef HAVE_LIBGMP
     case GEN_BBS:
         if (!quiet)
-            std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::endl;
+            std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::endl << std::endl;
         {
             ctrandom::BlumBlumShub bbs(bbsKeyBits);
             generate<unsigned int>(bbs);

@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="false"
+				LinkLibraryDependencies="true"
 				AdditionalDependencies="libeay32MTd.lib gmp.lib"
 				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
