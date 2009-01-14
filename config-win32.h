@@ -1,3 +1,7 @@
+// $Id$
+// Copyright (c) 2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Alle Rechte vorbehalten.
+
 #ifndef __CONFIG_WIN32_H_
 #define __CONFIG_WIN32_H_
 

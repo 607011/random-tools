@@ -1,6 +1,10 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
+
+#ifdef _WIN32
+#include "../config-win32.h"
+#endif
 
 #include <iostream>
 #include <iomanip>
@@ -79,6 +83,9 @@ static void disclaimer(void)
         << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
         << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag." << std::endl
         << "Alle Rechte vorbehalten." << std::endl
+        << std::endl
+        << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
+        << "Alle Ausgaben ohne Gewähr." << std::endl
         << std::endl;
 }
 

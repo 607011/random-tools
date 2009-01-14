@@ -5,6 +5,10 @@
 #ifndef __MONOBIT_H_
 #define __MONOBIT_H_
 
+#ifdef _WIN32
+#include "../config-win32.h"
+#endif
+
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
@@ -44,13 +48,8 @@ namespace ctrandom {
             size_t bitCount = 0;
             for (size_t j = 0; j < stepLen; ++j)
             {
-                VariateType r = ran.at(i + j) - _min;
-                for (size_t k = 0; k < bitsPerVariate; ++k)
-                {
-                    if ((r & 1) == 1)
-                        ++bitCount;
-                    r >>= 1;
-                }
+                for (VariateType r = ran.at(i + j) - _min; r != 0; r = r & (r-1))
+                    ++bitCount;
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
