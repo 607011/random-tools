@@ -67,13 +67,7 @@ namespace ctrandom {
     BlumBlumShub::BlumBlumShub(size_t keyLength)
     {
         MCG rng;
-#ifdef _WIN32
-        unsigned int seed;
-        rand_s(&seed);
-        rng.seed(seed);
-#else
-        rng.seed((unsigned int) time((time_t)0)); // TODO: besser einen Hardware-Generator verwenden
-#endif
+        rng.seed(makeSeed());
         size_t nKeyHexDigits = keyLength / 4;
         char* str = new char[nKeyHexDigits + 1];
 
@@ -111,7 +105,6 @@ namespace ctrandom {
     }
 
 
-
     BBSVariateType BlumBlumShub::operator()() 
     {
         BBSVariateType result = 0;
@@ -124,5 +117,4 @@ namespace ctrandom {
         }
         return result;
     }
-
 };
