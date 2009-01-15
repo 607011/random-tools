@@ -23,6 +23,7 @@
 
 #include <getopt.h>
 
+#include "gen/abstract_random_number_generator.h"
 #include "gen/circ.h"
 #include "gen/lcg.h"
 #include "gen/mcg.h"
@@ -66,14 +67,14 @@ static struct option long_options[] = {
 
 typedef int variate_t;
 typedef variate_t (*GeneratorFunction)(void);
-
+typedef std::map<size_t, bool> LottoField;
 
 const size_t DefaultBBSKeyBits = 512;
 const size_t DefaultFieldCount = 12;
 const size_t DefaultSelectionCount = 6;
 const size_t DefaultMaxNumber = 49;
 
-std::map<size_t, bool> lottoNumbers;
+LottoField lottoNumbers;
 size_t selectedCount = 0;
 size_t N = DefaultFieldCount;
 size_t selectionCount = DefaultSelectionCount;
@@ -130,7 +131,7 @@ static void disclaimer(void)
 
 void printNumbers(void)
 {
-    for (std::map<size_t, bool>::const_iterator i = lottoNumbers.begin(); i != lottoNumbers.end(); ++i)
+    for (LottoField::const_iterator i = lottoNumbers.begin(); i != lottoNumbers.end(); ++i)
         std::cout << std::setw(2) << (*i).first << "  ";
     std::cout << std::endl;
 }
@@ -138,13 +139,7 @@ void printNumbers(void)
 
 unsigned int getSeed(void)
 {
-    unsigned int seed;
-#ifdef _WIN32
-    rand_s(&seed);
-#else
-    seed = (unsigned int) time((time_t)0);
-#endif
-    return seed;
+    return ctrandom::RandomNumberGenerator<unsigned int>::makeSeed();
 }
 
 
