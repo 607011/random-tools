@@ -28,17 +28,29 @@
 namespace ctrandom {
 
 #ifdef HAVE_BOOST
-    template <typename T> 
+
+#if defined _MSC_VER || defined __BORLANDC__
+    typedef __int64 int64;
+    typedef unsigned __int64 uint64;
+#else
+    typedef long long int64;
+    typedef unsigned long long uint64;
+#endif
+
+    template <typename T>
     struct is_64bit : public boost::false_type { };
 
     template <> 
-    struct is_64bit<__int64> : public boost::true_type { };
+    struct is_64bit<int64> : public boost::true_type { };
 
     template <> 
-    struct is_64bit<unsigned __int64> : public boost::true_type { };
+    struct is_64bit<uint64> : public boost::true_type { };
 
     template <typename VariateType>
-    size_t __monobit_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, std::vector<size_t>& counts, const boost::true_type&)
+    size_t __monobit_test(const std::vector<VariateType>& ran,
+                          const VariateType _min, const VariateType _max,
+                          std::vector<size_t>& counts,
+                          const boost::true_type&)
     {
         const VariateType range = _max - _min;
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
@@ -62,7 +74,10 @@ namespace ctrandom {
 
 
     template <typename VariateType>
-    size_t __monobit_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, std::vector<size_t>& counts, const boost::false_type&)
+    size_t __monobit_test(const std::vector<VariateType>& ran,
+                          const VariateType _min, const VariateType _max,
+                          std::vector<size_t>& counts,
+                          const boost::false_type&)
     {
         const VariateType range = _max - _min;
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
@@ -95,7 +110,9 @@ namespace ctrandom {
     /// @param [out] Histogramm
     /// @return Anzahl der bestandenen Tests
     template <typename VariateType>
-    size_t monobit_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, std::vector<size_t>& counts)
+    size_t monobit_test(const std::vector<VariateType>& ran,
+                        const VariateType _min, const VariateType _max,
+                        std::vector<size_t>& counts)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
@@ -131,7 +148,8 @@ namespace ctrandom {
     /// @param _max größtmöglicher Wert in der Zufallszahlenfolge
     /// @return p-Wert
     template <typename VariateType>
-    double monobit_test_nist(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max)
+    double monobit_test_nist(const std::vector<VariateType>& ran,
+                             const VariateType _min, const VariateType _max)
     {
         const VariateType range = _max - _min;
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
