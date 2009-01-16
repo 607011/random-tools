@@ -9,6 +9,7 @@
 #ifdef _WIN32
 #define _CRT_RAND_S
 #include <cstdlib>
+#include "compat-win32.h"
 #else
 #include <cstdio>
 #include <ctime>
@@ -32,13 +33,18 @@ namespace ctrandom {
         static VariateType makeSeed(void);
     };
 
-
     template <typename VariateType>
     VariateType RandomNumberGenerator<VariateType>::makeSeed(void)
     {
-        VariateType seed = 0;
+        VariateType seed;
 #ifdef _WIN32
-        rand_s((unsigned int*)&seed);
+        if (hasRand_s()) {
+            seed = 0;
+            rand_s((unsigned int*)&seed);
+        }
+        else {
+            seed = (VariateType) rand();
+        }
 #else 
         FILE *fp = fopen("/dev/urandom", "r");
         if (fp != NULL)

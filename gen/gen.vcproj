@@ -150,6 +150,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\compat-win32.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\mersenne_twister.cpp"
 				>
 			</File>
@@ -169,6 +173,10 @@
 			</File>
 			<File
 				RelativePath=".\circ.h"
+				>
+			</File>
+			<File
+				RelativePath=".\compat-win32.h"
 				>
 			</File>
 			<File
