@@ -56,7 +56,7 @@ namespace ctrandom {
         }
         else
         {
-            seed = (VariateType) time((time_t)0);
+            seed = (VariateType) rand();
         }
 #endif
         return seed;

@@ -2,6 +2,8 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
+#define VERSION "1.0.3"
+
 #ifdef _WIN32
 #include "../config-win32.h"
 #else
@@ -9,8 +11,6 @@
 #include "config.h"
 #endif //HAVE_CONFIG_H
 #endif
-
-#define VERSION "1.0.3"
 
 #include <cstdlib>
 #include <ctime>
@@ -43,6 +43,9 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <wincrypt.h>
+#if _MSC_VER >= 1500
+#define HAVE_TPM
+#endif
 #endif
 
 enum _gen_types {
@@ -84,7 +87,10 @@ enum _gen_types {
 #ifdef HAVE_LIBSSL
     GEN_OPENSSL,
 #endif
-    GEN_FILE
+    GEN_FILE,
+#ifdef HAVE_TPM
+    GEN_TPM
+#endif
 };
 
 enum _long_options {
@@ -133,6 +139,9 @@ static struct option long_options[] = {
 #endif
 #ifdef HAVE_LIBSSL
     { "gen-openssl",          no_argument, 0, GEN_OPENSSL },
+#endif
+#ifdef HAVE_TPM
+    { "gen-tpm",              no_argument, 0, GEN_TPM },
 #endif
     { "gen-knuth",            no_argument, 0, GEN_KNUTH },
     { "gen-file",       required_argument, 0, GEN_FILE },
@@ -229,6 +238,9 @@ static void usage(void)
 #endif
 #ifdef _WIN32
         << "  --gen-crypt-win32" << std::endl
+#endif
+#ifdef HAVE_TPM
+        << "  --gen-tpm" << std::endl
 #endif
         << std::endl;
 }
@@ -709,6 +721,20 @@ int main(int argc, char* argv[])
             }
             if (!CryptReleaseContext(hCryptProv, 0)) {
                 std::cerr << "CryptReleaseContext() fehlgeschlagen: Kryptographie-Handle konnte nicht freigegeben werden." << std::endl;
+            }
+        }
+        break;
+#endif
+#ifdef HAVE_TPM
+    case GEN_TPM:
+        std::cout << "Trusted Platform Module .. " << std::flush;
+        {
+            for (count = 0; count < N; ++count)
+            {
+                updateProcess();
+                RAND_bytes(rngBuf, chunkSize);
+                if (fs.is_open())
+                    fs.write((char*) rngBuf, chunkSize);
             }
         }
         break;
