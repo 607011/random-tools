@@ -31,5 +31,6 @@ extern void test_birthday_spacings(void);
 extern void test_monobit(void);
 extern void test_pi(void);
 extern void test_entropy(void);
+extern void test_compression(void);
 
 #endif // __RNGASSESS_TESTS_H_
