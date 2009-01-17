@@ -18,7 +18,9 @@ void test_serial(void)
     {
         double p = ctrandom::serial_test<size_t>(r, r_min, r_max, groupsize);
         if (!quiet)
-            std::cout << " ... Gruppengröße = " << std::setw(1) << std::right << groupsize << ": "
+            std::cout << " ... " << std::flush;
+        if (!quiet)
+            std::cout << "Gruppengröße = " << std::setw(1) << std::right << groupsize << ": "
                       << std::flush
                       << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
                       << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN")

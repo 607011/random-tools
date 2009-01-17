@@ -61,6 +61,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="LIBCMTd.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -134,6 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -172,6 +175,10 @@
 			ReferencedProjectIdentifier="{8FEDD041-E3C3-445F-947D-01CC98AFD7AC}"
 			RelativePathToProject=".\test\test.vcproj"
 		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{B57BDBC0-98A8-44DF-99B6-D2693FFD999B}"
+			RelativePathToProject=".\bzip2-1.0.5\libbz2.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -185,6 +192,10 @@
 			</File>
 			<File
 				RelativePath=".\test-autocorrelation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\test-bzip2.cpp"
 				>
 			</File>
 			<File

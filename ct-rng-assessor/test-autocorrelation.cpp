@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cmath>
 
+#include "ct-rng-assessor.h"
 #include "tests.h"
 #include "test/autocorr.h"
 
@@ -20,20 +21,23 @@
 void test_autocorrelation(void)
 {
     std::vector<size_t> counts;
-    std::cout << "AUTOCORRELATION TEST" << std::endl;
-    std::cout << " ... " << std::flush;
+    if (!quiet)
+        std::cout << "AUTOCORRELATION TEST" << std::endl << " ... " << std::flush;
     size_t passed = ctrandom::autocorrelation_test<size_t>(r, r_min, r_max, counts);
     if (passed == counts.size())
     {
-        std::cout << "OK.";
+        if (!quiet)
+            std::cout << "OK.";
     }
     else
     {
         size_t notPassed = counts.size() - passed;
-        std::cout << "NICHT BESTANDEN. " << notPassed << " von " << counts.size()
-            << " Blöcken (" << std::setprecision(3) << 100 * (float) (counts.size() - passed) / counts.size() << "%)" << std::endl
-            << "     " << ((notPassed == 1)? "enthält" : "enthalten")
-            << " nicht die geforderte Anzahl Bits (2326..2674)";
+        if (!quiet)
+            std::cout << "NICHT BESTANDEN. " << notPassed << " von " << counts.size()
+                << " Blöcken (" << std::setprecision(3) << 100 * (float) (counts.size() - passed) / counts.size() << "%)" << std::endl
+                << "     " << ((notPassed == 1)? "enthält" : "enthalten")
+                << " nicht die geforderte Anzahl Bits (2326..2674)";
     }
-    std::cout << std::endl <<std::endl;
+    if (!quiet)
+        std::cout << std::endl <<std::endl;
 }

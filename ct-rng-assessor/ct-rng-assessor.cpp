@@ -186,6 +186,7 @@ int main(int argc, char* argv[])
     test_frequencies();
     test_monobit();
     test_autocorrelation();
+    test_compression();
     test_serial();
     test_gap();
     test_max_of_t();
