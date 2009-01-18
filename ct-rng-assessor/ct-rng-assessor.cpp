@@ -51,7 +51,7 @@ size_t r_min;
 size_t r_max;
 size_t r_range;
 size_t r_bits;
-std::vector<size_t> r;
+RNGArray r;
 double alpha = 0.01;
 
 
@@ -182,11 +182,15 @@ int main(int argc, char* argv[])
                   << "<tbody>" << std::endl
                   << "  <tr>" << std::endl;
 
+    // "soft" tests
     test_entropy();
+    test_pi();
+    test_bzip2();
+
+    // "hard" tests
     test_frequencies();
     test_monobit();
     test_autocorrelation();
-    test_compression();
     test_serial();
     test_gap();
     test_max_of_t();
@@ -195,7 +199,6 @@ int main(int argc, char* argv[])
     test_couponcollector();
     test_poker_knuth();
     test_poker_fips();
-    test_pi();
 
     if (htmlReport)
         std::cout << std::endl

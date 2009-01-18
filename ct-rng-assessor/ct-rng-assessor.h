@@ -11,9 +11,10 @@
 #include <limits>
 #include <cstdlib>
 #include <cmath>
+#include <vector>
 #include "tests.h"
 
-#define VERSION "1.0.3"
+#define VERSION "1.0.4"
 
 extern bool quiet;
 extern bool htmlReport;
