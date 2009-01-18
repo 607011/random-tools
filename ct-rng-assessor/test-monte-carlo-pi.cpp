@@ -32,5 +32,5 @@ void test_pi(void)
                       << pi << "</td>";
     }
     if (!quiet)
-        std::cout << std::endl << std::endl;
+        std::cout << std::endl;
 }
