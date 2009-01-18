@@ -1,7 +1,7 @@
 bin_PROGRAMS = ct-rng-assessor
 
 AM_CPPFLAGS = @BOOST_CPPFLAGS@
-AM_LDFLAGS = -L../test -lrngtest
+AM_LDFLAGS = -L../test -lrngtest -lbz2
 
 ct_rng_assessor_SOURCES = ct-rng-assessor.cpp 
 ct_rng_assessor_SOURCES += test-birthdayspacings.cpp
@@ -20,6 +20,7 @@ ct_rng_assessor_SOURCES += test-entropy.cpp
 ct_rng_assessor_SOURCES += test-monobit.cpp
 ct_rng_assessor_SOURCES += test-poker-fips.cpp
 ct_rng_assessor_SOURCES += test-autocorrelation.cpp
+ct_rng_assessor_SOURCES += test-bzip2.cpp
 
 DEFAULT_INCLUDES = -I. -I..
 
