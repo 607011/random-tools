@@ -4,9 +4,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <set>
 #include <cstdlib>
-#include <cmath>
 
 #include "ct-rng-assessor.h"
 #include "tests.h"
@@ -18,15 +16,15 @@
 ///// COMPRESSION TEST
 /////
 ////////////////////////////////////////////////////////////
-void test_compression(void)
+void test_bzip2(void)
 {
     if (!quiet)
-        std::cout << "COMPRESSION TEST (1 MByte blocks)" << std::endl;
-    const size_t BufSize = 1024*1024;
+        std::cout << "BZIP2 COMPRESSION TEST (1 MByte blocks)" << std::endl;
+    const size_t BufSize = 1048576;
+    const size_t DstBufSize = 1154034; // 1.1*BufSize+600
     char* srcBuf = new char[BufSize];
-    unsigned int dstBufSize = (unsigned int) (1.1*(float)BufSize+600);
-    char* dstBuf = new char[dstBufSize];
-    std::vector<size_t>::const_iterator rp = r.begin();
+    char* dstBuf = new char[DstBufSize];
+    RNGArray::const_iterator rp = r.begin();
     for (size_t i = 0; i < r.size(); i += BufSize)
     {
         if (!quiet)
@@ -34,28 +32,18 @@ void test_compression(void)
         size_t j = 0;
         while (j < BufSize && rp != r.end())
             srcBuf[j++] = *(rp++);
-        unsigned int compressedSize = dstBufSize;
+        unsigned int compressedSize = (unsigned int) DstBufSize;
         BZ2_bzBuffToBuffCompress(dstBuf, &compressedSize, srcBuf, j, 9, 0, 0);
         float pct = 100.0f * compressedSize / (float) j;
         if (!quiet)
-        {
-            std::cout << std::setw(10) << std::setprecision(4) << std::right << pct << "%    ";
-            if (pct > 99.999f)
-            {
-                std::cout << "OK.";
-            }
-            else
-            {
-                std::cout << "NICHT BESTANDEN.";
-            }
-            std::cout<< std::endl;
-        }
+            std::cout << std::setw(10) << std::setprecision(4) << std::right << pct << "% "
+                      << ((pct > 100.299f)? "OK." : "NICHT BESTANDEN.") << std::endl;
         if (htmlReport)
             std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
                       << pct << "</td>";
     }
     if (!quiet)
-        std::cout << std::endl <<std::endl;
+        std::cout << std::endl;
     delete [] dstBuf;
     delete [] srcBuf;
 }

@@ -8,11 +8,13 @@
 #include <cstdlib>
 #include <vector>
 
+typedef std::vector<size_t> RNGArray;
+
 extern size_t r_min;
 extern size_t r_max;
 extern size_t r_range;
 extern size_t r_bits;
-extern std::vector<size_t> r;
+extern RNGArray r;
 extern double alpha;
 
 extern void test_frequencies(void);
@@ -31,6 +33,6 @@ extern void test_birthday_spacings(void);
 extern void test_monobit(void);
 extern void test_pi(void);
 extern void test_entropy(void);
-extern void test_compression(void);
+extern void test_bzip2(void);
 
 #endif // __RNGASSESS_TESTS_H_
