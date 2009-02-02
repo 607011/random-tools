@@ -8,13 +8,13 @@
 
 #ifdef _WIN32
 #define _CRT_RAND_S
-#include <cstdlib>
 #include "compat-win32.h"
 #else
 #include <cstdio>
 #include <ctime>
 #endif
 
+#include <cstdlib>
 #include <limits>
 
 namespace ctrandom {
