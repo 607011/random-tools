@@ -1,11 +1,23 @@
-SUBDIRS = gen test ct-lotto ct-randcam ct-rng-assessor ct-rng-analyzer ct-rng
-
-ACLOCAL_AMFLAGS = -I m4
-
 PROJ=randomtools
 VERSION=1.0
 BUILD=$(PROJ)-$(VERSION)-linux
-FILES := $(foreach i,ct-randcam ct-lotto ct-rng-assessor ct-rng-analyzer ct-rng,$i/$i)
+
+ACLOCAL_AMFLAGS = -I m4
+
+SUBDIRS  = gen test 
+SUBDIRS += testu01-mylib testu01-probdist testu01-testu01 
+SUBDIRS += ct-lotto ct-rng-assessor ct-rng-analyzer ct-rng
+
+FILES  = ct-lotto/ct-lotto
+FILES += ct-rng/assessor/ct-rng-assessor
+FILES += ct-rng-analyze/ct-rng-analyzer
+FILES += ct-rng/ct-rng
+
+if BUILD_RANDCAM
+SUBDIRS += ct-randcam
+FILES += ct-randcam/ct-randcam
+endif
+
 MKDIR=mkdir
 CP=cp
 STRIP=strip

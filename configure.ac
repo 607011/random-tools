@@ -3,7 +3,7 @@ AC_COPYRIGHT([Copyright (c) 2008-2009 Oliver Lau, Heise Zeitschriften Verlag])
 
 AM_INIT_AUTOMAKE([randomtools], [1.0], [oliver.lau@ct.heise.de])
 AM_CONFIG_HEADER(config.h)
-
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_PROG_CXX
 AC_PROG_INSTALL
@@ -18,9 +18,13 @@ AC_HEADER_STDBOOL
 AC_STRUCT_TM
 AC_TYPE_SIZE_T
 
+AC_CHECK_TYPE([boolean])
+
 AC_CHECK_LIB([m], [pow])
 AC_CHECK_LIB([ssl], [RAND_bytes])
 
+have_pthreads=no
+AC_SEARCH_LIBS([pthread_create], [pthread], [have_pthreads=yes])
 
 
 
@@ -132,4 +136,4 @@ AX_GMP
 AX_OPENCV
 
 
-AC_OUTPUT([Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
+AC_OUTPUT([Makefile gen/Makefile test/Makefile testu01-mylib/Makefile testu01-probdist/Makefile testu01-testu01/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])

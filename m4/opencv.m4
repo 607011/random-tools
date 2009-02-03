@@ -29,12 +29,14 @@ if test "x$want_opencv" = "xyes"; then
    AC_REQUIRE([AC_PROG_CC])
    succeeded=no
    if test "$ac_opencv_path" != ""; then
-       OPENCV_LDFLAGS="-L$ac_opencv_path/lib"
-       OPENCV_CPPFLAGS="-I$ac_opencv_path/include"
-       succeeded=yes
+       if test -d "$ac_opencv_path/include/opencv" && test -r "$ac_opencv_path/include/opencv"; then
+       	  OPENCV_LDFLAGS="-L$ac_opencv_path/lib"
+       	  OPENCV_CPPFLAGS="-I$ac_opencv_path/include"
+	  succeeded=yes
+       fi
    else
        for ac_opencv_path_tmp in /usr /usr/local /opt ; do
-           if test -d "$ac_opencv_path_tmp/include" && test -r "$ac_opencv_path_tmp/include"; then
+           if test -d "$ac_opencv_path_tmp/include/opencv" && test -r "$ac_opencv_path_tmp/include/opencv"; then
                OPENCV_LDFLAGS="-L$ac_opencv_path_tmp/lib"
                OPENCV_CPPFLAGS="-I$ac_opencv_path_tmp/include"
                succeeded=yes
@@ -52,4 +54,8 @@ if test "x$want_opencv" = "xyes"; then
       AC_MSG_RESULT(no)
    fi
 fi
+
+AM_CONDITIONAL(BUILD_RANDCAM, test "$succeeded" = "yes")
+
 ])
+

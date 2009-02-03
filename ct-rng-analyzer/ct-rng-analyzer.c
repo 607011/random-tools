@@ -48,7 +48,7 @@ static struct option long_options[] = {
 
 static void usage(void)
 {
-    printf("Aufruf: ct_rng_analyzer [Testoptionen] [Optionen] <Eingabedatei>\n\n"
+    printf("Aufruf: ct-rng-analyzer [Testoptionen] [Optionen] <Eingabedatei>\n\n"
            "Testoptionen:\n"
            "  --rabbit\n"
            "  --fips140-2\n"

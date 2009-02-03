@@ -4,7 +4,7 @@ ct_rng_analyzer_SOURCES = ct-rng-analyzer.c
 
 AM_LDFLAGS = -ltestu01 -lprobdist -lmylib -lm
 
-DEFAULT_INCLUDES = -I. -I..
+DEFAULT_INCLUDES = -I. -I.. -I../TestU01/include
 
 distclean-local:
 
