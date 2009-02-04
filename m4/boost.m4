@@ -22,6 +22,8 @@ AC_ARG_WITH([boost],
             [want_boost="yes"]
 )
 
+
+succeeded=no
 if test "x$want_boost" = "xyes"; then
    AC_REQUIRE([AC_PROG_CC])
    boost_lib_version_req=ifelse([$1], ,1.36.0,$1)
@@ -34,7 +36,6 @@ if test "x$want_boost" = "xyes"; then
    fi
    WANT_BOOST_VERSION=`expr $boost_lib_version_req_major \* 100000 \+  $boost_lib_version_req_minor \* 100 \+ $boost_lib_version_req_sub_minor`
    AC_MSG_CHECKING(for boostlib >= $boost_lib_version_req)
-   succeeded=no
    if test "$ac_boost_path" != ""; then
        BOOST_LDFLAGS="-L$ac_boost_path/lib"
        BOOST_CPPFLAGS="-I$ac_boost_path/include"

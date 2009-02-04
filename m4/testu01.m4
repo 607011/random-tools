@@ -22,10 +22,10 @@ AC_ARG_WITH([testu01],
             [want_testu01="yes"]
 )
 
+succeeded=no
 if test "x$want_testu01" = "xyes"; then
    AC_MSG_CHECKING(for TestU01)
    AC_REQUIRE([AC_PROG_CC])
-   succeeded=no
    if test "$ac_testu01_path" != ""; then
        if test -f "$ac_testu01_path/include/unif01.h"; then
        	  TESTU01_LDFLAGS="-L$ac_testu01_path/lib"
@@ -35,7 +35,6 @@ if test "x$want_testu01" = "xyes"; then
    else
        for ac_testu01_path_tmp in /usr /usr/local /opt ; do
            if test -f "$ac_testu01_path_tmp/include/unif01.h"; then
-               echo "testing $ac_testu01_path_tmp/include/unif01.h ..."
                TESTU01_LDFLAGS="-L$ac_testu01_path_tmp/lib"
                TESTU01_CPPFLAGS="-I$ac_testu01_path_tmp/include"
                succeeded=yes
