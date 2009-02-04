@@ -22,12 +22,12 @@ AC_ARG_WITH([opencv],
             [want_opencv="yes"]
 )
 
+succeeded=no
 if test "x$want_opencv" = "xyes"; then
     # AC_CHECK_LIB([cv], [cvSub])
     # AC_CHECK_LIB([highgui], [main])
    AC_MSG_CHECKING(for OpenCV)
    AC_REQUIRE([AC_PROG_CC])
-   succeeded=no
    if test "$ac_opencv_path" != ""; then
        if test -d "$ac_opencv_path/include/opencv" && test -r "$ac_opencv_path/include/opencv"; then
        	  OPENCV_LDFLAGS="-L$ac_opencv_path/lib"

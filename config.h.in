@@ -1,5 +1,8 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Define to 1 if the system has the type `boolean bool'. */
+#undef HAVE_BOOLEAN_BOOL
+
 /* define if the Boost library is available */
 #undef HAVE_BOOST
 

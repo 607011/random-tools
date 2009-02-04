@@ -22,6 +22,7 @@ AC_ARG_WITH([gmp],
             [want_gmp="yes"]
 )
 
+succeeded=no
 if test "x$want_gmp" = "xyes"; then
    AC_REQUIRE([AC_PROG_CC])
    gmp_lib_version_req=ifelse([$1], ,4.1.0,$1)
@@ -33,7 +34,6 @@ if test "x$want_gmp" = "xyes"; then
         gmp_lib_version_req_sub_minor="0"
    fi
    AC_MSG_CHECKING(for gmplib >= $gmp_lib_version_req)
-   succeeded=no
    if test "$ac_gmp_path" != ""; then
        GMP_LDFLAGS="-L$ac_gmp_path/lib"
        GMP_CPPFLAGS="-I$ac_gmp_path/include"
