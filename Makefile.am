@@ -5,8 +5,7 @@ BUILD=$(PROJ)-$(VERSION)-linux
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS  = gen test 
-SUBDIRS += testu01-mylib testu01-probdist testu01-testu01 
-SUBDIRS += ct-lotto ct-rng-assessor ct-rng-analyzer ct-rng
+SUBDIRS += ct-rng ct-rng-assessor ct-lotto
 
 FILES  = ct-lotto/ct-lotto
 FILES += ct-rng/assessor/ct-rng-assessor
@@ -16,6 +15,11 @@ FILES += ct-rng/ct-rng
 if BUILD_RANDCAM
 SUBDIRS += ct-randcam
 FILES += ct-randcam/ct-randcam
+endif
+
+if BUILD_CT_RNG_ANALYZER
+SUBDIRS += ct-rng-analyzer
+FILES += ct-rng-analyzer/ct-rng-analyzer
 endif
 
 MKDIR=mkdir

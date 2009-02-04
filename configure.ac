@@ -138,6 +138,6 @@ AX_PADLOCK
 AX_BOOST
 AX_GMP
 AX_OPENCV
+AX_TESTU01
 
-
-AC_OUTPUT([Makefile gen/Makefile test/Makefile testu01-mylib/Makefile testu01-probdist/Makefile testu01-testu01/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
+AC_OUTPUT([Makefile gen/Makefile test/Makefile ct-rng/Makefile ct-lotto/Makefile ct-randcam/Makefile ct-rng-assessor/Makefile ct-rng-analyzer/Makefile])
