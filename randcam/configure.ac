@@ -1,41 +1,16 @@
-AC_INIT([randomtools], [1.2], [oliver.lau@ct.heise.de])
-AC_COPYRIGHT([Copyright (c) 2008-2009 Oliver Lau])
+AC_INIT([ct-randcam], [1.0], [ola@ctmagazin.de])
+AC_COPYRIGHT([Copyright (c) 2008 Oliver Lau, Heise Zeitschriften Verlag])
 
-AM_INIT_AUTOMAKE([randomtools], [1.2], [oliver@von-und-fuer-lau.de])
-AM_CONFIG_HEADER(config.h)
-AC_CONFIG_MACRO_DIR([m4])
+AM_INIT_AUTOMAKE([ct-randcam], [1.0], [ola@ctmagazin.de])
+AM_CONFIG_HEADER([config.h])
 
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_PROG_LIBTOOL
 AC_LANG_CPLUSPLUS
-AC_C_CONST
-AC_C_INLINE
-AC_PROG_CC
 
-AC_HEADER_STDBOOL
+AC_CHECK_LIB([cv], [cvSub])
+AC_CHECK_LIB([highgui], [main])
 
-AC_TYPE_UINT8_T
-AC_TYPE_UINT16_T
-AC_TYPE_UINT32_T
-AC_STRUCT_TM
-AC_TYPE_SIZE_T
-
-AC_CHECK_TYPES([boolean bool])
-
-AC_CHECK_LIB([m], [pow])
-AC_CHECK_LIB([ssl], [RAND_bytes])
-
-have_pthreads=no
-AC_SEARCH_LIBS([pthread_create], [pthread], [have_pthreads=yes])
-
-
-
-#######################################################
-#
-# enable --debug flag
-#
-#######################################################
 AC_ARG_ENABLE([debug],
               [AS_HELP_STRING([--enable-debug],[build debug version without optimization [no]])],
               [debug=$enableval],
@@ -83,6 +58,15 @@ else
 fi
 
 
+AC_ARG_ENABLE([gui],
+              [AS_HELP_STRING([--enable-gui],[enable OpenCV GUI])],
+              [have_opencv_gui=no],
+              [have_opencv_gui=yes])
+if test x"$have_opencv_gui" = "xyes"; then
+    AC_DEFINE([HAVE_OPENCV_GUI], [1], [Define to 1 if you have OpenCV GUI support enabled.])
+fi
+             
+
 AC_ARG_ENABLE([sse2],
               [AS_HELP_STRING([--enable-sse2],[enable SSE2 intrinsics [yes]])],
               [sse2=$enableval],
@@ -128,15 +112,10 @@ AC_ARG_ENABLE([openmp],
 if test x"$openmp" = "xyes"; then
  if test x"$ac_cv_c_compiler_gnu" = "xyes"; then
     DEFAULT_CXXFLAGS=" -fopenmp $DEFAULT_CXXFLAGS"
-    AC_CHECK_LIB([gomp], [omp_get_num_threads])
+    AC_CHECK_LIB(gomp,omp_get_num_threads)
  fi
 fi
 
 
-AX_PADLOCK
-AX_BOOST
-AX_GMP
-AX_OPENCV
-AX_TESTU01
-
-AC_OUTPUT([Makefile gen/Makefile test/Makefile rng/Makefile lotto/Makefile randcam/Makefile rng-assessor/Makefile rng-analyzer/Makefile])
+AM_SANITY_CHECK
+AC_OUTPUT(Makefile)

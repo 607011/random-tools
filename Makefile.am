@@ -1,25 +1,24 @@
 PROJ=randomtools
-VERSION=1.0
+VERSION=1.1
 BUILD=$(PROJ)-$(VERSION)-linux
 
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS  = gen test 
-SUBDIRS += ct-rng ct-rng-assessor ct-lotto
+SUBDIRS += rng rng-assessor lotto
 
-FILES  = ct-lotto/ct-lotto
-FILES += ct-rng/assessor/ct-rng-assessor
-FILES += ct-rng-analyze/ct-rng-analyzer
-FILES += ct-rng/ct-rng
+FILES  = lotto/lotto
+FILES += rng/assessor/rng-assessor
+FILES += rng/rng
 
 if BUILD_RANDCAM
-SUBDIRS += ct-randcam
-FILES += ct-randcam/ct-randcam
+SUBDIRS += randcam
+FILES += randcam/randcam
 endif
 
 if BUILD_CT_RNG_ANALYZER
-SUBDIRS += ct-rng-analyzer
-FILES += ct-rng-analyzer/ct-rng-analyzer
+SUBDIRS += rng-analyzer
+FILES += rng-analyzer/rng-analyzer
 endif
 
 MKDIR=mkdir
