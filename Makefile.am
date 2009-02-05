@@ -16,7 +16,7 @@ SUBDIRS += randcam
 FILES += randcam/randcam
 endif
 
-if BUILD_CT_RNG_ANALYZER
+if BUILD_RNG_ANALYZER
 SUBDIRS += rng-analyzer
 FILES += rng-analyzer/rng-analyzer
 endif
