@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
 #include <cmath>

@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
 #include <iostream>
@@ -61,7 +61,7 @@ void usage(void)
 void disclaimer(void)
 {
     std::cout << "ct-randcam " << VERSION << " - Zufallszahlen aus Webcam-Bildern generieren." << std::endl
-        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>" << std::endl
         << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl

@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #include "rng-assessor.h"
@@ -13,7 +13,7 @@
 void test_poker_knuth(void)
 {
     if (!quiet)
-        std::cout << "POKER TEST (à la Knuth)" << std::endl;
+        std::cout << "POKER TEST ( la Knuth)" << std::endl;
     double p = ctrandom::poker_test_knuth<size_t>(r, r_min, r_max);
     if (!quiet)
         std::cout << " ... " << std::flush

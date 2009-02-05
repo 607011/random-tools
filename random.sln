@@ -9,17 +9,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bin2asc", "bin2asc\bin2asc.vcproj", "{87B2C0A4-E421-4F7C-A549-95B80FE001BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-rng-assessor", "ct-rng-assessor\ct-rng-assessor.vcproj", "{20D82A2B-1A11-43DC-AFCF-950182525599}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rng-assessor", "rng-assessor\rng-assessor.vcproj", "{20D82A2B-1A11-43DC-AFCF-950182525599}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "getopt", "getopt\getopt.vcproj", "{FB10A353-C026-45E9-BC20-1FC81B036C03}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-rng", "ct-rng\ct-rng.vcproj", "{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rng", "rng\rng.vcproj", "{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-randcam", "ct-randcam\ct-randcam.vcproj", "{78A9C683-310C-469F-B5AA-99808BFEDDC6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "randcam", "randcam\randcam.vcproj", "{78A9C683-310C-469F-B5AA-99808BFEDDC6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bin2bits", "bin2bits\bin2bits.vcproj", "{556661DC-61B8-4024-A7BB-85C3AD071967}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-rng-analyzer", "ct-rng-analyzer\ct-rng-analyzer.vcproj", "{03DD844B-C2A1-4688-A296-94917FB66F2D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rng-analyzer", "rng-analyzer\rng-analyzer.vcproj", "{03DD844B-C2A1-4688-A296-94917FB66F2D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chisqtable", "chisqtable\chisqtable.vcproj", "{5F768CAD-64BC-401D-A365-2FEE6F7B9F72}"
 EndProject
@@ -29,7 +29,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testu01-mylib", "testu01-my
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testu01-testu01", "testu01-testu01\testu01-testu01.vcproj", "{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ct-lotto", "ct-lotto\ct-lotto.vcproj", "{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lotto", "lotto\lotto.vcproj", "{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbz2", "bzip2-1.0.5\libbz2.vcproj", "{B57BDBC0-98A8-44DF-99B6-D2693FFD999B}"
 EndProject

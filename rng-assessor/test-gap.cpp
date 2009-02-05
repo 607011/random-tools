@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #include "rng-assessor.h"
@@ -21,7 +21,7 @@ void test_gap(void)
         std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
                   << p << "</td>";
     if (!quiet)
-        std::cout << " ... untere Hälfte  : " << std::flush
+        std::cout << " ... untere Hlfte  : " << std::flush
                   << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
                   << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN") << '.'
                   << std::endl;
@@ -31,7 +31,7 @@ void test_gap(void)
         std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
                   << p << "</td>";
     if (!quiet)
-        std::cout << " ... obere Hälfte   : " << std::flush
+        std::cout << " ... obere Hlfte   : " << std::flush
                   << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
                   << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN") << '.'
                   << std::endl;
