@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag
+// Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #include <stdlib.h>
@@ -48,7 +48,7 @@ static struct option long_options[] = {
 
 static void usage(void)
 {
-    printf("Aufruf: ct-rng-analyzer [Testoptionen] [Optionen] <Eingabedatei>\n\n"
+    printf("Aufruf: rng-analyzer [Testoptionen] [Optionen] <Eingabedatei>\n\n"
            "Testoptionen:\n"
            "  --rabbit\n"
            "  --fips140-2\n"
