@@ -7,7 +7,7 @@
 #include <cmath>
 #include <vector>
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "test/frequency.h"
 #include "test/combinations.h"
 

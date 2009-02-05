@@ -1,8 +1,8 @@
-bin_PROGRAMS = ct-lotto
+bin_PROGRAMS = lotto
 
-ct_lotto_SOURCES = ct-lotto.cpp
+lotto_SOURCES = lotto.cpp
 
-ct_lotto_LDFLAGS = -L../gen -lrng
+lotto_LDFLAGS = -L../gen -lrng
 
 AM_CPPFLAGS = @GMP_CPPFLAGS@
 AM_LDFLAGS = @GMP_LDFLAGS@

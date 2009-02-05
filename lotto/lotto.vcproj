@@ -2,9 +2,10 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ct-rng-assessor"
-	ProjectGUID="{20D82A2B-1A11-43DC-AFCF-950182525599}"
-	RootNamespace="rng_assess"
+	Name="lotto"
+	ProjectGUID="{F629D19F-BCEE-49F2-89F6-A5E3CA8E75C9}"
+	RootNamespace="lotto"
+	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -20,7 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="2"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,13 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				StructMemberAlignment="0"
-				EnableEnhancedInstructionSet="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -61,8 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				IgnoreAllDefaultLibraries="false"
-				IgnoreDefaultLibraryNames="LIBCMTd.lib"
+				AdditionalDependencies="gmp.lib"
+				LinkIncremental="2"
+				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -94,7 +95,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="2"
+			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -115,13 +116,13 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -136,6 +137,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="gmp.lib"
+				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -168,16 +171,12 @@
 	</Configurations>
 	<References>
 		<ProjectReference
+			ReferencedProjectIdentifier="{43C69279-C5CE-4421-B6EC-D83618B11297}"
+			RelativePathToProject=".\gen\gen.vcproj"
+		/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{FB10A353-C026-45E9-BC20-1FC81B036C03}"
 			RelativePathToProject=".\getopt\getopt.vcproj"
-		/>
-		<ProjectReference
-			ReferencedProjectIdentifier="{8FEDD041-E3C3-445F-947D-01CC98AFD7AC}"
-			RelativePathToProject=".\test\test.vcproj"
-		/>
-		<ProjectReference
-			ReferencedProjectIdentifier="{B57BDBC0-98A8-44DF-99B6-D2693FFD999B}"
-			RelativePathToProject=".\bzip2-1.0.5\libbz2.vcproj"
 		/>
 	</References>
 	<Files>
@@ -187,67 +186,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ct-rng-assessor.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-autocorrelation.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-bzip2.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-couponcollector.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-entropy.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-frequency.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-gap.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-maxt.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-monobit.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-monte-carlo-pi.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-permutation.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-poker-fips.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-poker.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-runs-fips.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-runs.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\test-serial.cpp"
+				RelativePath=".\lotto.cpp"
 				>
 			</File>
 		</Filter>
@@ -256,14 +195,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\config-win32.h"
-				>
-			</File>
-			<File
-				RelativePath=".\tests.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

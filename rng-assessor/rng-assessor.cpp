@@ -18,7 +18,7 @@
 #include "test/math_functions.h"
 #include "test/chisq.h"
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 
 
 typedef unsigned char variate_t;
@@ -57,7 +57,7 @@ double alpha = 0.01;
 
 static void usage(void)
 {
-    std::cout << "Aufruf: ct-rng-assessor [Optionen] Zufallszahlendatei" << std::endl
+    std::cout << "Aufruf: rng-assessor [Optionen] Zufallszahlendatei" << std::endl
         << std::endl
         << "Options:" << std::endl
         << "  -n n" << std::endl
@@ -79,9 +79,8 @@ static void usage(void)
 
 static void disclaimer(void)
 {
-    std::cout << "ct-rng-assessor " << VERSION << " - Zufallszahlenanalyse 1." << std::endl
-        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag." << std::endl
+    std::cout << "rng-assessor " << VERSION << " - Zufallszahlenanalyse 1." << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl

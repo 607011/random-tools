@@ -53,6 +53,6 @@ if test "x$want_testu01" = "xyes"; then
    fi
 fi
 
-AM_CONDITIONAL(BUILD_CT_RNG_ANALYZER, test "$succeeded" = "yes")
+AM_CONDITIONAL(BUILD_RNG_ANALYZER, test "$succeeded" = "yes")
 
 ])

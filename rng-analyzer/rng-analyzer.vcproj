@@ -2,9 +2,10 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ct-rng"
-	ProjectGUID="{28798FE7-8BB5-4856-9DDE-C0D6627532A8}"
-	RootNamespace="gen_cmdline"
+	Name="rng-analyzer"
+	ProjectGUID="{03DD844B-C2A1-4688-A296-94917FB66F2D}"
+	RootNamespace="TestU01"
+	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -20,7 +21,6 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			UseOfMFC="0"
 			CharacterSet="2"
 			>
 			<Tool
@@ -41,12 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir);$(SolutionDir)\TestU01\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				StructMemberAlignment="4"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -61,9 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				LinkLibraryDependencies="true"
-				AdditionalDependencies="libeay32MTd.lib gmp.lib"
-				IgnoreDefaultLibraryNames="LIBCMT.lib"
+				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -97,7 +95,6 @@
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
-			EnableManagedIncrementalBuild="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -118,12 +115,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir);$(SolutionDir)\TestU01\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				EnableEnhancedInstructionSet="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -138,19 +134,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libeay32MT.lib gmp.lib"
-				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				IgnoreAllDefaultLibraries="false"
-				IgnoreDefaultLibraryNames="LIBCMT.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
-				Driver="0"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
-				Profile="false"
-				CLRThreadAttribute="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -181,8 +170,16 @@
 			RelativePathToProject=".\getopt\getopt.vcproj"
 		/>
 		<ProjectReference
-			ReferencedProjectIdentifier="{43C69279-C5CE-4421-B6EC-D83618B11297}"
-			RelativePathToProject=".\gen\gen.vcproj"
+			ReferencedProjectIdentifier="{A158405E-C7A7-4432-B82B-0C1A05706CB5}"
+			RelativePathToProject=".\testu01-probdist\testu01-probdist.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{F4B6CBAE-EA3D-4962-9D42-DAA32DC11521}"
+			RelativePathToProject=".\testu01-mylib\testu01-mylib.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{D9977B23-CD8A-4BFD-A4FE-79C0F4341958}"
+			RelativePathToProject=".\testu01-testu01\testu01-testu01.vcproj"
 		/>
 	</References>
 	<Files>
@@ -192,11 +189,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ct-rng.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\padlock_rng.cpp"
+				RelativePath=".\rng-analyzer.c"
 				>
 			</File>
 		</Filter>
@@ -205,14 +198,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\padlock.h"
-				>
-			</File>
-			<File
-				RelativePath=".\via_ace.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
