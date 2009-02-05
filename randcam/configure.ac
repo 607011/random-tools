@@ -1,7 +1,7 @@
-AC_INIT([ct-randcam], [1.0], [ola@ctmagazin.de])
-AC_COPYRIGHT([Copyright (c) 2008 Oliver Lau, Heise Zeitschriften Verlag])
+AC_INIT([randcam], [1.0], [oliver@von-und-fuer-lau.de])
+AC_COPYRIGHT([Copyright (c) 2008 Oliver Lau])
 
-AM_INIT_AUTOMAKE([ct-randcam], [1.0], [ola@ctmagazin.de])
+AM_INIT_AUTOMAKE([randcam], [1.0], [oliver@von-und-fuer-lau.de])
 AM_CONFIG_HEADER([config.h])
 
 AC_PROG_CXX
@@ -41,7 +41,7 @@ else
         if test x"$ac_cv_c_compiler_gnu" = "xyes"; then
           DEFAULT_CXXFLAGS="-g $DEFAULT_CXXFLAGS"
         fi
-        ;;    
+        ;;
     powerpc-*-*)
         if test x"$ac_cv_c_compiler_gnu" = "xyes"; then
             DEFAULT_CXXFLAGS="-g -mcpu=G3 -mtune=G5 -fomit-frame-pointer $DEFAULT_CXXFLAGS"
@@ -65,7 +65,7 @@ AC_ARG_ENABLE([gui],
 if test x"$have_opencv_gui" = "xyes"; then
     AC_DEFINE([HAVE_OPENCV_GUI], [1], [Define to 1 if you have OpenCV GUI support enabled.])
 fi
-             
+
 
 AC_ARG_ENABLE([sse2],
               [AS_HELP_STRING([--enable-sse2],[enable SSE2 intrinsics [yes]])],
@@ -81,7 +81,7 @@ if test x"$sse2" = "xyes"; then
     *-*-*)
         ;;
     esac
-  fi  
+  fi
 fi
 
 
@@ -93,7 +93,7 @@ AC_LINK_IFELSE([
 AC_LANG_PROGRAM([[
 #include <omp.h>
 void f(int* a, int* b, int n) {
-  int i;  
+  int i;
   #pragma parallel for
   for(i = 0; i < n; i++)
      a[i] += b[i];

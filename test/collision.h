@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #ifndef __COLLISION_H_
@@ -16,8 +16,8 @@
 
 namespace ctrandom {
 
-    /// Collision-Test à la Knuth.
-    /// TODO: Collision-Test à la Knuth implementieren.
+    /// Collision-Test  la Knuth.
+    /// TODO: Collision-Test  la Knuth implementieren.
     template <typename VariateType>
     double collision_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max)
     {

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ct-randcam"
+	Name="randcam"
 	ProjectGUID="{78A9C683-310C-469F-B5AA-99808BFEDDC6}"
 	RootNamespace="RandCam"
 	Keyword="Win32Proj"
@@ -185,7 +185,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ct-randcam.cpp"
+				RelativePath=".\randcam.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

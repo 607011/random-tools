@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #ifdef _WIN32
@@ -84,7 +84,7 @@ static void disclaimer(void)
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
-        << "Alle Ausgaben ohne Gewähr." << std::endl
+        << "Alle Ausgaben ohne Gewhr." << std::endl
         << std::endl;
 }
 
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
     ctrandom::RandomFile<size_t> gen(inputFilename, true);
     if (!gen.stream().is_open())
     {
-        std::cerr << "FEHLER: Öffnen von '" << inputFilename << "' fehlgeschlagen." << std::endl;
+        std::cerr << "FEHLER: ffnen von '" << inputFilename << "' fehlgeschlagen." << std::endl;
         exit(EXIT_FAILURE);
     }
     if (blockSize == 0)
