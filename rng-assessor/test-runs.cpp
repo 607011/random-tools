@@ -2,7 +2,7 @@
 // Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "test/run-above-below.h"
 #include "test/run-up-down.h"
 

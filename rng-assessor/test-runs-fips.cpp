@@ -1,8 +1,8 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "test/run-fips140-1.h"
 
 

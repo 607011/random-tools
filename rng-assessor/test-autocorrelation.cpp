@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cmath>
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "tests.h"
 #include "test/autocorr.h"
 

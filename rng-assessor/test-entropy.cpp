@@ -2,7 +2,7 @@
 // Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>, Heise Zeitschriften Verlag.
 // Alle Rechte vorbehalten.
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "test/entropy.h"
 
 ////////////////////////////////////////////////////////////

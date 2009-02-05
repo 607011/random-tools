@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <cstdlib>
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "tests.h"
 #include "bzip2-1.0.5/bzlib.h"
 

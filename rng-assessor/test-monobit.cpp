@@ -10,7 +10,7 @@
 #include "config.h"
 #endif
 
-#include "ct-rng-assessor.h"
+#include "rng-assessor.h"
 #include "test/monobit.h"
 
 

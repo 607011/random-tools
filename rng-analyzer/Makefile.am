@@ -1,6 +1,6 @@
-bin_PROGRAMS = ct-rng-analyzer
+bin_PROGRAMS = rng-analyzer
 
-ct_rng_analyzer_SOURCES = ct-rng-analyzer.c
+rng_analyzer_SOURCES = rng-analyzer.c
 
 AM_LDFLAGS = -ltestu01 -lprobdist -lmylib -lm
 
