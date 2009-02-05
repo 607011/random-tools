@@ -175,7 +175,7 @@ bool binary = true;
 
 static void usage(void)
 {
-    std::cout << "Aufruf: ct-rng Generator [Optionen]" << std::endl
+    std::cout << "Aufruf: rng Generator [Optionen]" << std::endl
         << std::endl
         << "Optionen:" << std::endl
         << "  -n N" << std::endl
@@ -248,9 +248,8 @@ static void usage(void)
 
 static void disclaimer(void)
 {
-    std::cout << "ct-rng " << VERSION << " - Generator für Zufallsbytes." << std::endl
-        << "Copyright (c) 2008-2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag" << std::endl
+    std::cout << "rng " << VERSION << " - Generator für Zufallsbytes." << std::endl
+        << "Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
@@ -789,6 +788,6 @@ int main(int argc, char* argv[])
     delete [] rngBuf;
 
     if (!quiet)
-        std::cout << count << " KByte geschrieben." << std::endl << std::endl;
+        std::cout << count << " KByte generiert." << std::endl << std::endl;
     return EXIT_SUCCESS;
 }

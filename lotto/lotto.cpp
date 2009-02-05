@@ -86,7 +86,7 @@ bool quiet = false;
 
 static void usage(void)
 {
-    std::cout << "Aufruf: ct-lotto Generator [Optionen]" << std::endl
+    std::cout << "Aufruf: lotto Generator [Optionen]" << std::endl
         << std::endl
         << "Optionen:" << std::endl
         << "  -n N" << std::endl
@@ -118,9 +118,8 @@ static void usage(void)
 
 static void disclaimer(void)
 {
-    std::cout << "ct-lotto " << VERSION << " - Lottozahlen-Generator." << std::endl
-        << "Copyright (c) 2009 Oliver Lau <ola@ctmagazin.de>" << std::endl
-        << "Copyright (c) 2009 Heise Zeitschriften Verlag" << std::endl
+    std::cout << "lotto " << VERSION << " - Lottozahlen-Generator." << std::endl
+        << "Copyright (c) 2009 Oliver Lau <oliver@von-und-fuer-lau.de>" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl

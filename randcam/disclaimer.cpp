@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>, Heise Zeitschriften Verlag.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>.
 // Alle Rechte vorbehalten.
 
 #include <iostream>
@@ -8,7 +8,7 @@
 
 void usage(void)
 {
-    std::cout << "Aufruf: ct-randcam [Optionen]" << std::endl
+    std::cout << "Aufruf: randcam [Optionen]" << std::endl
         << std::endl
         << "Optionen:" << std::endl
         << "  --out Dateiname" << std::endl
@@ -60,9 +60,8 @@ void usage(void)
 
 void disclaimer(void)
 {
-    std::cout << "ct-randcam " << VERSION << " - Zufallszahlen aus Webcam-Bildern generieren." << std::endl
+    std::cout << "randcam " << VERSION << " - Zufallszahlen aus Webcam-Bildern generieren." << std::endl
         << "Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>" << std::endl
-        << "Copyright (c) 2008-2009 Heise Zeitschriften Verlag" << std::endl
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl

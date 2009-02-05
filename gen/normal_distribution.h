@@ -1,5 +1,6 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de> Alle Rechte vorbehalten.
+// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
+// Alle Rechte vorbehalten.
 
 #ifndef __NORMALDISTRIBUTION_H_
 #define __NORMALDISTRIBUTION_H_
