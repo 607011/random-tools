@@ -1,4 +1,4 @@
-AC_INIT([randomtools], [1.2], [oliver.lau@ct.heise.de])
+AC_INIT([randomtools], [1.2], [oliver@von-und-fuer-lau.de])
 AC_COPYRIGHT([Copyright (c) 2008-2009 Oliver Lau])
 
 AM_INIT_AUTOMAKE([randomtools], [1.2], [oliver@von-und-fuer-lau.de])
