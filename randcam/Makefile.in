@@ -38,7 +38,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ct-randcam$(EXEEXT)
+bin_PROGRAMS = randcam$(EXEEXT)
 subdir = randcam
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -54,7 +54,7 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_ct_randcam_OBJECTS = ct-randcam.$(OBJEXT) entropy.$(OBJEXT) \
+am_ct_randcam_OBJECTS = randcam.$(OBJEXT) entropy.$(OBJEXT) \
 	disclaimer.$(OBJEXT) Masher.$(OBJEXT) md5.$(OBJEXT)
 ct_randcam_OBJECTS = $(am_ct_randcam_OBJECTS)
 ct_randcam_LDADD = $(LDADD)
@@ -183,7 +183,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-ct_randcam_SOURCES = ct-randcam.cpp entropy.cpp disclaimer.cpp Masher.cpp md5/md5.cpp
+ct_randcam_SOURCES = randcam.cpp entropy.cpp disclaimer.cpp Masher.cpp md5/md5.cpp
 DEFAULT_INCLUDES = -I. -I..
 AM_LDFLAGS = -lm @OPENCV_LDFLAGS@
 AM_CPPFLAGS = @OPENCV_CPPFLAGS@
@@ -248,8 +248,8 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-ct-randcam$(EXEEXT): $(ct_randcam_OBJECTS) $(ct_randcam_DEPENDENCIES) 
-	@rm -f ct-randcam$(EXEEXT)
+randcam$(EXEEXT): $(ct_randcam_OBJECTS) $(ct_randcam_DEPENDENCIES) 
+	@rm -f randcam$(EXEEXT)
 	$(CXXLINK) $(ct_randcam_LDFLAGS) $(ct_randcam_OBJECTS) $(ct_randcam_LDADD) $(LIBS)
 
 mostlyclean-compile:
@@ -259,7 +259,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Masher.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ct-randcam.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/randcam.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/disclaimer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/entropy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/md5.Po@am__quote@

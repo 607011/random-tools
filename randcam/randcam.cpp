@@ -66,7 +66,7 @@ static struct option long_options[] = {
     { NULL,                             0, 0, 0 },
 };
 
-const char* WindowName = "ct-randcam";
+const char* WindowName = "randcam";
 int verbose = 0;
 int camNum = 0;
 bool quiet = false;
