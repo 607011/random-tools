@@ -38,9 +38,6 @@ void test_bzip2(void)
         if (!quiet)
             std::cout << std::setw(10) << std::setprecision(4) << std::right << pct << "% "
                       << ((pct > 100.299f)? "OK." : "NICHT BESTANDEN.") << std::endl;
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << pct << "</td>";
     }
     if (!quiet)
         std::cout << std::endl;

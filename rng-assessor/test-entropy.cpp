@@ -15,12 +15,9 @@ void test_entropy(void)
     if (!quiet)
         std::cout << "ENTROPIE" << std::endl
                   << " ... " << std::flush;
-    double entropy = ctrandom::entropy_test<size_t>(r, r_min, r_max);
+    double entropy = ctrandom::entropy_test<variate_t>(r, r_min, r_max);
     if (!quiet)
         std::cout << std::setprecision(std::numeric_limits<double>::digits10)
                   << (8*entropy) << " Bits pro Byte" << std::endl
                   << std::endl;
-    if (htmlReport)
-        std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                  << (8*entropy) << "</td>";
 }

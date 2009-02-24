@@ -27,28 +27,25 @@ enum _long_options {
     SELECT_HELP = 1,
     SELECT_VERBOSE,
     SELECT_NOFIPS,
-    SELECT_QUIET,
-    SELECT_HTMLREPORT
+    SELECT_QUIET
 };
 
 static struct option long_options[] = {
     { "quiet",           no_argument, 0, SELECT_QUIET },
     { "verbose",         no_argument, 0, SELECT_VERBOSE },
     { "no-fips",         no_argument, 0, SELECT_NOFIPS },
-    { "html",            no_argument, 0, SELECT_HTMLREPORT },
     { NULL,                        0, 0, 0 }
 };
 
 bool quiet = false;
 bool runFIPS140_1 = true;
-bool htmlReport = false;
 size_t blockSize = 0;
 size_t offset = 0;
 int verbose = 0;
 char* inputFilename = NULL;
 
-size_t r_min;
-size_t r_max;
+variate_t r_min;
+variate_t r_max;
 size_t r_range;
 size_t r_bits;
 RNGArray r;
@@ -84,7 +81,7 @@ static void disclaimer(void)
         << "Alle Rechte vorbehalten." << std::endl
         << std::endl
         << "Diese Software wurde zu Lehr- und Demonstrationszwecken erstellt." << std::endl
-        << "Alle Ausgaben ohne Gewhr." << std::endl
+        << "Alle Ausgaben ohne Gewaehr." << std::endl
         << std::endl;
 }
 
@@ -127,10 +124,6 @@ int main(int argc, char* argv[])
         case SELECT_NOFIPS:
             runFIPS140_1 = false;
             break;
-        case SELECT_HTMLREPORT:
-            htmlReport = true;
-            quiet = true;
-            break;
         default:
             usage();
             exit(EXIT_FAILURE);
@@ -155,7 +148,7 @@ int main(int argc, char* argv[])
     ctrandom::RandomFile<size_t> gen(inputFilename, true);
     if (!gen.stream().is_open())
     {
-        std::cerr << "FEHLER: ffnen von '" << inputFilename << "' fehlgeschlagen." << std::endl;
+        std::cerr << "FEHLER: Oeffnen von '" << inputFilename << "' fehlgeschlagen." << std::endl;
         exit(EXIT_FAILURE);
     }
     if (blockSize == 0)
@@ -172,14 +165,9 @@ int main(int argc, char* argv[])
     for (size_t i = 0; i < blockSize; ++i)
         r[i] = gen();
     r_min = 0;
-    r_max = 1 + std::numeric_limits<variate_t>::max();
-    r_range = r_max - r_min;
-    r_bits = (size_t) (M_LOG2E * log((double) r_range));
-
-    if (htmlReport)
-        std::cout << "<table>" << std::endl
-                  << "<tbody>" << std::endl
-                  << "  <tr>" << std::endl;
+    r_max = std::numeric_limits<variate_t>::max();
+    r_range = 1 + (size_t) ((long) r_max - (long) r_min);
+    r_bits = (size_t) (M_LOG2E * log(1 + (double) r_range));
 
     // "soft" tests
     test_entropy();
@@ -198,12 +186,6 @@ int main(int argc, char* argv[])
     test_couponcollector();
     test_poker_knuth();
     test_poker_fips();
-
-    if (htmlReport)
-        std::cout << std::endl
-                  << "  </tr>" << std::endl
-                  << "</tbody>" << std::endl
-                  << "</table>" << std::endl;
 
     if (!quiet)
         std::cout << "Fertig." << std::endl << std::endl;

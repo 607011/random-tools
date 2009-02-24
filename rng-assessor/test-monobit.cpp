@@ -23,9 +23,9 @@ void test_monobit(void)
 {
 #ifdef HAVE_BOOST
     if (!quiet)
-        std::cout << "MONOBIT TEST (à la NIST)" << std::endl
+        std::cout << "MONOBIT TEST (a la NIST)" << std::endl
                   << " ... " << std::flush;
-    double p = ctrandom::monobit_test_nist<size_t>(r, r_min, r_max);
+    double p = ctrandom::monobit_test_nist<variate_t>(r, r_min, r_max);
     if (!quiet)
     {
         std::cout << "p = " << p << "  ";
@@ -37,19 +37,16 @@ void test_monobit(void)
         {
             std::cout << "NICHT BESTANDEN.";
         }
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << ((p > alpha)? "OK" : "FAIL") << "</td>";
         std::cout << std::endl << std::endl;
     }
 #endif
 
     if (!quiet)
-        std::cout << "MONOBIT TEST (à la FIPS 140-1)" << std::endl;
+        std::cout << "MONOBIT TEST (a la FIPS 140-1)" << std::endl;
     std::vector<size_t> counts;
     if (!quiet)
         std::cout << " ... " << std::flush;
-    size_t passed = ctrandom::monobit_test<size_t>(r, r_min, r_max, counts);
+    size_t passed = ctrandom::monobit_test<variate_t>(r, r_min, r_max, counts);
     if (!quiet) 
     {
         double pctFailed = 100.0 * (double) (counts.size() - passed) / (double) counts.size();
@@ -66,8 +63,6 @@ void test_monobit(void)
                       << "     " << ((notPassed == 1)? "enthält" : "enthalten")
                       << " nicht die geforderte Anzahl Bits (9654..10346)";
         }
-        if (htmlReport)
-            std::cout << "<td>" << pctFailed << "</td>";
         std::cout << std::endl << std::endl;
     }
 

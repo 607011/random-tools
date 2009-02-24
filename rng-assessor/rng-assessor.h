@@ -14,10 +14,9 @@
 #include <vector>
 #include "tests.h"
 
-#define VERSION "1.0.4"
+#define VERSION "1.1.0"
 
 extern bool quiet;
-extern bool htmlReport;
 extern int verbose;
 
 

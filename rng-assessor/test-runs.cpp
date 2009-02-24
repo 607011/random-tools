@@ -19,27 +19,17 @@ void test_runs(void)
     if (!quiet)
         std::cout << "RUN TEST" << std::endl
                   << " ... Serien oberhalb des Median : " << std::flush;
-    p = ctrandom::run_above_test<size_t>(r, r_min, r_max);
+    p = ctrandom::run_above_test<variate_t>(r, r_min, r_max);
     if (!quiet)
         std::cout << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
                   << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN")
                   << '.' << std::endl;
 
-    if (htmlReport)
-        std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                  << p << "</td>";
-
     if (!quiet)
         std::cout << " ... Serien unterhalb des Median: " << std::flush;
-    p = ctrandom::run_below_test<size_t>(r, r_min, r_max);
+    p = ctrandom::run_below_test<variate_t>(r, r_min, r_max);
     if (!quiet)
-        std::cout  << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
-        << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN") << '.' << std::endl;
-
-    if (htmlReport)
-        std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                  << p << "</td>";
-
-    if (!quiet)
-        std::cout << std::endl;
+        std::cout << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
+                  << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN") << '.'
+                  << std::endl << std::endl;
 }

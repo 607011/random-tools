@@ -123,24 +123,22 @@ void test_frequencies(void)
     if (!quiet)
         std::cout << "FREQUENCY TEST" << std::endl;
     size_t maxBuckets = r_range;
-    generate_primes(r_max);
+    generate_primes(1 + (size_t) r_max);
     std::set<size_t> divisors;
-    make_all_divisors(r_max, divisors);
+    make_all_divisors(1 + (size_t) r_max, divisors);
     for (std::set<size_t>::const_reverse_iterator i = divisors.rbegin(); i != divisors.rend(); ++i)
     {
         size_t divisor = (*i);
         size_t num_buckets = r_range / divisor;
-        if (num_buckets > maxBuckets || num_buckets < 5)
-            continue;
-        double p = ctrandom::frequency_test<size_t>(r, r_min, r_max, num_buckets);
-        if (!quiet)
-            std::cout << " ... " << std::flush
-                      << std::setw(4) << std::right << num_buckets << " Klassen: " << std::flush
-                      << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
-                      << " " << ((alpha < p)? "OK" : "NICHT BESTANDEN") << '.' << std::endl;
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << p << "</td>";
+        if ((num_buckets >= 5) && (num_buckets <= maxBuckets))
+        {
+            double p = ctrandom::frequency_test<variate_t>(r, r_min, r_max, num_buckets);
+            if (!quiet)
+                std::cout << " ... " << std::flush
+                          << std::setw(4) << std::right << num_buckets << " Klassen: " << std::flush
+                          << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
+                          << " " << ((alpha < p)? "OK" : "NICHT BESTANDEN") << '.' << std::endl;
+        }
     }
     if (!quiet)
         std::cout << std::endl;

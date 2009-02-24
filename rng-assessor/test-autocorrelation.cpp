@@ -23,7 +23,7 @@ void test_autocorrelation(void)
     std::vector<size_t> counts;
     if (!quiet)
         std::cout << "AUTOCORRELATION TEST" << std::endl << " ... " << std::flush;
-    size_t passed = ctrandom::autocorrelation_test<size_t>(r, r_min, r_max, counts);
+    size_t passed = ctrandom::autocorrelation_test<variate_t>(r, r_min, r_max, counts);
     if (passed == counts.size())
     {
         if (!quiet)
