@@ -89,7 +89,16 @@ namespace ctrandom {
             for (size_t j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
+#ifdef _MSC_VER
+#pragma warning(push)
+// prevent warning about right shift by too large amount, possibly resulting in data loss
+// TODO: distinguish between 8, 16, 32 and 64 bit variate types
+#pragma warning(disable:4333)
+#endif
                 bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff];
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
@@ -129,8 +138,17 @@ namespace ctrandom {
             for (size_t j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
+#ifdef _MSC_VER
+#pragma warning(push)
+// prevent warning about right shift by too large amount, possibly resulting in data loss
+// TODO: distinguish between 8, 16, 32 and 64 bit variate types
+#pragma warning(disable:4333)
+#endif
                 bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff] +
                     ctrandom::PopCount[(r >> 32) & 0xffff] + ctrandom::PopCount[(r >> 48) & 0xffff];
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
