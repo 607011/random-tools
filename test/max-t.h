@@ -33,7 +33,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        VariateType d = _max - _min;
+        size_t d = 1 + (size_t) ((long) _max - (long) _min);
         std::vector<size_t> histo(d, 0);
         for (size_t i = 0; i < ran.size() - t; i += t)
         {
@@ -46,8 +46,9 @@ namespace ctrandom {
         std::vector<size_t> expected;
         std::vector<size_t> histo2;
         double t_count = (double) (ran.size() - t) / (double) t;
-        for (VariateType i = _min; i < _max; ++i) {
-            size_t k = (size_t) (i - _min);
+        for (long i = _min; i <= (long) _max; ++i)
+        {
+            size_t k = (size_t) (i - (long) _min);
             size_t p = (size_t) (t_count * _P(k, d, t));
             if (p > 5 && histo.at(k) > 5)
             {

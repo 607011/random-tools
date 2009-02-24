@@ -27,8 +27,8 @@ namespace ctrandom {
         assert(_max > _min);
         assert(beta > alpha);
         assert(ran.size() > 100);
-        VariateType t_range = beta - alpha;
-        VariateType v_range = _max - _min;
+        size_t t_range = 1 + (size_t) ((long) beta - (long) alpha);
+        size_t v_range = 1 + (size_t) ((long) _max - (long) _min);
         std::vector<size_t> histo(t+1, 0);
         size_t n = 0;
         // TODO: Schleife lesbarer gestalten
@@ -40,7 +40,7 @@ namespace ctrandom {
             {
                 VariateType x = ran.at(j);
                 ++j;
-                if (alpha <= x && x < beta)
+                if (alpha <= x && x <= beta)
                     break;
                 ++r;
             }

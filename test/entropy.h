@@ -29,7 +29,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        size_t range = (size_t) (_max - _min);
+        size_t range = 1 + (size_t) ((long) _max - (long) _min);
         std::vector<size_t> histo(range, 0);
         for (size_t i = 0; i < ran.size(); ++i)
             ++histo[ran[i]];

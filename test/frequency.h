@@ -26,7 +26,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        double interval = (double) (_max - _min) / (double) num_buckets;
+        double interval = (double) (1 + (long) _max - (long) _min) / (double) num_buckets;
         std::vector<size_t> histo(num_buckets);
         for (size_t i = 0; i < ran.size(); ++i)
         {

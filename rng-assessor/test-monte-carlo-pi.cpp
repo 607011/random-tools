@@ -21,15 +21,12 @@ void test_pi(void)
     {
         if (!quiet)
             std::cout << " ... n = " << n << ": " << std::flush;
-        double pi = ctrandom::pi_test<size_t>(r, r_min, r_max, n);
+        double pi = ctrandom::pi_test<variate_t>(r, r_min, r_max, n);
         double absErr = fabs(M_PI-pi);
         if (!quiet)
             std::cout << "Pi = " << std::setprecision(10) << std::setw(12) << std::left << pi
                       << " (Abweichung = " << std::setprecision(3) << std::setw(5)
                       << (100.0*absErr/M_PI) << "%) " << std::endl;
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << pi << "</td>";
     }
     if (!quiet)
         std::cout << std::endl;

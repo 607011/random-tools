@@ -24,7 +24,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        VariateType median = (_max - _min) / 2;
+        size_t median = (1 + (size_t) ((long) _max - (long) _min)) / 2;
         std::map<size_t, size_t> histo;
         size_t counted = 0;
         size_t runLength = 0;
@@ -68,7 +68,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        VariateType median = (_max - _min) / 2;
+        size_t median = (1 + (size_t) ((long) _max - (long) _min)) / 2;
         std::map<size_t, size_t> histo;
         size_t counted = 0;
         size_t runLength = 0;

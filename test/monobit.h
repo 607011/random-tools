@@ -52,7 +52,7 @@ namespace ctrandom {
                           std::vector<size_t>& counts,
                           const boost::true_type&)
     {
-        const VariateType range = _max - _min;
+        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         const size_t stepLen = 20000 / bitsPerVariate;
         size_t passedCount = 0;
@@ -119,7 +119,7 @@ namespace ctrandom {
 #ifdef HAVE_BOOST
         return __monobit_test(ran, _min, _max, counts, is_64bit<VariateType>());
 #else
-        const VariateType range = _max - _min;
+        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         const size_t stepLen = 20000 / bitsPerVariate;
         size_t passedCount = 0;
@@ -151,7 +151,7 @@ namespace ctrandom {
     double monobit_test_nist(const std::vector<VariateType>& ran,
                              const VariateType _min, const VariateType _max)
     {
-        const VariateType range = _max - _min;
+        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         double Sn = 0;
         for (size_t i = 0; i < ran.size(); ++i)

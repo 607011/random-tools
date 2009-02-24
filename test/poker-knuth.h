@@ -27,7 +27,7 @@ namespace ctrandom {
         assert(_max > _min);
         assert(ran.size() > 100);
         const size_t k = 5;
-        size_t d = (size_t) (_max - _min);
+        size_t d = 1 + (size_t) ((long) _max - (long) _min);
         std::vector<size_t> histo(5, 0);
         std::vector<size_t> expected(5);
         double chunkCount = (double) ran.size() / (double) k;

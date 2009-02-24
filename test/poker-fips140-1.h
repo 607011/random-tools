@@ -1,5 +1,5 @@
 // $Id$
-// Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
+// Copyright (c) 2008-2009 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
 #ifndef __POKERFIPS1401_H_
@@ -34,7 +34,7 @@ namespace ctrandom {
         assert(_max > _min);
         assert(ran.size() > 100);
         const size_t ChunkSize = 20000;
-        VariateType range = _max - _min;
+        size_t range = 1 + (size_t) ((long) _max - (long) _min);
         unsigned int bitsPerVariate = (unsigned int) (log((double) range) / log(2.0));
         unsigned int stepLen = ChunkSize / bitsPerVariate;
         size_t passedCount = 0;

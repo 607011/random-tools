@@ -17,10 +17,7 @@ void test_couponcollector(void)
         std::cout << "COUPON COLLECTOR'S TEST" << std::endl;
     for (size_t d = 2; d <= 16; ++d) 
     {
-        double p = ctrandom::coupon_collector_test<size_t>(r, d, 20);
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << p << "</td>";
+        double p = ctrandom::coupon_collector_test<variate_t>(r, d, 20);
         if (!quiet)
             std::cout << " ... " << std::flush
                       << "d = " << std::setw(2) << std::right << d << ": " << std::flush

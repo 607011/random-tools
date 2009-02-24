@@ -25,7 +25,7 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        VariateType range = _max - _min;
+        size_t range = 1 + (size_t) ((long) _max - (long) _min);
         size_t num_buckets = (size_t) pow((double) range, (double) groupsize);
         std::vector<size_t> histo(num_buckets, 0);
         for (size_t i = groupsize - 1; i < ran.size(); i += groupsize)

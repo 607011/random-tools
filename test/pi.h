@@ -28,7 +28,7 @@ namespace ctrandom {
         assert(N > 0);
         assert(ran.size() > N*2*5);
         size_t inCount = 0;
-        const double r = (double) (_max - _min);
+        const double r = 1 + (double) ((long) _max - (long) _min);
         const double c = pow((double) r, (int) (2*N));
         for (size_t i = 0; i < ran.size() - N*2; i += N*2)
         {

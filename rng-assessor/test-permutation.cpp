@@ -17,15 +17,12 @@ void test_permutation(void)
         std::cout << "PERMUTATION TEST" << std::endl;
     for (size_t t = 3; t <= 5; ++t) 
     {
-        double p = ctrandom::permutation_test<size_t>(r, t, r_min, r_max);
+        double p = ctrandom::permutation_test<variate_t>(r, t, r_min, r_max);
         if (!quiet)
             std::cout << " ... t = " << std::setw(1) << std::right << t << ": " << std::flush
                       << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "
                       << " " << (((alpha < p) && (p < (1-alpha)))? "OK" : "NICHT BESTANDEN")
                       << '.' << std::endl;
-        if (htmlReport)
-            std::cout << "<td>" << std::setprecision(std::numeric_limits<double>::digits10)
-                      << p << "</td>";
     }
     if (!quiet)
         std::cout << std::endl;

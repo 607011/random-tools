@@ -8,10 +8,11 @@
 #include <cstdlib>
 #include <vector>
 
-typedef std::vector<size_t> RNGArray;
+typedef unsigned char variate_t;
+typedef std::vector<variate_t> RNGArray;
 
-extern size_t r_min;
-extern size_t r_max;
+extern variate_t r_min;
+extern variate_t r_max;
 extern size_t r_range;
 extern size_t r_bits;
 extern RNGArray r;

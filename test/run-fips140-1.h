@@ -75,7 +75,7 @@ namespace ctrandom {
         assert(ran.size() > 100);
         const size_t MaxRunLength = 5;
         const size_t ChunkSize = 20000;
-        VariateType range = _max - _min;
+        size_t range = 1 + (size_t) ((long) _max - (long) _min);
         size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         size_t stepLen = ChunkSize / bitsPerVariate;
         longestRun0 = 0;
