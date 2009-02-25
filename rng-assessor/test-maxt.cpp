@@ -15,10 +15,10 @@ void test_max_of_t(void)
 {
     if (!quiet)
         std::cout << "MAXIMUM-OF-T TEST" << std::endl;
-    size_t _T[] = { 2, 3, 4, 5, 7, 10, 11, 13, 16, 24, 0 };
-    for (size_t i = 0; _T[i] > 0; ++i)
+    int _T[] = { 2, 3, 4, 5, 7, 10, 11, 13, 16, 24, 0 };
+    for (int i = 0; _T[i] > 0; ++i)
     {
-        size_t t = _T[i];
+        int t = _T[i];
         double p = randomtools::max_t_test<variate_t>(r, t, r_min, r_max);
         if (!quiet)
             std::cout << " ... t = " << std::setw(2) << std::right << t << ": " << std::flush

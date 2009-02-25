@@ -27,7 +27,8 @@ namespace randomtools {
         assert(ran.size() > 100);
         const long range = 1L + ((long) _max - (long) _min);
         const long num_buckets = (long) pow((double) range, (double) groupsize);
-        std::vector<long> histo(num_buckets, 0);
+        std::vector<int> histo(num_buckets, 0);
+        // TODO: Schleife parallelisieren
         for (int i = groupsize - 1; i < (int)ran.size(); i += groupsize)
         {
             long idx = 0;
@@ -39,8 +40,8 @@ namespace randomtools {
             ++histo[idx];
         }
         double expected = (double) ran.size() / num_buckets / groupsize;
-        double res = ChiSq<long>(histo, expected);
-        double p = ChiSquareProbability(res, (long) (pow((double) range, (int) groupsize)));
+        double res = ChiSq<int>(histo, expected);
+        double p = ChiSquareProbability(res, (int) (pow((double) range, (int) groupsize)));
         return p;
     }
 

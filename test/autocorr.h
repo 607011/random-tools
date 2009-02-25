@@ -23,7 +23,7 @@ namespace randomtools {
     /// @param counts [out] Anzahl der durchgeführten Tests
     /// @return Anzahl der bestandenen Tests
     template <typename VariateType>
-    int autocorrelation_test(const std::vector<VariateType>& ran, size_t _min, size_t _max, int& counts)
+    int autocorrelation_test(const std::vector<VariateType>& ran, size_t _min, size_t _max, int& testCount)
     {
         assert(_max > _min);
         const long range = 1 + (size_t) ((long) _max - (long) _min);
@@ -31,9 +31,9 @@ namespace randomtools {
         assert((int) ran.size() > 5000 / bitsPerVariate);
         const int stepLen = 5000 / bitsPerVariate;
         int passedCount = 0;
-        int count = 0;
-#pragma omp parallel for reduction(+:count, passedCount)
-        for (long i = 0; i < (long) (ran.size() - stepLen); i += (long) stepLen)
+        int _testCount = 0;
+#pragma omp parallel for reduction(+:_testCount, passedCount)
+        for (int i = 0; i < (int) (ran.size() - stepLen); i += stepLen)
         {
             int sum = 0;
             for (int j = 0; j < stepLen; ++j)
@@ -45,12 +45,12 @@ namespace randomtools {
                     r >>= 1;
                 }
             }
-            ++count;
+            ++_testCount;
             if ((2326 < sum) && (sum < 2674))
                 ++passedCount;
         }
-        counts = count;
-        return count - passedCount;
+        testCount = _testCount;
+        return testCount - passedCount;
     };
 
 };

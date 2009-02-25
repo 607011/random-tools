@@ -15,7 +15,7 @@ void test_permutation(void)
 {
     if (!quiet)
         std::cout << "PERMUTATION TEST" << std::endl;
-    for (size_t t = 3; t <= 5; ++t) 
+    for (int t = 3; t <= 5; ++t) 
     {
         double p = randomtools::permutation_test<variate_t>(r, t, r_min, r_max);
         if (!quiet)

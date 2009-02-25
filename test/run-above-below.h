@@ -29,6 +29,7 @@ namespace randomtools {
         int counted = 0;
         int runLength = 0;
         VariateType current = ran.at(0);
+        // TODO: Schleife parallelisieren
         for (int i = 1; i < (int)ran.size(); ++i)
         {
             if (ran.at(i) >= median)

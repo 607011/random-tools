@@ -49,44 +49,55 @@ namespace randomtools {
     template <typename VariateType>
     size_t __monobit_test(const std::vector<VariateType>& ran,
                           const VariateType _min, const VariateType _max,
-                          std::vector<size_t>& counts,
+                          int& testCount,
                           const boost::true_type&)
     {
-        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
+        const long range = 1L + (size_t) ((long) _max - (long) _min);
         const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
         const size_t stepLen = 20000 / bitsPerVariate;
         size_t passedCount = 0;
-        for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
+        testCount = 0;
+        for (int i = 0; i < (int)ran.size() - stepLen; i += stepLen)
         {
-            size_t bitCount = 0;
-            for (size_t j = 0; j < stepLen; ++j)
+            int bitCount = 0;
+            for (int j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
+#ifdef _MSC_VER
+#pragma warning(push)
+// prevent warning about right shift by too large amount, possibly resulting in data loss
+// TODO: distinguish between 8, 16, 32 and 64 bit variate types
+#pragma warning(disable:4333)
+#endif
                 bitCount += randomtools::PopCount[r & 0xffff] + randomtools::PopCount[(r >> 16) & 0xffff] +
                     randomtools::PopCount[(r >> 32) & 0xffff] + randomtools::PopCount[(r >> 48) & 0xffff];
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
-            counts.push_back(bitCount);
+            ++testCount;
         }
-        return passedCount;
+        return testCount - passedCount;
     }
 
 
     template <typename VariateType>
     size_t __monobit_test(const std::vector<VariateType>& ran,
                           const VariateType _min, const VariateType _max,
-                          std::vector<size_t>& counts,
+                          int& testCount,
                           const boost::false_type&)
     {
-        const VariateType range = _max - _min;
-        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
-        const size_t stepLen = 20000 / bitsPerVariate;
-        size_t passedCount = 0;
+        const long range = 1L + (size_t) ((long) _max - (long) _min);
+        const int bitsPerVariate = (int) ceil(M_LOG2E * log((double) range));
+        const int stepLen = 20000 / bitsPerVariate;
+        int passedCount = 0;
+        testCount = 0;
         for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
         {
-            size_t bitCount = 0;
-            for (size_t j = 0; j < stepLen; ++j)
+            int bitCount = 0;
+            for (int j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
 #ifdef _MSC_VER
@@ -102,9 +113,9 @@ namespace randomtools {
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
-            counts.push_back(bitCount);
+            ++testCount;
         }
-        return passedCount;
+        return testCount - passedCount;
     }
 #endif // HAVE_BOOST
 
@@ -121,21 +132,21 @@ namespace randomtools {
     template <typename VariateType>
     size_t monobit_test(const std::vector<VariateType>& ran,
                         const VariateType _min, const VariateType _max,
-                        std::vector<size_t>& counts)
+                        int& testCount)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
 #ifdef HAVE_BOOST
-        return __monobit_test(ran, _min, _max, counts, is_64bit<VariateType>());
+        return __monobit_test(ran, _min, _max, testCount, is_64bit<VariateType>());
 #else
-        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
-        const size_t stepLen = 20000 / bitsPerVariate;
-        size_t passedCount = 0;
-        for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
+        const long range = 1L + ((long) _max - (long) _min);
+        const int bitsPerVariate = (int) ceil(M_LOG2E * log((double) range));
+        const int stepLen = 20000 / bitsPerVariate;
+        int passedCount = 0;
+        for (int i = 0; i < (int)ran.size() - stepLen; i += stepLen)
         {
-            size_t bitCount = 0;
-            for (size_t j = 0; j < stepLen; ++j)
+            int bitCount = 0;
+            for (int j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
 #ifdef _MSC_VER
@@ -152,9 +163,9 @@ namespace randomtools {
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
-            counts.push_back(bitCount);
+            ++testCount;
         }
-        return passedCount;
+        return testCount - passedCount;
 #endif // HAVE_BOOST
     };
 
@@ -169,19 +180,20 @@ namespace randomtools {
     double monobit_test_nist(const std::vector<VariateType>& ran,
                              const VariateType _min, const VariateType _max)
     {
-        const size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        const size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
-        double Sn = 0;
-        for (size_t i = 0; i < ran.size(); ++i)
+        const long range = 1L + ((long) _max - (long) _min);
+        const int bitsPerVariate = (int) ceil(M_LOG2E * log((double) range));
+        long Sn = 0;
+#pragma omp parallel for reduction(+:Sn)
+        for (int i = 0; i < (int)ran.size(); ++i)
         {
             VariateType r = ran.at(i) - _min;
-            for (size_t j = 0; j < bitsPerVariate; ++j)
+            for (int j = 0; j < bitsPerVariate; ++j)
             {
-                Sn += 2 * (double) (r & 1) - 1;
+                Sn += 2 * (r & 1) - 1;
                 r >>= 1;
             }
         }
-        double Sobs = fabs(Sn) / sqrt((double) ran.size() * bitsPerVariate);
+        double Sobs = (double) abs(Sn) / sqrt((double) ran.size() * bitsPerVariate);
         double p = boost::math::erfc<double>(Sobs / M_SQRT2);
         return p;
     }

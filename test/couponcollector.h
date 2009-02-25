@@ -23,13 +23,14 @@ namespace randomtools {
     double coupon_collector_test(const std::vector<VariateType>& ran, const int d, const int t)
     {
         assert(ran.size() > 100);
-        std::vector<long> histo(t-d+1, 0);
-        long segmentCount = 0;
+        std::vector<int> histo(t-d+1, 0);
+        int segmentCount = 0;
+        // TODO: Schleife parallelisieren
         for (int i = 0; i < (int)ran.size(); /* */)
         {
             std::vector<bool> coupon(d, false);
             int collectCount = 0;
-            long segmentLength = 0;
+            int segmentLength = 0;
             while (collectCount < d && i < (int)ran.size())
             {
                 VariateType nibble = ran.at(i) % d;
@@ -47,12 +48,12 @@ namespace randomtools {
                 ++segmentCount;
             }
         }
-        std::vector<long> expected(t-d+1, 0);
+        std::vector<int> expected(t-d+1, 0);
         double fac_d = randomtools::factorial<double>(d);
         for (int i = d; i < t; ++i)
-            expected[i-d] = (size_t) (segmentCount * fac_d / pow((double) d, (double) i) * stirling<double>(i - 1, d - 1));
-        expected[t-d] = (size_t) (segmentCount * (1 - fac_d / pow((double) d, (double) (t - 1)) * stirling<double>(t - 1, d)));
-        double res = ChiSq<long>(histo, expected);
+            expected[i-d] = (int) (segmentCount * fac_d / pow((double) d, (double) i) * stirling<double>(i - 1, d - 1));
+        expected[t-d] = (int) (segmentCount * (1 - fac_d / pow((double) d, (double) (t - 1)) * stirling<double>(t - 1, d)));
+        double res = ChiSq<int>(histo, expected);
         double p = ChiSquareProbability(res, t-d+1);
         return p;
     };
