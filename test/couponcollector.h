@@ -12,25 +12,25 @@
 #include "math_functions.h"
 #include "chisq.h"
 
-namespace ctrandom {
+namespace randomtools {
 
-    /// Coupon-Collector-Test  la Knuth.
+    /// Coupon-Collector-Test a la Knuth.
     /// @param ran Zufallszahlenfolge
     /// @param d
     /// @param t
     /// @return p-Wert des Chi-Quadrat-Anpassungstests
     template <typename VariateType>
-    double coupon_collector_test(const std::vector<VariateType>& ran, const size_t d, const size_t t)
+    double coupon_collector_test(const std::vector<VariateType>& ran, const int d, const int t)
     {
         assert(ran.size() > 100);
-        std::vector<size_t> histo(t-d+1, 0);
-        size_t segmentCount = 0;
-        for (size_t i = 0; i < ran.size(); /* */)
+        std::vector<long> histo(t-d+1, 0);
+        long segmentCount = 0;
+        for (int i = 0; i < (int)ran.size(); /* */)
         {
             std::vector<bool> coupon(d, false);
-            size_t collectCount = 0;
-            size_t segmentLength = 0;
-            while (collectCount < d && i < ran.size())
+            int collectCount = 0;
+            long segmentLength = 0;
+            while (collectCount < d && i < (int)ran.size())
             {
                 VariateType nibble = ran.at(i) % d;
                 if (coupon[nibble] == false)
@@ -47,12 +47,12 @@ namespace ctrandom {
                 ++segmentCount;
             }
         }
-        std::vector<size_t> expected(t-d+1, 0);
-        double fac_d = ctrandom::factorial<double>(d);
-        for (size_t i = d; i < t; ++i)
+        std::vector<long> expected(t-d+1, 0);
+        double fac_d = randomtools::factorial<double>(d);
+        for (int i = d; i < t; ++i)
             expected[i-d] = (size_t) (segmentCount * fac_d / pow((double) d, (double) i) * stirling<double>(i - 1, d - 1));
         expected[t-d] = (size_t) (segmentCount * (1 - fac_d / pow((double) d, (double) (t - 1)) * stirling<double>(t - 1, d)));
-        double res = ChiSq<size_t>(histo, expected);
+        double res = ChiSq<long>(histo, expected);
         double p = ChiSquareProbability(res, t-d+1);
         return p;
     };

@@ -11,49 +11,45 @@
 #include "test/frequency.h"
 #include "test/combinations.h"
 
-std::vector<bool> is_prime(10000);
-std::vector<unsigned int> primes;
+static std::vector<bool> is_prime(10000);
+static std::vector<long> primes;
 
 
 /// Generate prime numbers with Atkin's sieve.
-void generate_primes(size_t limit)
+void generate_primes(long limit)
 {
-    if (is_prime.size() < limit)
+    if ((long) is_prime.size() < limit)
         is_prime.resize(limit);
-    for (size_t i = 0; i < is_prime.size(); ++i)
+    for (long i = 0L; i < (long)is_prime.size(); ++i)
         is_prime[i] = false;
-    size_t n;
-    size_t square = (size_t) sqrt((float) limit);
-    for (size_t x = 1; x < square; ++x)
+    long n;
+    long square = (long) sqrt((float) limit);
+    for (long x = 1L; x < square; ++x)
     {   
-        for (size_t y = 1; y < square; ++y)
+        for (long y = 1L; y < square; ++y)
         {
             n = 4 * x * x + y * y;
-            if (n <= limit && (n % 12 == 1 || n % 12 == 5))
+            if ((n <= limit) && (n % 12L == 1L || n % 12L == 5L))
                 is_prime[n] = !is_prime[n];
 
-            n = 3 * x * x + y * y;
+            n = 3L * x * x + y * y;
             if (n <= limit && (n % 12 == 7))
                 is_prime[n] = !is_prime[n];
 
-            n = 3 * x * x - y * y;
-            if (x > y && n < limit && n % 12 == 11)
+            n = 3L * x * x - y * y;
+            if ((x > y) && (n < limit) && (n % 12L == 11L))
                 is_prime[n] = !is_prime[n];
         } 
     } 
     is_prime[2] = true;
     is_prime[3] = true;
-    for (n = 5; n < square; ++n)
-    {
+    for (n = 5L; n < square; ++n)
         if (is_prime[n])
-        {
-            for (size_t k = 1; k * n * n <= limit; ++k)
+            for (long k = 1L; k * n * n <= limit; ++k)
                 is_prime[k * n * n] = false;
-        }
-    }
 
     // pack found primes into array
-    for (size_t i = 2; i < is_prime.size(); ++i)
+    for (long i = 2L; i < (long)is_prime.size(); ++i)
         if (is_prime[i])
             primes.push_back(i);
 }
@@ -61,23 +57,23 @@ void generate_primes(size_t limit)
 
 /// Find smallest prime divisor for a number.
 /// @param x
-size_t find_smallest_prime_divisor(size_t x)
+long find_smallest_prime_divisor(long x)
 {
-    for (size_t i = 0; i < primes.size(); ++i)
+    for (long i = 0L; i < (long)primes.size(); ++i)
     {
-        if (x % primes[i] == 0)
+        if (x % primes[i] == 0L)
             return primes[i];
     }
-    return 1;
+    return 1L;
 }
 
 
 /// Find all prime factorials for a number.
 /// @param x
 /// @param factors
-void find_all_prime_factorials(unsigned int x, std::vector<size_t>& factors)
+void find_all_prime_factorials(long x, std::vector<long>& factors)
 {
-    size_t d = x;
+    long d = x;
     while (!is_prime[d])
     {
         size_t fac = find_smallest_prime_divisor(d);
@@ -92,23 +88,23 @@ void find_all_prime_factorials(unsigned int x, std::vector<size_t>& factors)
 /// Determine all divisors for a number.
 /// @param x
 /// @param divisors 
-void make_all_divisors(size_t x, std::set<size_t>& divisors)
+void make_all_divisors(long x, std::set<long>& divisors)
 {
-    std::vector<size_t> factors;
+    std::vector<long> factors;
     find_all_prime_factorials(x, factors);
-    for (size_t k = 1; k < factors.size(); ++k)
+    for (int k = 1; k < (int)factors.size(); ++k)
     {
-        ctrandom::Combinations<size_t> c(factors, k);
+        randomtools::Combinations<long> c(factors, k);
         while (c.hasMore())
         {
-            std::vector<size_t> combination = c.next();
-            size_t d = 1;
-            for (size_t i = 0; i < combination.size(); ++i)
+            std::vector<long> combination = c.next();
+            long d = 1L;
+            for (long i = 0L; i < (long) combination.size(); ++i)
                 d *= combination.at(i);
             divisors.insert(d);
         }
     }
-    divisors.insert(1);
+    divisors.insert(1L);
 }
 
 
@@ -122,17 +118,17 @@ void test_frequencies(void)
 {
     if (!quiet)
         std::cout << "FREQUENCY TEST" << std::endl;
-    size_t maxBuckets = r_range;
-    generate_primes(1 + (size_t) r_max);
-    std::set<size_t> divisors;
-    make_all_divisors(1 + (size_t) r_max, divisors);
-    for (std::set<size_t>::const_reverse_iterator i = divisors.rbegin(); i != divisors.rend(); ++i)
+    long maxBuckets = (long) r_range;
+    generate_primes(1 + (long) r_max);
+    std::set<long> divisors;
+    make_all_divisors(1 + (long) r_max, divisors);
+    for (std::set<long>::const_reverse_iterator i = divisors.rbegin(); i != divisors.rend(); ++i)
     {
-        size_t divisor = (*i);
-        size_t num_buckets = r_range / divisor;
+        long divisor = (*i);
+        long num_buckets = r_range / divisor;
         if ((num_buckets >= 5) && (num_buckets <= maxBuckets))
         {
-            double p = ctrandom::frequency_test<variate_t>(r, r_min, r_max, num_buckets);
+            double p = randomtools::frequency_test<variate_t>(r, r_min, r_max, num_buckets);
             if (!quiet)
                 std::cout << " ... " << std::flush
                           << std::setw(4) << std::right << num_buckets << " Klassen: " << std::flush

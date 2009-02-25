@@ -17,7 +17,7 @@ void test_permutation(void)
         std::cout << "PERMUTATION TEST" << std::endl;
     for (size_t t = 3; t <= 5; ++t) 
     {
-        double p = ctrandom::permutation_test<variate_t>(r, t, r_min, r_max);
+        double p = randomtools::permutation_test<variate_t>(r, t, r_min, r_max);
         if (!quiet)
             std::cout << " ... t = " << std::setw(1) << std::right << t << ": " << std::flush
                       << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "

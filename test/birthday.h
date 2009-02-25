@@ -12,7 +12,7 @@
 #include "chisq.h"
 #include "bitvector.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Birthday Spacings Test.
     /// TODO: Birthday Spacings Test implementieren.

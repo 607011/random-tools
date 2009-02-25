@@ -15,21 +15,20 @@ void test_poker_fips(void)
 {
     if (!quiet)
         std::cout << "POKER TEST (a la FIPS 140-1)" << std::endl;
-    std::vector<double> p;
+    int testCount = 0;
     if (!quiet)
         std::cout << " ... " << std::flush;
-    size_t passed = ctrandom::poker_test_fips140_1<variate_t>(r, r_min, r_max, p);
+    int notPassed = randomtools::poker_test_fips140_1<variate_t>(r, r_min, r_max, testCount);
     if (!quiet)
     {
-        if (passed == p.size())
+        if (notPassed == 0)
         {
             std::cout << "OK.";
         }
         else
         {
-            size_t notPassed = p.size() - passed;
-            std::cout << "NICHT BESTANDEN. " << notPassed << " von " << p.size()
-                << " Bloecken (" << std::setprecision(3) << 100 * (float) (p.size() - passed) / p.size() << "%)" << std::endl
+            std::cout << "NICHT BESTANDEN. " << notPassed << " von " << testCount
+                << " Bloecken (" << std::setprecision(3) << 100 * (float)notPassed / testCount << "%)" << std::endl
                 << "     nicht im geforderten p-Wert-Bereich (1,03..57,4)";
         }
         std::cout << std::endl <<std::endl;

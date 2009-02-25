@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     for (size_t* i = df; *i > 0; ++i) {
         printf("%lu", *i);
         for (double* j = p; *j > 0; ++j) {
-            printf("\t%7.2lf", ctrandom::ChiSquareCritical(*j, *i));
+            printf("\t%7.2lf", randomtools::ChiSquareCritical(*j, *i));
         }
         printf("\n");
     }

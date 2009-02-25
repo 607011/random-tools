@@ -2,21 +2,27 @@
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
-#ifndef __RNGASSESS_TESTS_H_
-#define __RNGASSESS_TESTS_H_
+#ifndef __RNGASSESSOR_TESTS_H_
+#define __RNGASSESSOR_TESTS_H_
 
 #include <cstdlib>
 #include <vector>
+
+#include "timer/timer.h"
 
 typedef unsigned char variate_t;
 typedef std::vector<variate_t> RNGArray;
 
 extern variate_t r_min;
 extern variate_t r_max;
-extern size_t r_range;
-extern size_t r_bits;
+extern long r_range;
+extern int r_bits;
 extern RNGArray r;
 extern double alpha;
+
+#ifdef TESTTIMING
+extern bool timeIt;
+#endif
 
 extern void test_frequencies(void);
 extern void test_runs(void);
@@ -36,4 +42,4 @@ extern void test_pi(void);
 extern void test_entropy(void);
 extern void test_bzip2(void);
 
-#endif // __RNGASSESS_TESTS_H_
+#endif // __RNGASSESSOR_TESTS_H_

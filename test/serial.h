@@ -12,7 +12,7 @@
 
 #include "chisq.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Serial-Test à la Knuth.
     /// @param ran Zufallszahlenfolge
@@ -21,26 +21,26 @@ namespace ctrandom {
     /// @param groupsize Gruppengröße
     /// @return p-Wert des Chi-Quadrat-Anpassungstests
     template <typename VariateType>
-    double serial_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, const size_t groupsize)
+    double serial_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, const int groupsize)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        size_t num_buckets = (size_t) pow((double) range, (double) groupsize);
-        std::vector<size_t> histo(num_buckets, 0);
-        for (size_t i = groupsize - 1; i < ran.size(); i += groupsize)
+        const long range = 1L + ((long) _max - (long) _min);
+        const long num_buckets = (long) pow((double) range, (double) groupsize);
+        std::vector<long> histo(num_buckets, 0);
+        for (int i = groupsize - 1; i < (int)ran.size(); i += groupsize)
         {
-            size_t idx = 0;
-            for (size_t j = 0; j < groupsize; ++j)
+            long idx = 0;
+            for (int j = 0; j < groupsize; ++j)
             {
-                size_t m = (size_t) pow((double) range, (double) j);
+                long m = (long) pow((double) range, (double) j);
                 idx += (ran[i - j] - _min) * m;
             }
             ++histo[idx];
         }
         double expected = (double) ran.size() / num_buckets / groupsize;
-        double res = ChiSq<size_t>(histo, expected);
-        double p = ChiSquareProbability(res, (size_t) (pow((double) range, (int) groupsize)));
+        double res = ChiSq<long>(histo, expected);
+        double p = ChiSquareProbability(res, (long) (pow((double) range, (int) groupsize)));
         return p;
     }
 

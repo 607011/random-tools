@@ -14,7 +14,7 @@
 #include "math_functions.h"
 #include "chisq.h"
 
-namespace ctrandom {
+namespace randomtools {
     
     /// Poker-Test à la Knuth.
     /// @param ran Array mit Zufallszahlen

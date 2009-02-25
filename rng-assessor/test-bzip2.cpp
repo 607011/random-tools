@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 void test_bzip2(void)
 {
-    if (!quiet)
-        std::cout << "BZIP2 COMPRESSION TEST (1 MByte blocks)" << std::endl;
     const size_t BufSize = 1048576;
     const size_t DstBufSize = 1154034; // 1.1*BufSize+600
     char* srcBuf = new char[BufSize];
     char* dstBuf = new char[DstBufSize];
+    if (!quiet)
+        std::cout << "BZIP2 COMPRESSION TEST (1 MByte blocks)" << std::endl;
     RNGArray::const_iterator rp = r.begin();
     for (size_t i = 0; i < r.size(); i += BufSize)
     {

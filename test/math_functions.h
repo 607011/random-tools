@@ -22,7 +22,7 @@
 #endif
 
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Berechnen des Binomial-Koeffizienten (n über k).
     /// @param n

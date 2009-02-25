@@ -14,7 +14,7 @@
 #include "chisq.h"
 #include "math_functions.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Poker Test à la FIPS 140-1.
     /// - Divide the 20000 bit stream into 5000 contiguous 4 bit segments.
@@ -29,22 +29,22 @@ namespace ctrandom {
     /// @param p [out] Histogramm: Anzahl der Läufer einer bestimmten Länge
     /// @return Anzahl der Tests, die bestanden wurden
     template <typename VariateType>
-    size_t poker_test_fips140_1(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, std::vector<double>& p)
+    int poker_test_fips140_1(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, int& testCount)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
         const size_t ChunkSize = 20000;
-        size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        unsigned int bitsPerVariate = (unsigned int) (log((double) range) / log(2.0));
-        unsigned int stepLen = ChunkSize / bitsPerVariate;
-        size_t passedCount = 0;
-        for (unsigned int i = 0; i < ran.size() - stepLen; i += stepLen)
+        long range = 1 + (size_t) ((long) _max - (long) _min);
+        int bitsPerVariate = (int) (log((double) range) / log(2.0));
+        int stepLen = ChunkSize / bitsPerVariate;
+        int passedCount = 0;
+        for (int i = 0; i < (int) ran.size() - stepLen; i += stepLen)
         {
             BitVector chunk(ChunkSize);
-            for (unsigned int j = 0; j < stepLen; ++j)
+            for (int j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
-                for (unsigned int k = 0; k < bitsPerVariate; ++k)
+                for (int k = 0; k < bitsPerVariate; ++k)
                 {
                     if ((r & 1) == 1)
                         chunk.set(j * bitsPerVariate + k);
@@ -52,22 +52,22 @@ namespace ctrandom {
                 }
             }
             std::vector<size_t> histo(16, 0);
-            for (unsigned int j = 0; j < ChunkSize - 4; j += 4)
+            for (int j = 0; j < ChunkSize - 4; j += 4)
             {
                 int v = 0;
-                for (unsigned int k = 0; k < 4; ++k)
+                for (int k = 0; k < 4; ++k)
                     v |= chunk.at(j + k) << k;
                 ++histo[v];
             }
             double X = 0;
-            for (size_t j = 0; j < 16; ++j)
+            for (int j = 0; j < 16; ++j)
                 X += histo[j] * histo[j];
             X = (16/((double)ChunkSize/4)) * X - (double)ChunkSize/4;
-            p.push_back(X);
+            ++testCount;
             if ((1.03 < X) && (X < 57.4))
                 ++passedCount;
         }
-        return passedCount;
+        return testCount - passedCount;
     }
 
 };

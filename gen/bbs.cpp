@@ -15,7 +15,7 @@
 #include "bbs.h"
 
 
-namespace ctrandom {
+namespace randomtools {
 
     namespace helper {
 

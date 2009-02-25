@@ -11,7 +11,7 @@
 
 #include "chisq.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Gap-Test à la Knuth.
     /// @param ran Zufallszahlenfolge

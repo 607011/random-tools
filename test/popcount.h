@@ -7,7 +7,7 @@
 
 #include <cstdlib>
 
-namespace ctrandom {
+namespace randomtools {
 
     extern const size_t PopCount[];
 

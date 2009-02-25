@@ -11,7 +11,7 @@
 
 #include "math_functions.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Eine Klasse, um k Elemente aus einer Menge von n Elementen ohne Wiederholungen herauszupicken.
     template <typename T>

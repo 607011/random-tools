@@ -5,7 +5,7 @@
 #ifndef __NORMALDISTRIBUTION_H_
 #define __NORMALDISTRIBUTION_H_
 
-namespace ctrandom {
+namespace randomtools {
 
     template <class Generator, typename VariateType>
     // double shall be either double or float

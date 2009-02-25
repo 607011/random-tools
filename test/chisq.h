@@ -10,19 +10,19 @@
 #include <cassert>
 #include <vector>
 
-namespace ctrandom {
+namespace randomtools {
 
     /// p-Wert für Chi-Quadrat-Anpassungstest berechnen.
     /// @param chi2 Chi-Quadrat
     /// @param degrees_of_freedom Anzahl der Freiheitsgrade
     /// @return p-Wert
-    extern double ChiSquareProbability(double chi, size_t degrees_of_freedom);
+    extern double ChiSquareProbability(double chi, int degrees_of_freedom);
 
     /// Schwellwert für Chi-Quadrat-Anpassungstest aus p-Wert berechnen.
     /// @param p p-Wert
     /// @param degrees_of_freedom Anzahl der Freiheitsgrade
     /// @return Chi-Quadrat-Schwellwert
-    extern double ChiSquareCritical(double p, size_t degrees_of_freedom);
+    extern double ChiSquareCritical(double p, int degrees_of_freedom);
 
     /// Chi-Quadrat für Anpassungstest berechnen.
     /// @param Y Array mit Messwerten

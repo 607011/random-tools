@@ -12,7 +12,7 @@
 #include "gen/equi_distribution.h"
 #include "chisq.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Frequency-Test à la Knuth.
     /// Zufallszahlen in Intervalle aufteilen und Häufigkeiten zählen.
@@ -22,19 +22,19 @@ namespace ctrandom {
     /// @param num_buckets Anzahl der Kategorien, in die die Zufallszahlen unterteilt werden sollen
     /// @return p-Wert des Chi-Quadrat-Tests der Häufigkeitsverteilung in den Kategorien
     template <typename VariateType>
-    double frequency_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, const size_t num_buckets)
+    double frequency_test(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, const int num_buckets)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        double interval = (double) (1 + (long) _max - (long) _min) / (double) num_buckets;
-        std::vector<size_t> histo(num_buckets);
-        for (size_t i = 0; i < ran.size(); ++i)
+        double interval = (double) (1L + (long) _max - (long) _min) / (double) num_buckets;
+        std::vector<int> histo(num_buckets);
+        for (int i = 0; i < (int)ran.size(); ++i)
         {
-            const size_t idx = (size_t) ((double) (ran.at(i) - _min) / interval);
+            const int idx = (int) ((double) (ran.at(i) - _min) / interval);
             ++histo[idx];
         }
         double expected = (double) ran.size() / (double) num_buckets;
-        double res = ChiSq<size_t>(histo, expected);
+        double res = ChiSq<int>(histo, expected);
         double p = ChiSquareProbability(res, num_buckets - 1);
         return p;
     }
@@ -47,7 +47,7 @@ namespace ctrandom {
     /// @param num_buckets Anzahl der Kategorien, in die die Zufallszahlen unterteilt werden sollen
     /// @return p-Wert des Chi-Quadrat-Tests der Häufigkeitsverteilung in den Kategorien
     template <class Generator, typename VariateType>
-    inline double frequency_test(const std::vector<VariateType>& ran, const EquiDistribution<Generator, VariateType>& rng, const size_t num_buckets)
+    inline double frequency_test(const std::vector<VariateType>& ran, const EquiDistribution<Generator, VariateType>& rng, const int num_buckets)
     {
         return frequency_test<VariateType>(ran, rng.min(), rng.max(), num_buckets);
     }
