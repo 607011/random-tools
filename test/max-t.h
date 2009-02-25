@@ -25,38 +25,41 @@ namespace randomtools {
 
     /// Maximum-of-t-Test à la Knuth.
     /// @param ran Zufallszahlenfolge
+    /// @param t t
     /// @param _min kleinstmöglicher Wert in der Zufallszahlenfolge
     /// @param _max größtmöglicher Wert in der Zufallszahlenfolge
     /// @return p-Wert des Chi-Quadrat-Anpassungstests
     template <typename VariateType>
-    double max_t_test(const std::vector<VariateType>& ran, const size_t t, const VariateType _min, const VariateType _max)
+    double max_t_test(const std::vector<VariateType>& ran, const int t, const VariateType _min, const VariateType _max)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        size_t d = 1 + (size_t) ((long) _max - (long) _min);
-        std::vector<size_t> histo(d, 0);
-        for (size_t i = 0; i < ran.size() - t; i += t)
+        long d = 1L + ((long) _max - (long) _min);
+        std::vector<int> histo(d, 0);
+        // TODO: Schleife parallelisieren
+        for (int i = 0; i < (int)ran.size() - t; i += t)
         {
             VariateType t_max = std::numeric_limits<VariateType>::min();
-            for (size_t j = 0; j < t; ++j)
+            for (int j = 0; j < t; ++j)
                 if (ran.at(i+j) > t_max)
                     t_max = ran.at(i+j);
             ++histo[t_max];
         }
-        std::vector<size_t> expected;
-        std::vector<size_t> histo2;
+        std::vector<int> expected;
+        std::vector<int> histo2;
         double t_count = (double) (ran.size() - t) / (double) t;
+        // TODO: Schleife ggf. parallelisieren
         for (long i = _min; i <= (long) _max; ++i)
         {
-            size_t k = (size_t) (i - (long) _min);
-            size_t p = (size_t) (t_count * _P(k, d, t));
+            long k = (long) (i - (long) _min);
+            long p = (long) (t_count * _P(k, d, t));
             if (p > 5 && histo.at(k) > 5)
             {
                 expected.push_back(p);
                 histo2.push_back(histo.at(k));
             }
         }
-        double res = ChiSq<size_t>(histo2, expected);
+        double res = ChiSq<int>(histo2, expected);
         double p = ChiSquareProbability(res, histo2.size()-1);
         return p;
     }

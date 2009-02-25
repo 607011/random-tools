@@ -28,6 +28,7 @@ namespace randomtools {
         assert(ran.size() > 100);
         double interval = (double) (1L + (long) _max - (long) _min) / (double) num_buckets;
         std::vector<int> histo(num_buckets);
+        // TODO: Schleife parallelisieren
         for (int i = 0; i < (int)ran.size(); ++i)
         {
             const int idx = (int) ((double) (ran.at(i) - _min) / interval);

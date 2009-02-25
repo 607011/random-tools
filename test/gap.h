@@ -27,12 +27,12 @@ namespace randomtools {
         assert(_max > _min);
         assert(beta > alpha);
         assert(ran.size() > 100);
-        size_t t_range = 1 + (size_t) ((long) beta - (long) alpha);
-        size_t v_range = 1 + (size_t) ((long) _max - (long) _min);
-        std::vector<size_t> histo(t+1, 0);
-        size_t n = 0;
+        long t_range = 1L + ((long) beta - (long) alpha);
+        long v_range = 1L + ((long) _max - (long) _min);
+        std::vector<int> histo(t+1, 0);
+        int n = 0;
         // TODO: Schleife lesbarer gestalten
-        std::vector<size_t>::size_type j = 0;
+        std::vector<int>::size_type j = 0;
         while (j < ran.size()) 
         {
             size_t r = 0;
@@ -47,15 +47,15 @@ namespace randomtools {
             ++histo[(r >= t)? t : r];
             ++n;
         }
-        std::vector<size_t> expected(t+1);
+        std::vector<int> expected(t+1);
         double prob = (double) t_range / (double) v_range;
-        for (size_t i = 0; i < expected.size()-1; ++i)
+        for (int i = 0; i < (int)expected.size()-1; ++i)
         {
             double e = prob * pow(1-prob, (double) i);
-            expected[i] = (size_t) ((double) n * e);
+            expected[i] = (int) ((double) n * e);
         }
-        expected[t] = (size_t) ((double) n * pow(1-prob, (double) t));
-        double res = ChiSq<size_t>(histo, expected);
+        expected[t] = (int) ((double) n * pow(1-prob, (double) t));
+        double res = ChiSq<int>(histo, expected);
         double p = ChiSquareProbability(res, t);
         return p;
     };

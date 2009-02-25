@@ -33,12 +33,13 @@ namespace randomtools {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        const size_t ChunkSize = 20000;
-        long range = 1 + (size_t) ((long) _max - (long) _min);
+        const int ChunkSize = 20000;
+        long range = 1L + ((long) _max - (long) _min);
         int bitsPerVariate = (int) (log((double) range) / log(2.0));
         int stepLen = ChunkSize / bitsPerVariate;
         int passedCount = 0;
-        for (int i = 0; i < (int) ran.size() - stepLen; i += stepLen)
+        // TODO: Schleife parallelisieren
+        for (int i = 0; i < (int)ran.size() - stepLen; i += stepLen)
         {
             BitVector chunk(ChunkSize);
             for (int j = 0; j < stepLen; ++j)
@@ -51,7 +52,7 @@ namespace randomtools {
                     r >>= 1;
                 }
             }
-            std::vector<size_t> histo(16, 0);
+            std::vector<int> histo(16, 0);
             for (int j = 0; j < ChunkSize - 4; j += 4)
             {
                 int v = 0;

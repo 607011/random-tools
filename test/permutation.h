@@ -31,15 +31,15 @@ namespace randomtools {
 
 
         template <typename VariateType>
-        static size_t _F(std::vector<VariateType>& U)
+        static int _F(std::vector<VariateType>& U)
         {
-            size_t r = U.size();
-            size_t f = 0;
+            int r = (int) U.size();
+            int f = 0;
             do
             {
-                size_t s = 0;
+                int s = 0;
                 VariateType _max = std::numeric_limits<VariateType>::min();
-                for (size_t i = 0; i < r; ++i)
+                for (int i = 0; i < r; ++i)
                 {
                     if (U.at(i) > _max)
                     {
@@ -64,23 +64,24 @@ namespace randomtools {
     /// @param _max größtmöglicher Wert in der Zufallszahlenfolge
     /// @return p-Wert des Chi-Quadrat-Anpassungstests
     template <typename VariateType>
-    double permutation_test(const std::vector<VariateType>& ran, const size_t t, const VariateType _min, const VariateType _max)
+    double permutation_test(const std::vector<VariateType>& ran, const int t, const VariateType _min, const VariateType _max)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        size_t num_buckets = ran.size() / t;
-        size_t n = randomtools::factorial<size_t>(t);
-        std::vector<size_t> histo(n);
-        for (size_t i = 0; i < ran.size() - t; i += t)
+        int num_buckets = ran.size() / t;
+        int n = randomtools::factorial<int>(t);
+        std::vector<int> histo(n);
+        // TODO: Schleife parallelisieren
+        for (int i = 0; i < (int)ran.size() - t; i += t)
         {
            std::vector<VariateType> U(t);
-           for (size_t j = 0; j < t; ++j)
+           for (int j = 0; j < t; ++j)
                U[j] = ran[i+j];
-           size_t f = helper::_F(U);
+           int f = helper::_F(U);
            ++histo[f];
         }
         double E = (double) num_buckets / (double) n;
-        double res = ChiSq<size_t>(histo, E);
+        double res = ChiSq<int>(histo, E);
         double p = ChiSquareProbability(res, n-1);
         return p;
     }

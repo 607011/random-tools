@@ -82,6 +82,7 @@ namespace randomtools {
         longestRun1 = 0;
         size_t passedCount = 0;
         runCount = 0;
+        // TODO: Schleife parallelisieren
         for (int i = 0; i < (int)ran.size() - stepLen; i += stepLen)
         {
             BitVector chunk(ChunkSize);

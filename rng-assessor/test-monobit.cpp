@@ -30,35 +30,30 @@ void test_monobit(void)
     {
         std::cout << "p = " << p << "  ";
         if (p > alpha)
-        {
             std::cout << "OK.";
-        }
         else
-        {
             std::cout << "NICHT BESTANDEN.";
-        }
         std::cout << std::endl << std::endl;
     }
 #endif
 
     if (!quiet)
         std::cout << "MONOBIT TEST (a la FIPS 140-1)" << std::endl;
-    std::vector<size_t> counts;
+    int counts = 0;
     if (!quiet)
         std::cout << " ... " << std::flush;
-    size_t passed = randomtools::monobit_test<variate_t>(r, r_min, r_max, counts);
+    int notPassed = randomtools::monobit_test<variate_t>(r, r_min, r_max, counts);
     if (!quiet) 
     {
-        double pctFailed = 100.0 * (double) (counts.size() - passed) / (double) counts.size();
-        if (passed == counts.size())
+        if (notPassed == 0)
         {
             std::cout << "OK.";
         }
         else
         {
-            size_t notPassed = counts.size() - passed;
+            double pctFailed = 100 * (float)notPassed / (float)counts;
             std::cout << "NICHT BESTANDEN. " << notPassed
-                      << " von " << counts.size() << " Blöcken ("
+                      << " von " << counts << " Blöcken ("
                       << std::setprecision(3) << pctFailed << "%)" << std::endl
                       << "     " << ((notPassed == 1)? "enthält" : "enthalten")
                       << " nicht die geforderte Anzahl Bits (9654..10346)";

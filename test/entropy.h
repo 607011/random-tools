@@ -38,6 +38,7 @@ namespace randomtools {
         for (int i = 0; i < (int)ran.size(); ++i)
             ++histo[ran[i]];
         double ent = 0.0;
+        // TODO: Schleife parallelisieren
         for (long i = 0; i < range; ++i)
         {
             double p = (double)histo[i] / (double)ran.size();

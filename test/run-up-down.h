@@ -17,9 +17,9 @@
 namespace randomtools {
 
 
-    static inline double _P(size_t r)
+    static inline double _P(long r)
     {
-        return (double) r / (double) randomtools::factorial<size_t>(r+1);
+        return (double) r / (double) randomtools::factorial<long>(r+1);
     }
 
 
@@ -28,11 +28,11 @@ namespace randomtools {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        std::map<size_t, size_t> histo;
-        size_t runLength = 0;
+        std::map<long, int> histo;
+        int runLength = 0;
         VariateType current = ran.at(0);
-        size_t counted = 0;
-        for (size_t i = 1; i < ran.size()-1; ++i)
+        int counted = 0;
+        for (int i = 1; i < ran.size()-1; ++i)
         {
             if (ran.at(i) >= current)
             {
@@ -47,17 +47,17 @@ namespace randomtools {
             }
             current = ran.at(i);
         }
-        size_t maxIdx = 0;
-        for (std::map<size_t,size_t>::const_iterator i = histo.begin(); i != histo.end(); ++i)
+        int maxIdx = 0;
+        for (std::map<long, int>::const_iterator i = histo.begin(); i != histo.end(); ++i)
             if ((*i).first > maxIdx)
                 maxIdx = (*i).first;
-        std::vector<size_t> histo2(maxIdx+1);
-        for (std::map<size_t, size_t>::const_iterator i = histo.begin(); i != histo.end(); ++i)
+        std::vector<int> histo2(maxIdx+1);
+        for (std::map<long, int>::const_iterator i = histo.begin(); i != histo.end(); ++i)
             histo2[(*i).first] = (*i).second;
-        std::vector<size_t> expected(histo2.size());
-        for (size_t i = 1; i <= expected.size(); ++i)
-            expected[i-1] = (size_t) ((double) counted * _P(i));
-        double res = ChiSq<size_t>(histo2, expected);
+        std::vector<int> expected(histo2.size());
+        for (int i = 1; i <= (int) expected.size(); ++i)
+            expected[i-1] = (int) ((double) counted * _P(i));
+        double res = ChiSq<int>(histo2, expected);
         double p = ChiSquareProbability(res, histo2.size()-1);
         return p;
     };

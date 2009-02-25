@@ -20,7 +20,7 @@ void test_runs_fips(void)
     int longestRun1 = 0;
     if (!quiet)
         std::cout << " ... " << std::flush;
-    size_t notPassed = randomtools::run_test_fips<variate_t>(r, r_min, r_max, runs, longestRun0, longestRun1);
+    int notPassed = randomtools::run_test_fips<variate_t>(r, r_min, r_max, runs, longestRun0, longestRun1);
     if (!quiet)
     {
         if (notPassed == 0)

@@ -26,26 +26,27 @@ namespace randomtools {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        const size_t k = 5;
-        size_t d = 1 + (size_t) ((long) _max - (long) _min);
-        std::vector<size_t> histo(5, 0);
-        std::vector<size_t> expected(5);
+        const int k = 5;
+        long d = 1L + ((long) _max - (long) _min);
+        std::vector<int> histo(5, 0);
+        std::vector<int> expected(5);
         double chunkCount = (double) ran.size() / (double) k;
-        for (size_t r = 1; r <= 5; ++r)
+        for (int r = 1; r <= 5; ++r)
         {
             double nominator = (double) d;
-            for (size_t j = d - r + 1; j < d; ++j)
+            for (long j = d - r + 1; j < d; ++j)
                 nominator *= (double) j;
             expected[r-1] = (size_t) (chunkCount * nominator / pow((double) d, (double) k) * stirling<double>(k, r));
         }
-        for (size_t i = 0; i < ran.size() - k; i += k)
+        // TODO: Schleife parallelisieren
+        for (int i = 0; i < (int) ran.size() - k; i += k)
         {
-            std::map<VariateType, size_t> hand;
-            for (size_t j = 0; j < k; ++j)
+            std::map<VariateType, int> hand;
+            for (int j = 0; j < k; ++j)
                 ++hand[ran.at(i+j)];
             ++histo[hand.size()-1];
         }
-        double res = ChiSq<size_t>(histo, expected);
+        double res = ChiSq<int>(histo, expected);
         double p = ChiSquareProbability(res, k-1);
         return p;
     }
