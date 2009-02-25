@@ -300,7 +300,7 @@ void generate(GeneratorFunction gen, std::ofstream& fs)
 
 
 template <class T>
-void generate(ctrandom::RandomNumberGenerator<T>& gen, std::ofstream& fs)
+void generate(randomtools::RandomNumberGenerator<T>& gen, std::ofstream& fs)
 {
     for (count = 0; count < N; ++count)
     {
@@ -473,7 +473,7 @@ int main(int argc, char* argv[])
     case GEN_MT19937:
         std::cout << "Mersenne-Twister 19937 .. " << std::flush;
         {
-            ctrandom::MersenneTwister mt19937;
+            randomtools::MersenneTwister mt19937;
             mt19937.seed((unsigned int) time(0));
             generate<unsigned int>(mt19937, fs);
         }
@@ -481,7 +481,7 @@ int main(int argc, char* argv[])
     case GEN_MT800:
         std::cout << "Mersenne-Twister 800 .. " << std::flush;
         {
-            ctrandom::MersenneTwister mt800;
+            randomtools::MersenneTwister mt800;
             mt800.seed((unsigned int) time(0));
             generate<unsigned int>(mt800, fs);
         }
@@ -489,7 +489,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_ANSIC:
         std::cout << "LCG (ANSI C) .. " << std::flush;
         {
-            ctrandom::LCG_ANSIC lcg;
+            randomtools::LCG_ANSIC lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -497,7 +497,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_MINSTD:
         std::cout << "LCG (MINSTD) .. " << std::flush;
         {
-            ctrandom::LCG_MINSTD lcg;
+            randomtools::LCG_MINSTD lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -505,7 +505,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_FISHMAN:
         std::cout << "LCG (FISHMAN) .. " << std::flush;
         {
-            ctrandom::LCG_FISHMAN lcg;
+            randomtools::LCG_FISHMAN lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -513,7 +513,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN1:
         std::cout << "LCG (Hoaglin1) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN1 lcg;
+            randomtools::LCG_HOAGLIN1 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -521,7 +521,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN2:
         std::cout << "LCG (Hoaglin2) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN2 lcg;
+            randomtools::LCG_HOAGLIN2 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -529,7 +529,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN3:
         std::cout << "LCG (Hoaglin3) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN3 lcg;
+            randomtools::LCG_HOAGLIN3 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -537,7 +537,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN4:
         std::cout << "LCG (Hoaglin4) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN4 lcg;
+            randomtools::LCG_HOAGLIN4 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -545,7 +545,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN5:
         std::cout << "LCG (Hoaglin5) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN5 lcg;
+            randomtools::LCG_HOAGLIN5 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -553,7 +553,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_HOAGLIN6:
         std::cout << "LCG (Hoaglin6) .. " << std::flush;
         {
-            ctrandom::LCG_HOAGLIN6 lcg;
+            randomtools::LCG_HOAGLIN6 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -561,7 +561,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_URN12:
         std::cout << "LCG (URN12) .. " << std::flush;
         {
-            ctrandom::LCG_URN12 lcg;
+            randomtools::LCG_URN12 lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -569,7 +569,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_SIMSCRIPT:
         std::cout << "LCG (SIMSCRIPT) .. " << std::flush;
         {
-            ctrandom::LCG_SIMSCRIPT lcg;
+            randomtools::LCG_SIMSCRIPT lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -577,7 +577,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_RANDU:
         std::cout << "LCG (RANDU) .. " << std::flush;
         {
-            ctrandom::LCG_RANDU lcg;
+            randomtools::LCG_RANDU lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -585,7 +585,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_APPLE:
         std::cout << "LCG (APPLE) .. " << std::flush;
         {
-            ctrandom::LCG_APPLE lcg;
+            randomtools::LCG_APPLE lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -593,7 +593,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_SUPERDUPER:
         std::cout << "LCG (SUPERDUPER) .. " << std::flush;
         {
-            ctrandom::LCG_SUPERDUPER lcg;
+            randomtools::LCG_SUPERDUPER lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -601,7 +601,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_BCPL:
         std::cout << "LCG (BCPL) .. " << std::flush;
         {
-            ctrandom::LCG_BCPL lcg;
+            randomtools::LCG_BCPL lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -609,7 +609,7 @@ int main(int argc, char* argv[])
     case GEN_LCG_BCSLIB:
         std::cout << "LCG (BCSLIB) .. " << std::flush;
         {
-            ctrandom::LCG_BCSLIB lcg;
+            randomtools::LCG_BCSLIB lcg;
             lcg.seed((unsigned int) time(0));
             generate<unsigned int>(lcg, fs);
         }
@@ -617,7 +617,7 @@ int main(int argc, char* argv[])
     case GEN_MCG:
         std::cout << "MCG .. " << std::flush;
         {
-            ctrandom::MCG mcg;
+            randomtools::MCG mcg;
             mcg.seed((unsigned int) time(0));
             generate<unsigned char>(mcg, fs);
         }
@@ -625,7 +625,7 @@ int main(int argc, char* argv[])
     case GEN_KNUTH:
         std::cout << "Knuth .. " << std::flush;
         {
-            ctrandom::KnuthRand1 knuth;
+            randomtools::KnuthRand1 knuth;
             knuth.seed((unsigned int) time(0));
             generate<unsigned int>(knuth, fs);
         }
@@ -633,7 +633,7 @@ int main(int argc, char* argv[])
     case GEN_MWC:
         std::cout << "Multiply-with-carry (Marsaglia) .. " << std::flush;
         {
-            ctrandom::MultiplyWithCarry mwc;
+            randomtools::MultiplyWithCarry mwc;
             mwc.seed((unsigned int) time(0));
             generate<unsigned int>(mwc, fs);
         }
@@ -642,7 +642,7 @@ int main(int argc, char* argv[])
     case GEN_BBS:
         std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::flush;
         {
-            ctrandom::BlumBlumShub bbs(bbsKeyBits);
+            randomtools::BlumBlumShub bbs(bbsKeyBits);
             generate<unsigned int>(bbs, fs);
         }
         break;
@@ -650,7 +650,7 @@ int main(int argc, char* argv[])
     case GEN_CIRCULAR:
         std::cout << "Circular .. " << std::flush;
         {
-            ctrandom::CircularBytes circ;
+            randomtools::CircularBytes circ;
             generate<unsigned int>(circ, fs);
         }
         break;

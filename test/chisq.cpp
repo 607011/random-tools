@@ -5,7 +5,7 @@
 #include "chisq.h"
 #include "math_functions.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     // Portiert von http://statpages.org/pdfs.html
 
@@ -19,7 +19,7 @@ namespace ctrandom {
     }
 
 
-    double ChiSquareProbability(double x, size_t df)
+    double ChiSquareProbability(double x, int df)
     {
         if (x > 1000 || df > 1000)
         {
@@ -32,14 +32,14 @@ namespace ctrandom {
         double p = exp(-0.5 * x);
         if ( (df % 2) == 1)
             p *= sqrt(2 * x / M_PI);
-        size_t k = df;
+        int k = df;
         while (k >= 2)
         {
             p = p * x / k;
             k -= 2;
         }
         double t = p;
-        size_t a = df;
+        int a = df;
         while (t > 1e-15 * p)
         {
             a += 2;
@@ -50,7 +50,7 @@ namespace ctrandom {
     }
 
 
-    double ChiSquareCritical(double p, size_t df)
+    double ChiSquareCritical(double p, int df)
     {
         const double nearnull = 1e-10;
         double v = 0.5;

@@ -25,7 +25,7 @@ void test_monobit(void)
     if (!quiet)
         std::cout << "MONOBIT TEST (a la NIST)" << std::endl
                   << " ... " << std::flush;
-    double p = ctrandom::monobit_test_nist<variate_t>(r, r_min, r_max);
+    double p = randomtools::monobit_test_nist<variate_t>(r, r_min, r_max);
     if (!quiet)
     {
         std::cout << "p = " << p << "  ";
@@ -46,7 +46,7 @@ void test_monobit(void)
     std::vector<size_t> counts;
     if (!quiet)
         std::cout << " ... " << std::flush;
-    size_t passed = ctrandom::monobit_test<variate_t>(r, r_min, r_max, counts);
+    size_t passed = randomtools::monobit_test<variate_t>(r, r_min, r_max, counts);
     if (!quiet) 
     {
         double pctFailed = 100.0 * (double) (counts.size() - passed) / (double) counts.size();

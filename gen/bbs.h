@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <gmp.h>
 
-namespace ctrandom {
+namespace randomtools {
 
     typedef unsigned int BBSVariateType;
 

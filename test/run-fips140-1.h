@@ -2,8 +2,8 @@
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
-#ifndef __RUN_FIPS_H_
-#define __RUN_FIPS_H_
+#ifndef __RUN_FIPS140_1_H_
+#define __RUN_FIPS140_1_H_
 
 #include <cstdlib>
 #include <cmath>
@@ -15,25 +15,26 @@
 #include "chisq.h"
 #include "math_functions.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     struct RunResult
     {
+        static const int MaxRunLength = 6;
         RunResult(void)
         {
             longestRun0 = 0;
             longestRun1 = 0;
-            for (size_t i = 0; i < 6; ++i) 
+            for (int i = 0; i < MaxRunLength; ++i) 
             {
                 run0[i] = 0;
                 run1[i] = 0;
             }
             passed = false;
         }
-        size_t run0[6];
-        size_t run1[6];
-        size_t longestRun0;
-        size_t longestRun1;
+        int run0[MaxRunLength];
+        int run1[MaxRunLength];
+        int longestRun0;
+        int longestRun1;
         bool passed;
     };
 
@@ -64,30 +65,30 @@ namespace ctrandom {
     /// @param ran [in] Zufallszahlenfolge
     /// @param _min [in] kleinstmöglicher Wert in der Zufallszahlenfolge
     /// @param _max [in] größtmöglicher Wert in der Zufallszahlenfolge
-    /// @param runs [out] Histogramm: Anzahl der Läufe einer bestimmten Länge
+    /// @param runCount [out] Histogramm: Anzahl der Läufe einer bestimmten Länge
     /// @param longestRun0 [out] längster Run aus Nullen
     /// @param longestRun1 [out] längster Run aus Einsen
     /// @return Anzahl der Tests, die bestanden wurden
     template <typename VariateType>
-    size_t run_test_fips(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, std::vector<RunResult>& runs, size_t& longestRun0, size_t& longestRun1)
+    size_t run_test_fips(const std::vector<VariateType>& ran, const VariateType _min, const VariateType _max, int& runCount, int& longestRun0, int& longestRun1)
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        const size_t MaxRunLength = 5;
-        const size_t ChunkSize = 20000;
+        const int ChunkSize = 20000;
         size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        size_t bitsPerVariate = (size_t) ceil(M_LOG2E * log((double) range));
-        size_t stepLen = ChunkSize / bitsPerVariate;
+        int bitsPerVariate = (int) ceil(M_LOG2E * log((double) range));
+        int stepLen = ChunkSize / bitsPerVariate;
         longestRun0 = 0;
         longestRun1 = 0;
         size_t passedCount = 0;
-        for (size_t i = 0; i < ran.size() - stepLen; i += stepLen)
+        runCount = 0;
+        for (int i = 0; i < (int)ran.size() - stepLen; i += stepLen)
         {
             BitVector chunk(ChunkSize);
-            for (size_t j = 0; j < stepLen; ++j)
+            for (int j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
-                for (size_t k = 0; k < bitsPerVariate; ++k)
+                for (int k = 0; k < bitsPerVariate; ++k)
                 {
                     if ((r & 1) == 1)
                         chunk.set(j * bitsPerVariate + k);
@@ -95,9 +96,9 @@ namespace ctrandom {
                 }
             }
             bool isSet = chunk.at(0);
-            size_t runLength = 0;
+            int runLength = 0;
             RunResult run;
-            for (size_t j = 1; j < ChunkSize; ++j)
+            for (int j = 1; j < ChunkSize; ++j)
             {
                 if (isSet) 
                 {
@@ -107,7 +108,7 @@ namespace ctrandom {
                     }
                     else
                     {
-                        ++run.run1[(runLength > MaxRunLength)? MaxRunLength : runLength];
+                        ++run.run1[(runLength > RunResult::MaxRunLength)? RunResult::MaxRunLength : runLength];
                         if (run.longestRun1 < runLength)
                             run.longestRun1 = runLength;
                         runLength = 0;
@@ -122,7 +123,7 @@ namespace ctrandom {
                     }
                     else
                     {
-                        ++run.run0[(runLength > MaxRunLength)? MaxRunLength : runLength];
+                        ++run.run0[(runLength > RunResult::MaxRunLength)? RunResult::MaxRunLength : runLength];
                         if (run.longestRun0 < runLength)
                             run.longestRun0 = runLength;
                         runLength = 0;
@@ -145,11 +146,11 @@ namespace ctrandom {
                 && (  90 < run.run1[5]) && (run.run1[5] <  223);
             if (run.passed)
                 ++passedCount;
-            runs.push_back(run);
+            ++runCount;
         }
-        return passedCount;
+        return runCount - passedCount;
     };
 
 };
 
-#endif // __RUN_FIPS_H_
+#endif // __RUN_FIPS140_1_H_

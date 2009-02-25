@@ -14,12 +14,12 @@
 #include "chisq.h"
 #include "math_functions.h"
 
-namespace ctrandom {
+namespace randomtools {
 
 
     static inline double _P(size_t r)
     {
-        return (double) r / (double) ctrandom::factorial<size_t>(r+1);
+        return (double) r / (double) randomtools::factorial<size_t>(r+1);
     }
 
 

@@ -67,20 +67,20 @@ static struct option long_options[] = {
 
 typedef int variate_t;
 typedef variate_t (*GeneratorFunction)(void);
-typedef std::map<size_t, bool> LottoField;
+typedef std::map<int, bool> LottoField;
 
-const size_t DefaultBBSKeyBits = 512;
-const size_t DefaultFieldCount = 12;
-const size_t DefaultSelectionCount = 6;
-const size_t DefaultMaxNumber = 49;
+const int DefaultBBSKeyBits = 512;
+const int DefaultFieldCount = 12;
+const int DefaultSelectionCount = 6;
+const int DefaultMaxNumber = 49;
 
 LottoField lottoNumbers;
-size_t selectedCount = 0;
-size_t N = DefaultFieldCount;
-size_t selectionCount = DefaultSelectionCount;
-size_t maxNumber = DefaultMaxNumber;
+int selectedCount = 0;
+int N = DefaultFieldCount;
+int selectionCount = DefaultSelectionCount;
+int maxNumber = DefaultMaxNumber;
 int generator = GEN_SYSTEM_RAND;
-size_t bbsKeyBits = DefaultBBSKeyBits;
+int bbsKeyBits = DefaultBBSKeyBits;
 bool quiet = false;
 
 
@@ -138,19 +138,19 @@ void printNumbers(void)
 
 unsigned int getSeed(void)
 {
-    return ctrandom::RandomNumberGenerator<unsigned int>::makeSeed();
+    return randomtools::RandomNumberGenerator<unsigned int>::makeSeed();
 }
 
 
 template <typename T>
 void __generate(T gen)
 {
-    for (size_t i = 0; i < N; ++i)
+    for (int i = 0; i < N; ++i)
     {
         lottoNumbers.clear();
-        while (lottoNumbers.size() < selectionCount)
+        while ((int) lottoNumbers.size() < selectionCount)
         {
-            size_t r = 1 + gen() % maxNumber;
+            int r = 1 + gen() % maxNumber;
             if (!lottoNumbers[r])
                 lottoNumbers[r] = true;
         }
@@ -166,9 +166,9 @@ void generate(GeneratorFunction gen)
 
 
 template <class T>
-void generate(ctrandom::RandomNumberGenerator<T>& gen)
+void generate(randomtools::RandomNumberGenerator<T>& gen)
 {
-    __generate<ctrandom::RandomNumberGenerator<T>&>(gen);
+    __generate<randomtools::RandomNumberGenerator<T>&>(gen);
 }
 
 
@@ -241,7 +241,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "Mersenne-Twister 19937 .. " << std::endl << std::endl;
         {
-            ctrandom::MersenneTwister mt19937;
+            randomtools::MersenneTwister mt19937;
             mt19937.seed(getSeed());
             for (int i = 0; i < 10000; ++i) // warm-up
                 (void) mt19937();
@@ -252,7 +252,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "LCG (ANSI C) .. " << std::endl << std::endl;
         {
-            ctrandom::LCG_ANSIC lcg;
+            randomtools::LCG_ANSIC lcg;
             lcg.seed(getSeed());
             generate<unsigned int>(lcg);
         }
@@ -261,7 +261,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "MCG .. " << std::endl << std::endl;
         {
-            ctrandom::MCG mcg;
+            randomtools::MCG mcg;
             mcg.seed(getSeed());
             generate<unsigned char>(mcg);
         }
@@ -270,7 +270,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "Knuth .. " << std::endl << std::endl;
         {
-            ctrandom::KnuthRand1 knuth;
+            randomtools::KnuthRand1 knuth;
             knuth.seed(getSeed());
             generate<unsigned int>(knuth);
         }
@@ -279,7 +279,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "Multiply-with-carry (Marsaglia) .. " << std::endl << std::endl;
         {
-            ctrandom::MultiplyWithCarry mwc;
+            randomtools::MultiplyWithCarry mwc;
             mwc.seed(getSeed());
             generate<unsigned int>(mwc);
         }
@@ -289,7 +289,7 @@ int main(int argc, char* argv[])
         if (!quiet)
             std::cout << "Blum-Blum-Shub (" << bbsKeyBits << " Bits) .. " << std::endl << std::endl;
         {
-            ctrandom::BlumBlumShub bbs(bbsKeyBits);
+            randomtools::BlumBlumShub bbs(bbsKeyBits);
             generate<unsigned int>(bbs);
         }
         break;

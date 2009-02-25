@@ -14,7 +14,7 @@
 #include "chisq.h"
 
 
-namespace ctrandom {
+namespace randomtools {
 
     template <typename VariateType>
     static inline double _P(VariateType k, size_t d, size_t t)

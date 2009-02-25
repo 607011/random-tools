@@ -6,7 +6,7 @@
 #include "mcg.h"
 #include "mersenne_twister.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     ///////////////////////////////////////////////////////////////////////
     //

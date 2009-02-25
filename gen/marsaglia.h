@@ -15,7 +15,7 @@
 #include <intrin.h>
 #endif
 
-namespace ctrandom {
+namespace randomtools {
 
     class MultiplyWithCarry : public RandomNumberGenerator<unsigned int>
     {

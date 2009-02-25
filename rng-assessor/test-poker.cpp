@@ -14,7 +14,7 @@ void test_poker_knuth(void)
 {
     if (!quiet)
         std::cout << "POKER TEST (a la Knuth)" << std::endl;
-    double p = ctrandom::poker_test_knuth<variate_t>(r, r_min, r_max);
+    double p = randomtools::poker_test_knuth<variate_t>(r, r_min, r_max);
     if (!quiet)
         std::cout << " ... " << std::flush
                   << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "

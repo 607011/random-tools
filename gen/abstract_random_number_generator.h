@@ -3,8 +3,8 @@
 // Alle Rechte vorbehalten.
 
 
-#ifndef __ABSTRACTRANDOMNUMBERGENERATOR_H_
-#define __ABSTRACTRANDOMNUMBERGENERATOR_H_
+#ifndef __ABSTRArandomtoolsNUMBERGENERATOR_H_
+#define __ABSTRArandomtoolsNUMBERGENERATOR_H_
 
 #ifdef _WIN32
 #define _CRT_RAND_S
@@ -17,7 +17,7 @@
 #include <cstdlib>
 #include <limits>
 
-namespace ctrandom {
+namespace randomtools {
 
     template <typename VariateType>
     class RandomNumberGenerator
@@ -67,4 +67,4 @@ namespace ctrandom {
     typedef RandomNumberGenerator<unsigned int> IntRandomNumberGenerator;
 };
 
-#endif //  __ABSTRACTRANDOMNUMBERGENERATOR_H_
+#endif //  __ABSTRArandomtoolsNUMBERGENERATOR_H_

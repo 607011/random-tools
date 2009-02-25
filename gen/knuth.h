@@ -10,7 +10,7 @@
 
 #include "lcg.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     template <size_t _M, size_t _N>
     class KnuthAdditive : public RandomNumberGenerator<unsigned int>

@@ -17,7 +17,11 @@
 
 #include "math_functions.h"
 
-namespace ctrandom {
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
+namespace randomtools {
 
     /// Ermitteln der Entropie einer Zufallszahlenfolge.
     /// @param ran Zufallszahlenfolge
@@ -29,14 +33,14 @@ namespace ctrandom {
     {
         assert(_max > _min);
         assert(ran.size() > 100);
-        size_t range = 1 + (size_t) ((long) _max - (long) _min);
-        std::vector<size_t> histo(range, 0);
-        for (size_t i = 0; i < ran.size(); ++i)
+        long range = 1L + ((long) _max - (long) _min);
+        std::vector<int> histo(range, 0);
+        for (int i = 0; i < (int)ran.size(); ++i)
             ++histo[ran[i]];
         double ent = 0.0;
-        for (size_t i = 0; i < range; ++i)
+        for (long i = 0; i < range; ++i)
         {
-            double p = (double) histo[i] / ran.size();
+            double p = (double)histo[i] / (double)ran.size();
             if (p > 0.0)
                 ent += p * M_LOG2E * log(1.0 / p);
         }

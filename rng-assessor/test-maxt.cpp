@@ -19,7 +19,7 @@ void test_max_of_t(void)
     for (size_t i = 0; _T[i] > 0; ++i)
     {
         size_t t = _T[i];
-        double p = ctrandom::max_t_test<variate_t>(r, t, r_min, r_max);
+        double p = randomtools::max_t_test<variate_t>(r, t, r_min, r_max);
         if (!quiet)
             std::cout << " ... t = " << std::setw(2) << std::right << t << ": " << std::flush
                       << "p = " << std::setprecision(5) << std::setw(9) << std::left << p << " "

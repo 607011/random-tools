@@ -9,7 +9,6 @@
 #include <cmath>
 
 #include "rng-assessor.h"
-#include "tests.h"
 #include "test/autocorr.h"
 
 
@@ -20,24 +19,35 @@
 ////////////////////////////////////////////////////////////
 void test_autocorrelation(void)
 {
-    std::vector<size_t> counts;
+#ifdef TESTTIMING
+    TIMER stopwatch;
+    LONGLONG duration;
+#endif // TESTTIMING
+    int counts;
     if (!quiet)
         std::cout << "AUTOCORRELATION TEST" << std::endl << " ... " << std::flush;
-    size_t passed = ctrandom::autocorrelation_test<variate_t>(r, r_min, r_max, counts);
-    if (passed == counts.size())
-    {
-        if (!quiet)
-            std::cout << "OK.";
-    }
-    else
-    {
-        size_t notPassed = counts.size() - passed;
-        if (!quiet)
-            std::cout << "NICHT BESTANDEN. " << notPassed << " von " << counts.size()
-                << " Blöcken (" << std::setprecision(3) << 100 * (float) (counts.size() - passed) / counts.size() << "%)" << std::endl
-                << "     " << ((notPassed == 1)? "enthält" : "enthalten")
-                << " nicht die geforderte Anzahl Bits (2326..2674)";
-    }
+
+    START();
+    int notPassed = randomtools::autocorrelation_test<variate_t>(r, r_min, r_max, counts);
+    STOP(duration);
+
     if (!quiet)
-        std::cout << std::endl <<std::endl;
+    {
+        if (notPassed == 0)
+        {
+            std::cout << "OK." << std::endl;
+        }
+        else
+        {
+            std::cout << "NICHT BESTANDEN. " << notPassed << " von " << counts
+                << " Blöcken (" << std::setprecision(3) << 100 * (float)notPassed / counts << "%)" << std::endl
+                << "     " << ((notPassed == 1)? "enthaelt" : "enthalten")
+                << " nicht die geforderte Anzahl Bits (2326..2674)" << std::endl;
+        }
+#ifdef TESTTIMING
+        if (timeIt)
+            std::cout << " Laufzeit: " << duration << " ms" << std::endl;
+#endif // TESTTIMING
+        std::cout << std::endl;
+    }
 }

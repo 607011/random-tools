@@ -14,7 +14,7 @@
 #include "math_functions.h"
 #include "bitvector.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     /// Collision-Test  la Knuth.
     /// TODO: Collision-Test  la Knuth implementieren.

@@ -25,7 +25,7 @@
 #endif
 
 
-namespace ctrandom {
+namespace randomtools {
 
 #ifdef HAVE_BOOST
 
@@ -62,8 +62,8 @@ namespace ctrandom {
             for (size_t j = 0; j < stepLen; ++j)
             {
                 VariateType r = ran.at(i + j) - _min;
-                bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff] +
-                    ctrandom::PopCount[(r >> 32) & 0xffff] + ctrandom::PopCount[(r >> 48) & 0xffff];
+                bitCount += randomtools::PopCount[r & 0xffff] + randomtools::PopCount[(r >> 16) & 0xffff] +
+                    randomtools::PopCount[(r >> 32) & 0xffff] + randomtools::PopCount[(r >> 48) & 0xffff];
             }
             if ((9654 < bitCount) && (bitCount < 10346))
                 ++passedCount;
@@ -95,7 +95,7 @@ namespace ctrandom {
 // TODO: distinguish between 8, 16, 32 and 64 bit variate types
 #pragma warning(disable:4333)
 #endif
-                bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff];
+                bitCount += randomtools::PopCount[r & 0xffff] + randomtools::PopCount[(r >> 16) & 0xffff];
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
@@ -144,8 +144,8 @@ namespace ctrandom {
 // TODO: distinguish between 8, 16, 32 and 64 bit variate types
 #pragma warning(disable:4333)
 #endif
-                bitCount += ctrandom::PopCount[r & 0xffff] + ctrandom::PopCount[(r >> 16) & 0xffff] +
-                    ctrandom::PopCount[(r >> 32) & 0xffff] + ctrandom::PopCount[(r >> 48) & 0xffff];
+                bitCount += randomtools::PopCount[r & 0xffff] + randomtools::PopCount[(r >> 16) & 0xffff] +
+                    randomtools::PopCount[(r >> 32) & 0xffff] + randomtools::PopCount[(r >> 48) & 0xffff];
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif

@@ -39,16 +39,17 @@ static struct option long_options[] = {
 
 bool quiet = false;
 bool runFIPS140_1 = true;
-size_t blockSize = 0;
-size_t offset = 0;
+long blockSize = 0;
+long offset = 0;
 int verbose = 0;
 char* inputFilename = NULL;
 
 variate_t r_min;
 variate_t r_max;
-size_t r_range;
-size_t r_bits;
+long r_range;
+int r_bits;
 RNGArray r;
+bool timeIt = true;
 double alpha = 0.01;
 
 
@@ -97,11 +98,11 @@ int main(int argc, char* argv[])
         {
         case 'n':
             if (optarg != NULL)
-                blockSize = (size_t) atoi(optarg);
+                blockSize = atol(optarg);
             break;
         case 'o':
             if (optarg != NULL)
-                offset = (size_t) atoi(optarg);
+                offset = atol(optarg);
             break;
         case 'h':
             // fall-through
@@ -145,16 +146,16 @@ int main(int argc, char* argv[])
 
     if (!quiet)
         std::cout << "Verarbeiten von '" << inputFilename << "' .." << std::endl << std::endl;
-    ctrandom::RandomFile<size_t> gen(inputFilename, true);
+    randomtools::RandomFile<size_t> gen(inputFilename, true);
     if (!gen.stream().is_open())
     {
         std::cerr << "FEHLER: Oeffnen von '" << inputFilename << "' fehlgeschlagen." << std::endl;
         exit(EXIT_FAILURE);
     }
-    if (blockSize == 0)
+    if (blockSize == 0L)
     {
         gen.stream().seekg(0, std::ios::end);
-        blockSize = gen.stream().tellg();
+        blockSize = (long)gen.stream().tellg();
     }
 
     if (!quiet)
@@ -162,12 +163,12 @@ int main(int argc, char* argv[])
                   << " ab Offset " << offset << " .." << std::endl << std::endl;
     gen.seek(offset);
     r.resize(blockSize);
-    for (size_t i = 0; i < blockSize; ++i)
+    for (long i = 0; i < blockSize; ++i)
         r[i] = gen();
     r_min = 0;
     r_max = std::numeric_limits<variate_t>::max();
-    r_range = 1 + (size_t) ((long) r_max - (long) r_min);
-    r_bits = (size_t) (M_LOG2E * log(1 + (double) r_range));
+    r_range = 1L + ((long) r_max - (long) r_min);
+    r_bits = (int) (M_LOG2E * log(1 + (double) r_range));
 
     // "soft" tests
     test_entropy();

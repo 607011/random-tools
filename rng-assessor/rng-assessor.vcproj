@@ -42,11 +42,13 @@
 				Optimization="0"
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				PreprocessorDefinitions="NOMINMAX"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				StructMemberAlignment="0"
 				EnableEnhancedInstructionSet="2"
+				OpenMP="true"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -119,9 +121,11 @@
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="$(SolutionDir)\getopt;$(SolutionDir)"
+				PreprocessorDefinitions="NOMINMAX"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
+				OpenMP="true"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -178,6 +182,10 @@
 		<ProjectReference
 			ReferencedProjectIdentifier="{B57BDBC0-98A8-44DF-99B6-D2693FFD999B}"
 			RelativePathToProject=".\bzip2-1.0.5\libbz2.vcproj"
+		/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{CF4FEC1E-BA0E-46F8-AFCA-DB971DB4B672}"
+			RelativePathToProject=".\timer\timer.vcproj"
 		/>
 	</References>
 	<Files>

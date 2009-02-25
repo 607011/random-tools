@@ -9,4 +9,8 @@
 #define HAVE_LIBGMP
 #define HAVE_LIBSSL
 
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
 #endif // __CONFIG_WIN32_H_

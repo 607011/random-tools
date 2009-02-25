@@ -7,7 +7,7 @@
 
 #include "abstract_random_number_generator.h"
 
-namespace ctrandom {
+namespace randomtools {
 
     template <unsigned long long A, unsigned long long R0, unsigned long long C, unsigned long long M>
     class LinearCongruential : public RandomNumberGenerator<unsigned int>

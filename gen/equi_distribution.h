@@ -5,7 +5,7 @@
 #ifndef __EQUIDISTRIBUTION_H_
 #define __EQUIDISTRIBUTION_H_
 
-namespace ctrandom {
+namespace randomtools {
 
     template <class Generator, typename VariateType>
     class EquiDistribution

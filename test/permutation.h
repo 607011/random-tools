@@ -16,7 +16,7 @@
 #include "chisq.h"
 
 
-namespace ctrandom {
+namespace randomtools {
 
 
     namespace helper {
@@ -69,7 +69,7 @@ namespace ctrandom {
         assert(_max > _min);
         assert(ran.size() > 100);
         size_t num_buckets = ran.size() / t;
-        size_t n = ctrandom::factorial<size_t>(t);
+        size_t n = randomtools::factorial<size_t>(t);
         std::vector<size_t> histo(n);
         for (size_t i = 0; i < ran.size() - t; i += t)
         {

@@ -11,7 +11,7 @@
 #include <string>
 #include <fstream>
 
-namespace ctrandom {
+namespace randomtools {
 
     template <typename VariateType>
     class RandomFile : public RandomNumberGenerator<VariateType>

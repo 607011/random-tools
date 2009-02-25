@@ -14,9 +14,9 @@ void test_serial(void)
 {
     if (!quiet)
         std::cout << "SERIAL TEST" << std::endl;
-    for (size_t groupsize = 2; groupsize <= 3; ++groupsize)
+    for (int groupsize = 2; groupsize <= 3; ++groupsize)
     {
-        double p = ctrandom::serial_test<variate_t>(r, r_min, r_max, groupsize);
+        double p = randomtools::serial_test<variate_t>(r, r_min, r_max, groupsize);
         if (!quiet)
             std::cout << " ... " << std::flush;
         if (!quiet)

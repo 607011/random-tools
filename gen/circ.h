@@ -8,7 +8,7 @@
 #include "abstract_random_number_generator.h"
 
 
-namespace ctrandom {
+namespace randomtools {
 
     template <unsigned int M, unsigned int X0>
     class Circular : public RandomNumberGenerator<unsigned int>
