@@ -29,7 +29,7 @@ void WorkerThread::terminate(void)
 {
     MutexLocker locker(&triggerMutex);
 	doQuit = true;
-    triggerCond.signal();
+    triggerCond.wake();
 }
 
 
@@ -39,7 +39,6 @@ void WorkerThread::run(void)
     pthread_t id = pthread_self();
     printf("WorkerThread %08x running ...\n", id.p);
 #endif
-	// process job queue until queue is empty
 	while (!doQuit)
 	{
 		bool wasBusy = false;
@@ -86,6 +85,6 @@ void WorkerThread::trigger(void)
 	}
 	else
 	{
-		triggerCond.signal();
+		triggerCond.wake();
 	}
 }

@@ -25,15 +25,16 @@ public:
 
     inline void wait(Mutex* mutex)
     {
-        pthread_cond_wait(&cond, &(mutex->mtx));
+        while(pthread_cond_wait(&cond, &(mutex->mtx)) != 0)
+            ;
     }
 
-    inline void signal(void)
+    inline void wake(void)
     {
         pthread_cond_signal(&cond);
     }
 
-    inline void broadcast(void)
+    inline void wakeAll(void)
     {
         pthread_cond_broadcast(&cond);
     }
