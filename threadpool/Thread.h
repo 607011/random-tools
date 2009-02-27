@@ -9,11 +9,10 @@
 #include <cstdio>
 #endif
 
-#include <cstdlib>
-
 #include <pthread.h>
 
 #include "Mutex.h"
+
 
 class Thread {
 public:

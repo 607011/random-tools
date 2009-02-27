@@ -27,7 +27,7 @@ public:
         assert(n >= 0);
         MutexLocker locker(&mutex);
         avail += n;
-        cond.broadcast();
+        cond.wakeAll();
     }
 
     inline void acquire(int n = 1)

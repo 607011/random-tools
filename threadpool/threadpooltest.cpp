@@ -41,6 +41,9 @@ int main(int argc, char* argv[])
     for (int i = 0; i < 23; ++i)
         pool.enqueue(new MyJob(i+1));
 
+    printf("Main thread starting thread pool ...\n");
+    pool.run();
+
     printf("Main thread waiting for jobs to finish ...\n");
     pool.waitForFinished();
 
