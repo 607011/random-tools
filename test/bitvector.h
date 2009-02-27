@@ -24,21 +24,21 @@ public:
     inline bool operator[](size_t i) const
     {
         size_t j = i / BitsPerElement;
-        size_t k = 1 << (i % BitsPerElement);
+        size_t k = (size_t)1 << (i % BitsPerElement);
         return (v.at(j) & k) == k;
     }
 
     inline bool at(size_t i) const
     {
         size_t j = i / BitsPerElement;
-        size_t k = 1 << (i % BitsPerElement);
+        size_t k = (size_t)1 << (i % BitsPerElement);
         return (v.at(j) & k) == k;
     }
 
     inline void set(size_t i)
     {
         size_t j = i / BitsPerElement;
-        size_t k = 1 << (i % BitsPerElement);
+        size_t k = (size_t)1 << (i % BitsPerElement);
         v[j] |= k;
     }
 
