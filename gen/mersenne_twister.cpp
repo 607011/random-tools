@@ -16,47 +16,39 @@ namespace randomtools {
     //
     ///////////////////////////////////////////////////////////////////////
 
+
     MersenneTwister::MersenneTwister(void)
     {
-        index = N + 1;
-        A[0] = 0;
-        A[1] = 0x9908b0df;
+        // ...
     }
 
 
     void MersenneTwister::seed(unsigned int _Seed)
     {
-        MCG rng(_Seed);
-        for (unsigned int i = 0; i < N; ++i)
-            y[i] = rng();
+        unsigned int r = _Seed;
+        unsigned int s = 3402;
+        for (int i = 0; i < N; ++i)
+        {
+            r = 509845221 * r + 3;
+            s *= s + 1;
+            y[i] = s + (r >> 10);
+        }
         index = 0;
+        warmup();
     }
 
 
-    void MersenneTwister::warmup(int rounds)
+    void MersenneTwister::warmup()
     {
-        assert(rounds > N);
-        seed(makeSeed());
-        for (int i = 0; i < rounds; ++i)
+        for (int i = 0; i < 10000; ++i)
             (*this)();
     }
 
 
     unsigned int MersenneTwister::operator()()
     {
-        if (index >= N)
+        if (index == N)
         {
-            if (index > N)
-            {
-                unsigned int r = 9;
-                unsigned int s = 3402;
-                for (int i = 0 ; i < N ; ++i)
-                {
-                    r = 509845221 * r + 3;
-                    s *= s + 1;
-                    y[i] = s + (r >> 10);
-                }
-            }
             unsigned int h;
             for (int k = 0 ; k < N-M ; ++k)
             {
@@ -80,6 +72,9 @@ namespace randomtools {
         e ^= (e >> 18);
         return e;
     }
+
+
+    const unsigned int MersenneTwister::A[2] = { 0, 0x9908b0df };
 
 
     ///////////////////////////////////////////////////////////////////////

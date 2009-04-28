@@ -21,18 +21,19 @@ namespace randomtools {
         MersenneTwister(void);
         unsigned int operator()();
         inline unsigned int next(void) { return (*this)(); }
-        void seed(unsigned int _Seed);
-        // warm up with a least 624 iterations
-        void warmup(int rounds = 10000);
+        void seed(unsigned int _Seed = 9);
 
     private:
         static const int N = 624;
         static const int M = 397;
         static const unsigned int LO = 0x7fffffff;
         static const unsigned int HI = 0x80000000;
-        unsigned int A[2];
+        static const unsigned int A[2];
         unsigned int y[N];
         int index;
+
+    private: // methods
+        void warmup();
     };
 
 
