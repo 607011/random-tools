@@ -3,8 +3,8 @@
 // Alle Rechte vorbehalten.
 
 
-#ifndef __ABSTRArandomtoolsNUMBERGENERATOR_H_
-#define __ABSTRArandomtoolsNUMBERGENERATOR_H_
+#ifndef __ABSTRACTNUMBERGENERATOR_H_
+#define __ABSTRACTNUMBERGENERATOR_H_
 
 #ifdef _WIN32
 #define _CRT_RAND_S
@@ -67,4 +67,4 @@ namespace randomtools {
     typedef RandomNumberGenerator<unsigned int> IntRandomNumberGenerator;
 };
 
-#endif //  __ABSTRArandomtoolsNUMBERGENERATOR_H_
+#endif //  __ABSTRACTNUMBERGENERATOR_H_

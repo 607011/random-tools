@@ -50,9 +50,7 @@ void WorkerThread::run(void)
 			pool->jobDone(this);
 		}
 		if (wasBusy)
-		{
 			pool->jobsDone();
-		}
 #ifdef _DEBUG
         printf("WorkerThread %08x waiting for trigger ...\n", id.p);
 #endif
@@ -66,9 +64,7 @@ void WorkerThread::run(void)
         triggerMutex.unlock();
 	}
 	if (doQuit)
-	{
 		pool->jobDone(this);
-	}
 #ifdef _DEBUG
     printf("WorkerThread %08x quitting ...\n", id.p);
 #endif
@@ -80,11 +76,7 @@ void WorkerThread::trigger(void)
 {
     MutexLocker locker(&triggerMutex);
 	if (!isRunning())
-	{
 		start();
-	}
 	else
-	{
 		triggerCond.wake();
-	}
 }

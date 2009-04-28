@@ -45,7 +45,7 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				StructMemberAlignment="4"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -121,7 +121,7 @@
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="$(SolutionDir)\getopt"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				StructMemberAlignment="4"
 				EnableFunctionLevelLinking="true"
 				EnableEnhancedInstructionSet="2"
@@ -185,26 +185,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\randcam.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						DisableSpecificWarnings="4996"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						DisableSpecificWarnings="4996"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\disclaimer.cpp"
 				>
 			</File>
@@ -233,6 +213,26 @@
 					<Tool
 						Name="VCCLCompilerTool"
 						DisableSpecificWarnings="4307"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\randcam.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						DisableSpecificWarnings="4996"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						DisableSpecificWarnings="4996"
 					/>
 				</FileConfiguration>
 			</File>
