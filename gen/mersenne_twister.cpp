@@ -2,9 +2,11 @@
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
+#include <cassert>
 
 #include "mcg.h"
 #include "mersenne_twister.h"
+
 
 namespace randomtools {
 
@@ -28,6 +30,15 @@ namespace randomtools {
         for (unsigned int i = 0; i < N; ++i)
             y[i] = rng();
         index = 0;
+    }
+
+
+    void MersenneTwister::warmup(int rounds)
+    {
+        assert(rounds > N);
+        seed(makeSeed());
+        for (int i = 0; i < rounds; ++i)
+            (*this)();
     }
 
 
@@ -68,12 +79,6 @@ namespace randomtools {
         e ^= (e << 15) & 0xefc60000;
         e ^= (e >> 18);
         return e;
-    }
-
-
-    unsigned int MersenneTwister::next(void)
-    {
-        return (*this)();
     }
 
 
