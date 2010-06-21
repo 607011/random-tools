@@ -63,8 +63,8 @@ namespace randomtools {
     }
 
 
-    typedef RandomNumberGenerator<unsigned long long> Int64RandomNumberGenerator;
-    typedef RandomNumberGenerator<unsigned int> IntRandomNumberGenerator;
+    typedef RandomNumberGenerator<unsigned long long> UInt64RandomNumberGenerator;
+    typedef RandomNumberGenerator<unsigned int> UIntRandomNumberGenerator;
 };
 
 #endif //  __ABSTRACTNUMBERGENERATOR_H_
