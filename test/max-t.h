@@ -1,4 +1,4 @@
-// $Id$
+// $Id: max-t.h,v af569101d24e 2009/02/25 15:00:20 oliver $
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 

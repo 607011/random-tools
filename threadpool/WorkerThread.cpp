@@ -1,4 +1,4 @@
-// $Id$
+// $Id: WorkerThread.cpp,v d2f549da0391 2009/04/28 07:54:08 oliver $
 // Copyright (c) 2009 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 

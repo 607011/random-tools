@@ -1,4 +1,4 @@
-// $Id$
+// $Id: poker.h,v 845ec36a3b5b 2009/02/05 14:46:01 oliver $
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 

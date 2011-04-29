@@ -1,4 +1,4 @@
-// $Id$
+// $Id: Thread.h,v 6aa0463352ef 2009/02/27 16:31:34 oliver $
 // Copyright (c) 2009 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 

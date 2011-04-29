@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C++ Express 2008
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gen", "gen\gen.vcproj", "{43C69279-C5CE-4421-B6EC-D83618B11297}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rngdemo", "rngdemo\rngdemo.vcproj", "{F4A871BF-AE91-4BB4-86EE-17C8950CAC0B}"
@@ -36,6 +36,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "timer", "timer\timer.vcproj", "{CF4FEC1E-BA0E-46F8-AFCA-DB971DB4B672}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "threadpool", "threadpool\threadpool.vcproj", "{E9C977AA-35CC-4100-A2B8-09931E96A9E4}"
+	GlobalSection(Qt) = preSolution
+		Integration = True
+	EndGlobalSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

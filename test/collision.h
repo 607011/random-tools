@@ -1,4 +1,4 @@
-// $Id$
+// $Id: collision.h,v 6453a4c3269e 2009/02/25 13:55:36 oliver $
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 

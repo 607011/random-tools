@@ -1,4 +1,4 @@
-// $Id$
+// $Id: timer.h,v 6453a4c3269e 2009/02/25 13:55:36 oliver $
 
 #ifndef __TIMER_H_
 #define __TIMER_H_
