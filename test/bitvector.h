@@ -1,4 +1,4 @@
-// $Id$
+// $Id: bitvector.h,v cc0b6b7ececb 2009/02/27 10:22:53 oliver $
 // Copyright (c) 2008 Oliver Lau <oliver@von-und-fuer-lau.de>
 // Alle Rechte vorbehalten.
 
